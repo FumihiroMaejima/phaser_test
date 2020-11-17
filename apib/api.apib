@@ -1,0 +1,55 @@
+FORMAT: 1A
+HOST: http://localhost/api
+
+## API Blueprint Test
+
+# Data Structures
+
+## Blog Post (object)
++ id: 42 (number, required)
++ text: Hello World (string)
++ author (Author) - Author of the blog post.
+
+## Send Blog Post (object)
++ id: 42 (number, required)
++ text: Hello World (string)
+
+## Author (object)
++ name: Boba Fett
++ email: fett@intergalactic.com
+
+
+# GET /message
++ Response 200 (text/plain)
+    Hello World!
+
+# Blog Post List [/posts]
+
+## Retrieve All Posts [GET]
++ Response 200 (application/json)
+    + Attributes (array[Blog Post])
+
++ Response 401 (application/json)
+    + Body
+        ```
+        {
+            "error": "Unauthorized"
+        }
+        ```
+
+# Send Blog Post [/posts]
+
+## Retrieve All Posts [POST]
++ Request (application/json)
+    + Attributes (array[Send Blog Post])
+
++ Response 200 (application/json)
+    + Attributes (array[Blog Post])
+
++ Response 401 (application/json)
+    + Body
+        ```
+        {
+            "error": "Unauthorized"
+        }
+        ```

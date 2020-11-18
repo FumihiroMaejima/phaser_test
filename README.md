@@ -184,22 +184,14 @@ VUE_APP_API_BASE_URL='http://localhost:8080/api/v1/xxx'
 
 ```Shell-session
 $ yarn add axios
-$ yarn add axios-mock-server
-$ yarn add @vue/test-utils
-$ yarn add jest
-$ yarn add vuex-class
 $ yarn add --dev stylelint
-$ yarn add --dev vue-jest
-$ yarn add --dev babel-jest
-$ yarn add --dev node-sass
-
 ```
 
 一括の場合
 
 ```Shell-session
-$ yarn add axios axios-mock-server @vue/test-utils jest vuex-class
-$ yarn add --dev stylelint vue-jest babel-jest node-sass @vue/cli-plugin-babel
+yarn add axios
+yarn add --dev stylelint
 ```
 
 ## ライブラリの設定

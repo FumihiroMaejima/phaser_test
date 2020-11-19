@@ -716,11 +716,14 @@ purgeの設定は必ず行う。
 ```Javascript
 module.exports = {
   purge: ['./src/**/*.ts', './src/**/*.tsx', './src/**/*.vue'],
+  darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {}
+    extend: {},
   },
-  variants: {},
-  plugins: []
+  variants: {
+    extend: {},
+  },
+  plugins: [],
 }
 ```
 
@@ -746,6 +749,12 @@ $ yarn add postcss-cli
 $ yarn add autoprefixer postcss-cli
 ```
 (2020/10現在 autoprefixerは^9.8.6を指定)
+(2020/11現在 tailwindcss2.0が出たが暫くpostCSSの後方互換性のある物をインストールした方が良い)
+
+```shell-session
+$ yarn remove tailwindcss postcss-cli postcss autoprefixer
+$ yarn add tailwindcss@compat postcss@^7 autoprefixer@^9
+```
 
 設定ファイル(postcss.config.js)の編集
 

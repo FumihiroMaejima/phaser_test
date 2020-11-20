@@ -1,5 +1,5 @@
 module.exports = {
-  headerName: 'portal',
+  headerName: 'Phaser Test',
   headerContents: ['about', 'event', 'gallery'],
   noticeData: [
     { title: '「event」ページを更新しました。', date: '2020/09/24 10:00' },

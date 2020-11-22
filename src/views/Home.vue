@@ -11,10 +11,23 @@
 import { defineComponent } from 'vue'
 // import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
 
+import { appGameConfig } from '@/config/game'
+import Phaser from 'phaser'
+
 export default defineComponent({
   name: 'Home',
   components: {
     // HelloWorld
+  },
+  setup() {
+    const config = appGameConfig
+    // update Type
+    config.type = Phaser.AUTO
+    const game = new Phaser.Game(config)
+
+    return {
+      game
+    }
   }
 })
 </script>

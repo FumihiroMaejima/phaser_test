@@ -4,6 +4,11 @@
       test
       <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
     </div>
+    <button
+      class="border-2 rounded border-purple-500 hover:border-gray-500 ..."
+    >
+      Button
+    </button>
   </div>
 </template>
 
@@ -11,23 +16,14 @@
 import { defineComponent } from 'vue'
 // import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
 
-import { appGameConfig } from '@/config/game'
-import Phaser from 'phaser'
-
 export default defineComponent({
   name: 'Home',
   components: {
     // HelloWorld
   },
   setup() {
-    const config = appGameConfig
-    // update Type
-    config.type = Phaser.AUTO
-    const game = new Phaser.Game(config)
 
-    return {
-      game
-    }
+    return {}
   }
 })
 </script>

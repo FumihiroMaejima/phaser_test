@@ -1,6 +1,6 @@
-# phaser_test
+# vue_rpg
 
-my phaser test.
+my vue rpg test test.
 
 ---
 
@@ -184,22 +184,14 @@ VUE_APP_API_BASE_URL='http://localhost:8080/api/v1/xxx'
 
 ```Shell-session
 $ yarn add axios
-$ yarn add axios-mock-server
-$ yarn add @vue/test-utils
-$ yarn add jest
-$ yarn add vuex-class
 $ yarn add --dev stylelint
-$ yarn add --dev vue-jest
-$ yarn add --dev babel-jest
-$ yarn add --dev node-sass
-
 ```
 
 一括の場合
 
 ```Shell-session
-$ yarn add axios axios-mock-server @vue/test-utils jest vuex-class
-$ yarn add --dev stylelint vue-jest babel-jest node-sass @vue/cli-plugin-babel
+yarn add axios
+yarn add --dev stylelint
 ```
 
 ## ライブラリの設定
@@ -724,11 +716,14 @@ purgeの設定は必ず行う。
 ```Javascript
 module.exports = {
   purge: ['./src/**/*.ts', './src/**/*.tsx', './src/**/*.vue'],
+  darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {}
+    extend: {},
   },
-  variants: {},
-  plugins: []
+  variants: {
+    extend: {},
+  },
+  plugins: [],
 }
 ```
 
@@ -754,6 +749,12 @@ $ yarn add postcss-cli
 $ yarn add autoprefixer postcss-cli
 ```
 (2020/10現在 autoprefixerは^9.8.6を指定)
+(2020/11現在 tailwindcss2.0が出たが暫くpostCSSの後方互換性のある物をインストールした方が良い)
+
+```shell-session
+$ yarn remove tailwindcss postcss-cli postcss autoprefixer
+$ yarn add tailwindcss@compat postcss@^7 autoprefixer@^9
+```
 
 設定ファイル(postcss.config.js)の編集
 

@@ -1,5 +1,5 @@
 {
-  "name": "phaser_test",
+  "name": "vue_rpg",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,7 +11,10 @@
     "lint:css": "stylelint src/**/*.css"
   },
   "dependencies": {
+    "autoprefixer": "^9",
     "axios": "^0.21.0",
+    "postcss": "^7",
+    "tailwindcss": "^2.0.1-compat",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"

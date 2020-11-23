@@ -11,7 +11,11 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "typeRoots": [
+      "./node_modules/phaser/types"
+    ],
     "types": [
+      "Phaser",
       "webpack-env",
       "jest"
     ],

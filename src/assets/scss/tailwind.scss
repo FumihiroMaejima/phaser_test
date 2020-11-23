@@ -1,0 +1,9 @@
+@tailwind base;
+/** メディアクエリを含んだクラス（.sm\:font-boldなど）が最初に来る **/
+// @tailwind screens;
+@tailwind components;
+
+.testbtn{
+  @apply font-semibold text-white py-2 px-4 rounded-full;
+}
+@tailwind utilities;

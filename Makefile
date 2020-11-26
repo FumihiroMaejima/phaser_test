@@ -12,6 +12,12 @@ down-rmi:
 ps:
 	docker-compose ps
 
+frontend-install:
+	docker-compose exec nginx ash -c 'yarn install'
+
+frontend-build:
+	docker-compose exec nginx ash -c 'yarn build'
+
 migrate:
 	docker-compose exec app php artisan migrate
 

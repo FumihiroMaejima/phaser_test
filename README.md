@@ -300,6 +300,14 @@ $ docker-compose exec app composer require laravel/ui
 $ php artisan ui vue --auth
 ```
 
+Laravel8からlaravel/uiで認証を使わなくなった。(上記は不要)
+jetstreamを使う
+
+```shell-session
+$ composer require laravel/jetstream
+$ php artisan jetstream:install livewire
+```
+
 マイグレーションの実行
 
 ```shell-session

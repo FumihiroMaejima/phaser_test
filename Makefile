@@ -13,10 +13,10 @@ ps:
 	docker-compose ps
 
 frontend-install:
-	docker-compose exec nginx ash -c 'yarn install'
+	docker-compose exec nginx ash -c 'cd /var/www/frontend && yarn install'
 
 frontend-build:
-	docker-compose exec nginx ash -c 'yarn build'
+	docker-compose exec nginx ash -c 'cd /var/www/frontend && yarn build'
 
 migrate:
 	docker-compose exec app php artisan migrate

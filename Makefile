@@ -89,3 +89,12 @@ mock-down:
 
 mock-ps:
 	docker-compose -f ./docker-compose.mock.yml ps
+
+swagger-up:
+docker-compose -f ./docker-compose.swagger.yml up -d
+
+swagger-down:
+docker-compose -f ./docker-compose.swagger.yml down
+
+swagger-ps:
+docker-compose -f ./docker-compose.swagger.yml ps

@@ -344,20 +344,7 @@ JWTで用いる秘密鍵の作成
 $ php artisan jwt:secret
 ```
 
-JWTで用いる秘密鍵の作成
-
-```shell-session
-$ composer require tymon/jwt-auth ^1.0.0
-```
-
 ⇨「.env」に「JWT_SECRET」のパラメーターが追加される。
-
-config/auth.phpの設定
-
-```shell-session
-$ composer require tymon/jwt-auth ^1.0.0
-```
-
 
 config/auth.phpの設定
 
@@ -386,7 +373,7 @@ config/auth.phpの設定
 
 Userモデルの修正
 
-app/Model/Userを下記の通りに修正する。
+app/Models/Userを下記の通りに修正する。
 
 ・「Tymon\JWTAuth\Contracts\JWTSubject」のuse宣言とimplementsとして設定
 
@@ -435,6 +422,7 @@ class User extends Authenticatable implements JWTSubject
 ```
 
 conposer.jsonの修正
+→現在の」Laravel8はModelsディレクトリがあるから不要。(変更になる可能性あり・)
 
 Userモデルの位置を変更した為、修正する。
 
@@ -468,18 +456,25 @@ $ composer dump-autoload
 router/api.phpを下記の通りに修正
 
 ＊api.phpに設定されたurlは自動的に「api」というパスが割当てられる為、「api」の記載は不要。
-
+＊Laravel8からルーティングの記載」方法が若干変わった。
 
 ```PHP
+use App\Http\Controllers\Users\AuthController;
+
+Route::get('test', function () {
+    return 'api connection test!';
+});
+
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('login', 'AuthController@login');
+    Route::post('login', [AuthController::class, 'login']);
 });
 
 Route::group(['prefix' => 'auth', 'middleware' => 'auth:api'], function () {
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::GET('own', 'AuthController@me');
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::post('self', [AuthController::class, 'getAuthUser']);
 });
+
 
 ```
 
@@ -487,8 +482,10 @@ Route::group(['prefix' => 'auth', 'middleware' => 'auth:api'], function () {
 
 コントローラーの作成
 
+*ディレクトリ名は随時変更
+
 ```shell-session
- $ php artisan make:controller AuthController
+ $ php artisan make:controller Users/AuthController
 ```
 
 内容は下記の通り(コンストラクタとログイン処理のみ抜粋)
@@ -532,8 +529,14 @@ Route::group(['prefix' => 'auth', 'middleware' => 'auth:api'], function () {
 
 シーダーファイルの作成
 
+passwordなどはconfigで設定すると良い。
+
 
 ```PHP
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 
 class UsersTableSeeder extends Seeder
 {
@@ -595,7 +598,7 @@ localhost/api/auth/login
 
 ```JSON
 {
-	"email": "v@example.com",
+	"email": "testuser@example.com",
 	"password": "testpassword"
 }
 ```
@@ -622,7 +625,7 @@ localhost/api/auth/login
 ### Model作成
 
 ```shell-session
- $ php artisan make:model Model/Test
+ $ php artisan make:model Models/Test
 ```
 
 ### シーディングファイル作成

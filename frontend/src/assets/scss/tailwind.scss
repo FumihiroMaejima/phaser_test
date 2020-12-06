@@ -7,3 +7,7 @@
   @apply font-semibold text-white py-2 px-4 rounded-full;
 }
 @tailwind utilities;
+
+button:focus {
+  outline: none !important; // for Google Chrome
+}

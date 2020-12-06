@@ -4,11 +4,22 @@
       test
       <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
     </div>
-    <button
-      class="border-2 rounded border-purple-500 hover:border-gray-500 ..."
-    >
-      Button
-    </button>
+    <div class="my-2">
+      <button class="border-2 rounded border-purple-500 hover:border-gray-500">
+        Button
+      </button>
+    </div>
+    <div class="grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4">
+      <div class="bg-gray-500 rounded">1</div>
+      <div class="bg-gray-500 rounded">2</div>
+      <div class="bg-gray-500 rounded">3</div>
+      <div class="bg-gray-500 rounded">4</div>
+      <div class="bg-gray-500 rounded">5</div>
+      <div class="bg-gray-500 rounded">6</div>
+      <div class="bg-gray-500 rounded">7</div>
+      <div class="bg-gray-500 rounded">8</div>
+      <div class="bg-gray-500 rounded">9</div>
+    </div>
   </div>
 </template>
 
@@ -22,7 +33,6 @@ export default defineComponent({
     // HelloWorld
   },
   setup() {
-
     return {}
   }
 })

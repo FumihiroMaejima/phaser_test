@@ -70,8 +70,8 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .global-header {
-  button:focus {
+  /* button:focus {
     outline: none !important; // for Google Chrome
-  }
+  } */
 }
 </style>

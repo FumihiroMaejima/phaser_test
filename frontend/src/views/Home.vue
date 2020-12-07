@@ -20,6 +20,45 @@
       <div class="bg-gray-500 rounded">8</div>
       <div class="bg-gray-500 rounded">9</div>
     </div>
+
+    <h1 class="italic my-2">testゲーム</h1>
+
+    <div class="grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4">
+      <div class="flex">
+        <div class="bg-gray-500 rounded">1</div>
+        <div class="bg-gray-500 rounded">2</div>
+        <div class="bg-gray-500 rounded">3</div>
+      </div>
+
+      <div class="flex justify-center">
+        <div class="bg-gray-500 rounded">1</div>
+        <div class="bg-gray-500 rounded">2</div>
+        <div class="bg-gray-500 rounded">3</div>
+      </div>
+
+      <div class="flex justify-end">
+        <div class="bg-gray-500 rounded">1</div>
+        <div class="bg-gray-500 rounded">2</div>
+        <div class="bg-gray-500 rounded">3</div>
+      </div>
+      <!-- <div class="bg-gray-500 rounded">1</div> -->
+      <div class="bg-gray-500 rounded">2</div>
+      <div class="bg-green-500 rounded">3</div>
+      <div class="bg-yellow-500 rounded">4</div>
+      <div class="bg-gray-500 rounded">5</div>
+      <div class="bg-pink-500 rounded">6</div>
+      <div class="bg-gray-500 rounded">7</div>
+      <div class="bg-blue-500 rounded">8</div>
+      <div class="bg-gray-500 rounded">9</div>
+    </div>
+
+    <div class="grid grid-flow-col rounded bg-gray-200 my-1 mx-1">
+      <button
+        class="bg-red-500 hover:bg-red-600 border-yellow-900 text-white text-sm py-2 px-4 rounded"
+      >
+        testボタン
+      </button>
+    </div>
   </div>
 </template>
 

@@ -59,6 +59,18 @@
         testボタン
       </button>
     </div>
+
+    <div class="grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4">
+      <div
+        class="bg-clip-border p-4 border-4 border-dashed border-purple-800 bg-purple-500"
+      ></div>
+      <div
+        class="bg-clip-padding p-4 border-4 border-dashed border-purple-800 bg-purple-500"
+      ></div>
+      <div
+        class="bg-clip-content p-4 border-4 border-dashed border-purple-800 bg-purple-500"
+      ></div>
+    </div>
   </div>
 </template>
 

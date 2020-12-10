@@ -101,6 +101,16 @@
       >
         Hover me
       </button>
+      <button
+        class="rounded bg-blue-600 hover:bg-red-600 transform hover:scale-110 motion-reduce:transform-none text-white"
+      >
+        Hover me
+      </button>
+      <button
+        class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700"
+      >
+        Click me
+      </button>
     </div>
 
     <h1 class="italic my-2">input</h1>
@@ -112,11 +122,63 @@
           class="rounded border border-transparent shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
         />
         <button
-          class="ml-2 rounded bg-purple-600 hover:bg-purple-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 text-white"
+          class="ml-2 py-1 px-2 rounded bg-purple-600 hover:bg-purple-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 text-white"
         >
           Sign up
         </button>
       </form>
+      <form>
+        <input
+          class="rounded shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+        />
+        <button
+          class="ml-2 py-1 px-2 rounded bg-purple-600 hover:bg-purple-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 text-white"
+        >
+          Sign up
+        </button>
+      </form>
+    </div>
+
+    <h1 class="italic my-2">card</h1>
+    <div class="grid rounded grid-flow-col gap-4 bg-purple-100 py-2 px-2">
+      <div
+        class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
+      >
+        <div class="md:flex">
+          <div class="md:flex-shrink-0">
+            <img
+              class="h-48 w-full object-cover md:w-48"
+              src="/img/store.jpg"
+              alt="Man looking at item at a store"
+            />
+          </div>
+          <div class="p-8">
+            <div
+              class="uppercase tracking-wide text-sm text-indigo-500 font-semibold"
+            >
+              Case study
+            </div>
+            <a
+              href="#"
+              class="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
+              >Finding customers for your new business</a
+            >
+            <p class="mt-2 text-gray-500">
+              Getting a new business off the ground is a lot of hard work. Here
+              are five ideas you can use to find your first customers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="italic my-2">flex space-x</h1>
+    <div class="grid rounded grid-flow-col gap-4 bg-purple-100 py-2 px-2">
+      <div class="flex space-x-4 ...">
+        <div class="flex-1 rounded bg-gray-400">flex-1 1</div>
+        <div class="flex-1 rounded bg-gray-400">flex-1 2</div>
+        <div class="flex-1 rounded bg-gray-400">flex-1 3</div>
+      </div>
     </div>
 
     <div class="mt-10 grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4"></div>

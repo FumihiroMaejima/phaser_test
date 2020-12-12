@@ -137,6 +137,17 @@
           Sign up
         </button>
       </form>
+      <form>
+        <input
+          class="rounded shadow-inner placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+          placeholder="test-name@example.com"
+        />
+        <button
+          class="ml-2 py-1 px-2 rounded bg-purple-600 hover:bg-purple-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 text-white"
+        >
+          Sign up
+        </button>
+      </form>
     </div>
 
     <h1 class="italic my-2">card</h1>

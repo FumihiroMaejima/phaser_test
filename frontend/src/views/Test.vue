@@ -202,7 +202,7 @@
     </div>
 
     <h1 class="italic my-2">component test</h1>
-    <grid-cols>
+    <grid-cols :gap="2">
       <template v-slot:grid-content>
         <div class="bg-gray-500 rounded">grid-cols-3 1</div>
         <div class="bg-gray-500 rounded">grid-cols-3 2</div>
@@ -222,9 +222,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import GridCols from '@/components/parts/GridCols.vue'
+// import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
 
 export default defineComponent({
-  name: 'Home',
+  name: 'Test',
   components: {
     GridCols
   },

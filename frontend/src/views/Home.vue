@@ -192,6 +192,16 @@
       </div>
     </div>
 
+
+    <h1 class="italic my-2">divide</h1>
+    <div class="grid rounded grid-flow-col gap-4 bg-purple-100 py-2 px-2">
+      <div class="divide-y-4 divide-yellow-600 divide-dashed">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+      </div>
+    </div>
+
     <div class="mt-10 grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4"></div>
   </div>
 </template>

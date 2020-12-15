@@ -201,7 +201,7 @@
       </div>
     </div>
 
-    <h1 class="italic my-2">component test</h1>
+    <h1 class="italic my-2">component grid-cols test</h1>
     <grid-cols>
       <template v-slot:grid-content>
         <div class="bg-gray-500 rounded">grid-cols-3 1</div>
@@ -215,6 +215,22 @@
         <div class="bg-gray-500 rounded">grid-cols-3 9</div>
       </template>
     </grid-cols>
+
+    <h1 class="italic my-2">component grid-rows test</h1>
+    <grid-rows>
+      <template v-slot:grid-content>
+        <div class="bg-gray-500 rounded">grid-rows1</div>
+        <div class="bg-gray-500 rounded">grid-rows2</div>
+        <div class="bg-green-500 rounded">grid-rows3</div>
+        <div class="bg-yellow-500 rounded">grid-rows4</div>
+        <div class="bg-gray-500 rounded">grid-rows5</div>
+        <div class="bg-pink-500 rounded">grid-rows6</div>
+        <div class="bg-gray-500 rounded">grid-rows7</div>
+        <div class="bg-blue-500 rounded">grid-rows8</div>
+        <div class="bg-gray-500 rounded">grid-rows9</div>
+      </template>
+    </grid-rows>
+
     <div class="mt-10 grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4"></div>
   </div>
 </template>
@@ -222,11 +238,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import GridCols from '@/components/parts/GridCols.vue'
+import GridRows from '@/components/parts/GridRows.vue'
 
 export default defineComponent({
   name: 'Home',
   components: {
-    GridCols
+    GridCols,
+    GridRows
   },
   setup() {
     return {}

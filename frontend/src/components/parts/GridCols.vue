@@ -1,9 +1,11 @@
 <template>
   <div
     class="grid rounded"
-    :class="`md:grid-cols-${mdCols} sm:grid-cols-${smCols} gap-${gap}`"
+    :class="
+      `md:grid-cols-${mdCols} sm:grid-cols-${smCols} gap-${gap} ${option}`
+    "
   >
-    <slot name="grid-content" />
+    <slot />
   </div>
 </template>
 
@@ -14,6 +16,7 @@ type Props = {
   mdCols: number
   smCols: number
   gap: number
+  option: string
 }
 
 export default defineComponent({
@@ -30,6 +33,10 @@ export default defineComponent({
     gap: {
       type: Number,
       default: 4
+    },
+    option: {
+      type: String,
+      default: ''
     }
   },
   setup(/* props: Props */) {

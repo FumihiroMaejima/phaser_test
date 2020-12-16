@@ -201,34 +201,30 @@
       </div>
     </div>
 
-    <h1 class="italic my-2">component test</h1>
-    <grid-cols :gap="2">
-      <template v-slot:grid-content>
-        <div class="bg-gray-500 rounded">grid-cols-3 1</div>
-        <div class="bg-gray-500 rounded">grid-cols-3 2</div>
-        <div class="bg-gray-500 rounded">grid-cols-3 3</div>
-        <div class="bg-gray-500 rounded">grid-cols-3 4</div>
-        <div class="bg-gray-500 rounded">grid-cols-3 5</div>
-        <div class="bg-gray-500 rounded">grid-cols-3 6</div>
-        <div class="bg-gray-500 rounded">grid-cols-3 7</div>
-        <div class="bg-gray-500 rounded">grid-cols-3 8</div>
-        <div class="bg-gray-500 rounded">grid-cols-3 9</div>
-      </template>
+    <h1 class="italic my-2">component grid-cols test</h1>
+    <grid-cols>
+      <div class="bg-gray-500 rounded">grid-cols-3 1</div>
+      <div class="bg-gray-500 rounded">grid-cols-3 2</div>
+      <div class="bg-gray-500 rounded">grid-cols-3 3</div>
+      <div class="bg-gray-500 rounded">grid-cols-3 4</div>
+      <div class="bg-gray-500 rounded">grid-cols-3 5</div>
+      <div class="bg-gray-500 rounded">grid-cols-3 6</div>
+      <div class="bg-gray-500 rounded">grid-cols-3 7</div>
+      <div class="bg-gray-500 rounded">grid-cols-3 8</div>
+      <div class="bg-gray-500 rounded">grid-cols-3 9</div>
     </grid-cols>
 
     <h1 class="italic my-2">component grid-rows test</h1>
     <grid-rows>
-      <template v-slot:grid-content>
-        <div class="bg-gray-500 rounded">grid-rows1</div>
-        <div class="bg-gray-500 rounded">grid-rows2</div>
-        <div class="bg-green-500 rounded">grid-rows3</div>
-        <div class="bg-yellow-500 rounded">grid-rows4</div>
-        <div class="bg-gray-500 rounded">grid-rows5</div>
-        <div class="bg-pink-500 rounded">grid-rows6</div>
-        <div class="bg-gray-500 rounded">grid-rows7</div>
-        <div class="bg-blue-500 rounded">grid-rows8</div>
-        <div class="bg-gray-500 rounded">grid-rows9</div>
-      </template>
+      <div class="bg-gray-500 rounded">grid-rows1</div>
+      <div class="bg-gray-500 rounded">grid-rows2</div>
+      <div class="bg-green-500 rounded">grid-rows3</div>
+      <div class="bg-yellow-500 rounded">grid-rows4</div>
+      <div class="bg-gray-500 rounded">grid-rows5</div>
+      <div class="bg-pink-500 rounded">grid-rows6</div>
+      <div class="bg-gray-500 rounded">grid-rows7</div>
+      <div class="bg-blue-500 rounded">grid-rows8</div>
+      <div class="bg-gray-500 rounded">grid-rows9</div>
     </grid-rows>
 
     <div class="mt-10 grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4"></div>

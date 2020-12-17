@@ -227,12 +227,22 @@
       <div class="bg-gray-500 rounded">grid-rows9</div>
     </grid-rows>
 
+    <h1 class="italic my-2">component button test</h1>
+    <grid-cols>
+      <app-button>
+        test
+      </app-button>
+      <chip />
+    </grid-cols>
+
     <div class="mt-10 grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4"></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import AppButton from '@/components/parts/AppButton.vue'
+import Chip from '@/components/parts/Chip.vue'
 import GridCols from '@/components/parts/GridCols.vue'
 import GridRows from '@/components/parts/GridRows.vue'
 // import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
@@ -240,6 +250,8 @@ import GridRows from '@/components/parts/GridRows.vue'
 export default defineComponent({
   name: 'Test',
   components: {
+    AppButton,
+    Chip,
     GridCols,
     GridRows
   },

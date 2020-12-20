@@ -1,4 +1,5 @@
 FROM php:7.4-fpm-alpine
+# FROM php:8.0.0-alpine
 
 # tinker(psysh)
 ARG PSYSH_DIR=/usr/local/share/psysh

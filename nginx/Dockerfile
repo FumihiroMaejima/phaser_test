@@ -1,5 +1,4 @@
-# FROM nginx:1.17.7
-FROM nginx:1.18-alpine
+FROM nginx:1.19-alpine
 
 RUN apk update && \
     apk add --update --no-cache --virtual=.build-dependencies && \

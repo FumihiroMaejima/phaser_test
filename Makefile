@@ -81,6 +81,9 @@ circleci:
 ci:
 	circleci build
 
+backend-serve:
+	cd app/backend && php artisan serve
+
 mock-up:
 	docker-compose -f ./docker-compose.mock.yml up -d
 

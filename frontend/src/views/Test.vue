@@ -250,6 +250,11 @@
       <app-input type="password" @app-input="catchAppInputEvent" />
     </grid-cols>
 
+    <h1 class="italic my-2">component card test</h1>
+    <grid-rows mdRows="1" option="bg-purple-100 py-2 px-2">
+      <card />
+    </grid-rows>
+
     <div class="mt-10 grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4"></div>
   </div>
 </template>
@@ -258,6 +263,7 @@
 import { defineComponent } from 'vue'
 import AppButton from '@/components/parts/AppButton.vue'
 import AppInput from '@/components/parts/AppInput.vue'
+import Card from '@/components/parts/Card.vue'
 import Chip from '@/components/parts/Chip.vue'
 import GridCols from '@/components/parts/GridCols.vue'
 import GridRows from '@/components/parts/GridRows.vue'
@@ -268,6 +274,7 @@ export default defineComponent({
   components: {
     AppButton,
     AppInput,
+    Card,
     Chip,
     GridCols,
     GridRows

@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex items-center justify-between flex-wrap bg-gray-500 p-6 global-header"
+    class="flex items-center justify-between flex-wrap bg-gray-600 p-6 global-header"
   >
     <div class="flex items-center flex-shrink-0 text-white mr-6">
       <span class="font-semibold text-xl tracking-tight">{{ header }}</span>

@@ -4,6 +4,7 @@
     :class="
       `bg-${color}-500 hover:bg-${color}-700 border-${color}-600 active:border-${color}-700 ${font} ${textColor} ${option}`
     "
+    @click="onClick"
   >
     {{ text }}
   </button>
@@ -45,7 +46,17 @@ export default defineComponent({
     }
   },
   setup() {
-    return {}
+
+    /**
+     * catch click event
+     * @return {void}
+     */
+    const onClick = (event: any) => {
+      console.log('click: ' + JSON.stringify(event, null, 2))
+    }
+    return {
+      onClick
+    }
   }
 })
 </script>

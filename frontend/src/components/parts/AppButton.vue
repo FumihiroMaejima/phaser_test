@@ -46,7 +46,6 @@ export default defineComponent({
     }
   },
   setup() {
-
     /**
      * catch click event
      * @return {void}

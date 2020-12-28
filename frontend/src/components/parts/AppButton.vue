@@ -1,8 +1,8 @@
 <template>
   <button
-    class="rounded-lg shadow-md py-2 px-4 border-b-4"
+    class="rounded-lg shadow-md py-2 px-4 border-b-4 active:border-none"
     :class="
-      `bg-${color}-500 hover:bg-${color}-700 border-${color}-600 active:border-${color}-700 ${font} ${textColor} ${option}`
+      `bg-${color}-500 hover:bg-${color}-700 border-${color}-600 active:bg-${color}-400 ${font} ${textColor} ${option}`
     "
     @click="onClick"
   >

@@ -1,8 +1,8 @@
 <template>
   <div class="flex items-center justify-center">
     <div class="w-full max-w-md">
-      <div class="bg-white shadow-md rounded mt-8 mb-4">
-        <h1 class="italic bg-gray-600 text-white rounded px-2 py-2">
+      <div class="bg-gray-100 shadow-md rounded mt-8 mb-4">
+        <h1 class="italic bg-gray-600 text-white rounded-t-lg px-2 py-2">
           Login Form
         </h1>
         <div class="bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4">

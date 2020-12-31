@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex items-center justify-between flex-wrap bg-gray-500 p-6 global-header"
+    class="flex items-center justify-between flex-wrap bg-gray-600 p-6 global-header"
   >
     <div class="flex items-center flex-shrink-0 text-white mr-6">
       <span class="font-semibold text-xl tracking-tight">{{ header }}</span>
@@ -32,7 +32,7 @@
           v-for="(value, key) in contents"
           v-bind:key="key"
           href="#responsive-header"
-          class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
+          class="block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-white"
           :class="{ 'mr-4': key !== contents.length - 1 }"
         >
           {{ value }}
@@ -46,6 +46,7 @@
 import { defineComponent, getCurrentInstance, ref } from 'vue'
 
 export default defineComponent({
+  name: 'GlobalHeader',
   setup() {
     let header = ref<string>('header')
     let contents = ref<string[]>([])
@@ -70,8 +71,8 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .global-header {
-  button:focus {
+  /* button:focus {
     outline: none !important; // for Google Chrome
-  }
+  } */
 }
 </style>

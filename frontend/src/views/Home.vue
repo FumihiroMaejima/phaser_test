@@ -1,29 +1,38 @@
 <template>
   <div class="container mx-auto">
-    <div class="bg-gray-500 my-1 sm:mx-1">
-      test
-      <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
-    </div>
-    <button
-      class="border-2 rounded border-purple-500 hover:border-gray-500 ..."
-    >
-      Button
-    </button>
+    <h1 class="italic my-2">ゲーム</h1>
+    <grid-rows mdRows="1" option="bg-blue-100 py-2 px-2">
+      <card />
+    </grid-rows>
+
+    <div class="mt-10 grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4"></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-// import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
+import Card from '@/components/parts/Card.vue'
+// import GridCols from '@/components/parts/GridCols.vue'
+import GridRows from '@/components/parts/GridRows.vue'
 
 export default defineComponent({
   name: 'Home',
   components: {
-    // HelloWorld
+    Card,
+    GridRows
   },
   setup() {
-
-    return {}
+    // methods
+    /**
+     * catch app-input event
+     * @return {void}
+     */
+    const catchAppInputEvent = (event: any) => {
+      console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
+    }
+    return {
+      catchAppInputEvent
+    }
   }
 })
 </script>

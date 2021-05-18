@@ -11,12 +11,14 @@ services:
       - "${PHP_FPM_PORT}:${PHP_FPM_PORT}"
     expose:
       - "${PHP_FPM_PORT}"
-    depends_on:
-      - db
+    # depends_on:
+    #  - db
     environment:
       TZ: "Asia/Tokyo"
       APP_URL: ${APP_URL}
       APP_ENV: ${APP_ENV}
+    networks:
+      default:
 
   nginx:
     build: ./nginx
@@ -33,34 +35,31 @@ services:
       # - "${NGINX_FRONT_END_PORT}:${NGINX_FRONT_END_PORT}"
     environment:
       TZ: "Asia/Tokyo"
+    networks:
+      default:
+        # ipv4_address: ${SERVICE_NETWORK_IP}
 
-  db:
-    build: ./mysql
-    container_name: ${PROJECT_NAME}_db
-    volumes:
-      - ./mysql/mysql_data:/var/lib/mysql # データの永続化
-      - ./mysql/sql:/docker-entrypoint-initdb.d
-    ports:
-      - "${MYSQL_PORT}:${MYSQL_PORT}"
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      TZ: "Asia/Tokyo"
-
-  # node:
-  #   build: ./node
-  #   container_name: ${PROJECT_NAME}_node
+  # db:
+  #   build: ./mysql
+  #   container_name: ${PROJECT_NAME}_db
   #   volumes:
-  #     - ./node/frontend:/frontend
-  #   depends_on:
-  #     - app
+  #     - vue-rpg-store:/var/lib/mysql # データの永続化
+  #     - ./mysql/sql:/docker-entrypoint-initdb.d
   #   ports:
-  #     - "${NODE_APPLICATION_PORT}:${NODE_APPLICATION_PORT}"
+  #     - "${MYSQL_PORT}:${MYSQL_PORT}"
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  #     TZ: "Asia/Tokyo"
+  #   networks:
+  #     default:
 
-  redis:
-    image: redis:5.0-alpine
-    container_name: ${PROJECT_NAME}_redis
-    volumes:
-      - redis-store:/data
+  # redis:
+  #   image: redis:5.0-alpine
+  #   container_name: ${PROJECT_NAME}_redis
+  #   volumes:
+  #     - redis-store:/data
 
-volumes:
-  redis-store:
+networks:
+  default:
+    external:
+      name: ${NETWORK_NAME}

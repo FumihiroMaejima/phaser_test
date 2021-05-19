@@ -9,7 +9,7 @@
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "prepare": "cd .. && husky install frontend/.husky",
-    "create-precommit": "cd .. && husky add frontend/.husky/pre-commit \"yarn lint-staged\"",
+    "create-precommit": "cd .. && husky add frontend/.husky/pre-commit \"cd frontend && yarn lint-staged\"",
     "lint-staged": "lint-staged"
   },
   "dependencies": {

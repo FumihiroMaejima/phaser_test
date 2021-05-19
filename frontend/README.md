@@ -297,7 +297,7 @@ package.jsonの`srcripts`に`prepare`が追記されている為下記の通り�
   "scripts": {
     ...
     "prepare": "cd .. && husky install frontend/.husky",
-    "create-precommit": "cd .. && husky add frontend/.husky/pre-commit \"yarn lint-staged\"",
+    "create-precommit": "cd .. && husky add frontend/.husky/pre-commit \"cd frontend && yarn lint-staged\"",
     "lint-staged": "lint-staged"
   },
 ```

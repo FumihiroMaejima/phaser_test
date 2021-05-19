@@ -8,10 +8,10 @@ my vue rpg test test.
 
 | 名前 | バージョン |
 | :--- | :---: |
-| npm | 6.12.1 |
-| node | 12.13.1 |
-| vue/cli | 4.5.9 |
-| TypeScript | 3.8.3 |
+| npm | 6.14.8 |
+| node | 12.20.0 |
+| vue/cli | 4.5.13 |
+| TypeScript | 4.1.3 |
 
 ---
 
@@ -25,7 +25,7 @@ $ npm uninstall yarn -g
 $ npm install yarn -g
 
 $ yarn --version
-1.22.5
+1.22.10
 ```
 
 
@@ -33,16 +33,16 @@ $ yarn --version
 
 ```Shell-session
 $ vue --version
-@vue/cli 4.4.6
+@vue/cli 4.5.10
 
 $ yarn global add @vue/cli
 
 $ vue --version
-@vue/cli 4.5.4
+@vue/cli 4.5.13
 
 
 $ yarn -v
-1.22.5
+1.22.10
 ```
 
 ## TypeScriptのインストール
@@ -52,7 +52,7 @@ $ yarn -v
 ```Shell-session
 $ npm install -g typescript
 $ tsc -v
-Version 3.8.3
+Version 4.1.3
 ```
 
 ### プロジェクトにインストールする
@@ -835,7 +835,19 @@ $ yarn add webpack-cli
 
 ---
 
-## Storybookの設定(v6.0.0以降)
+## VeeValidateの設定
+
+## VeeValidateをインストール
+
+現状は`Vue3版`をインストールする
+
+```Shell-session
+$ yarn add vee-validate@next
+```
+
+---
+
+## Storybookの設定(v6.2.0以降)
 
 ### Storybookのインストール
 
@@ -1039,6 +1051,87 @@ export const HelloTest = () => ({
 ```shell-session
 $ yarn storybook
 ```
+
+---
+
+## E2Eテストの設定
+
+`cypress`を利用する。
+
+プロジェクト作成時にcypressをインストールしている事を前提とする。
+
+### tsconfig.jsonの設定
+
+TypeScriptの設定の為に`types`に`cypress`を追記
+
+```json
+{
+  "types": [
+    "webpack-env",
+    "@types/jest",
+    "cypress",
+    "jest"
+  ],
+}
+```
+
+### 外部ファイルインポートの設定
+
+データ等を外部ファイル化した時にimport宣言した時にエラーが発生する現象の対応。
+
+`@cypress/webpack-preprocessor`をインストールする。
+
+```
+$ yarn add --dev @cypress/webpack-preprocessor
+```
+
+
+`frontend/tests/e2e/plugins/index.js`の、`const webpack`と`on`のコメントアウトになっている箇所のコメントを外す。
+
+これでテストファイル内でimport宣言が出来る様になる。
+
+
+```javascript
+/* eslint-disable @typescript-eslint/no-var-requires */
+const webpack = require('@cypress/webpack-preprocessor')
+
+module.exports = (on, config) => {
+  on('file:preprocessor', webpack({
+    webpackOptions: require('@vue/cli-service/webpack.config'),
+    watchOptions: {}
+  }))
+
+  return Object.assign({}, config, {
+    fixturesFolder: 'tests/e2e/fixtures',
+    integrationFolder: 'tests/e2e/specs',
+    screenshotsFolder: 'tests/e2e/screenshots',
+    videosFolder: 'tests/e2e/videos',
+    supportFile: 'tests/e2e/support/index.js'
+  })
+}
+```
+### 参考のテスト
+
+```TypeScript
+describe('Root Page Test', () => {
+  it('Visits the app root url with no authData.', () => {
+    cy.visit('/')
+
+    // redirect login form
+    cy.contains('div', 'Login Form')
+    cy.get('button').should('be.disabled')
+
+    cy.get('#email')
+      .should('have.value', '')
+
+    cy.get('#password')
+      .should('have.value', '')
+  })
+})
+```
+
+---
+
 
 ### Vuetifyを使う場合
 

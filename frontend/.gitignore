@@ -24,11 +24,3 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
-# apib
-/apib/doc
-
-# local env files
-.env
-# .eslintcache
-.eslintcache

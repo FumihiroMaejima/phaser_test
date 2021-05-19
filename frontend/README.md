@@ -279,46 +279,28 @@ module.exports = {
 }
 ```
 
-## Vuetifyの設定
-
-インストール
-
-```Shell-session
-$ vue add vuetify
-$ yarn add material-design-icons-iconfont
-```
-
-Typescriptを使っている場合は下記の通りtsconfig.jsonの「types」に「vuetify」を追加する
-
-```Json
-{
-  "compilerOptions": {
-    "types": [
-      "webpack-env",
-      "vuetify",
-      "jest"
-    ],
-  }
-}
-```
-
 ## huskyの設定
 
 huskyが設定されていなければ追加する
+
+v5系から設定方法が変わっている。
 
 ```Shell-session
 $ yarn add --dev husky
 ```
 
-lint-stagedを設定する
+package.jsonの`srcripts`に`prepare`が追記されている為下記の通り修正する。(モノレポ用の設定)
 
-```Shell-session
-$ npx mrm lint-staged
+`frontend/.huskyディレクトリ`を作成する為に`yarn prepare`と`yarn create-precommit`をそれぞれ実行する。
+
+```json
+  "scripts": {
+    ...
+    "prepare": "cd .. && husky install frontend/.husky",
+    "create-precommit": "cd .. && husky add frontend/.husky/pre-commit \"yarn lint-staged\"",
+    "lint-staged": "lint-staged"
+  },
 ```
-
-package.jsonに「gitHooks」の設定があれば削除する
-
-
 
 ## Componentsディレクトリの設定
 
@@ -328,246 +310,6 @@ modules
 views
 ```
 
-## vue-routerの設定
-
-/src/router.jsの作成と編集
-
-```TypeScript
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import TestPage from './components/Pages/TestPage.vue'
-
-Vue.use(Router)
-
-export default new Router({
-    mode: 'history',
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: HelloWorld
-        },
-        {
-            path: '/test',
-            name: 'test',
-            component: TestPage
-        },
-    ]
-})
-
-```
-
-## vuexの設定
-
-TypeScriptでvuexを使う為にvuex-classをインストール
-
-```Shell
-$ yarn add vuex-class
-```
-
-/src/store.jsの作成と編集
-
-関連するモジュールも作成しておくこと
-
-```TypeScript
-import Vue from 'vue'
-import Vuex from 'vuex'
-// import testModule from './store/modules/testModule'
-
-Vue.use(Vuex)
-
-const store = new Vuex.Store({
-  strict: process.env.NODE_ENV !== 'production',
-  modules: {
-    // test: testModule
-  },
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  }
-})
-
-export default store
-```
-
-
-/src/store/modulesディレクトリの作成
-
-```shell-session
-$ mkdir /src/store/modules
-```
-
-/src/store/modules/testModule.jsの作成と編集
-
-コードは省略
-
-
-## モジュールを利用するコンポーネントの作成
-
-「/test」にアクセスした時に利用するコンポーネント
-
-/src/components/Pages/TestPage.vueの作成と編集
-
-```TypeScript
-<template>
-    <div>
-        <TestSubModuleComponent module="subModule1"/>
-        <TestSubModuleComponent module="subModule2"/>
-        <TestModuleComponent/>
-    </div>
-</template>
-
-<script>
-import TestSubModuleComponent from './TestSubModuleComponent.vue'
-import TestModuleComponent from './TestModuleComponent.vue'
-
-export default {
-    name: 'app',
-    components: {
-        TestSubModuleComponent,
-        TestModuleComponent,
-    }
-}
-```
-
-## main.tsの設定
-
-main.tsの編集
-
-```TypeScript
-import Vue from 'vue'
-import App from './App.vue'
-import router from './routers/'
-import store from './store/'
-import client from './client'
-import vuetify from './plugins/vuetify';
-
-Vue.config.productionTip = false
-Vue.prototype.$client = client
-
-new Vue({
-  router,
-  store,
-  vuetify,
-  render: h => h(App)
-}).$mount('#app')
-require("@/assets/scss/App.scss");
-```
-
-基本的な設定は上記の通り
-
-次はより詳細な設定を記載する。
-
----
-
-## App.vueの設定
-
-App.vueの編集
-
-```TypeScript
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <router-view/>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'app'
-}
-</script>
-```
-
-
-## vuetifyのインストール
-
-vuetifのインストール
-
-yarnでinstallしないことに注意
-
-```shell-session
-$ vue add vuetify
-```
-
-
-## axios-mock-serverの設定
-
-### mocksディレクトリの作成
-
-```shell-session
-$ mkdir mocks
-```
-
-### apiファイルとdataファイルを作成
-
-/mocks/api/users/user.ts
-/mocks/data/users/user.json
-
-・user.ts
-
-```TypeScript
-import data from '../../data/users/user.json'
-
-export default {
-  get() {
-    return [
-      200,
-      data
-    ]
-  }
-}
-```
-
-・user.json
-
-```Json
-{
-  "id": 0,
-  "name": "foo"
-}
-```
-
-### mockのビルド
-
-```shell-session
-$ yarn mock:build
-yarn mock:build
-yarn run v1.22.1
-$ axios-mock-server -b
-mocks/$mock.js was built successfully.
-```
-
-/mocks/$mock.jsファイルが作成される。
-
-### client.tsの修正
-
-client.tsを下記の通りに修正
-
-```TypeScript
-import axios from 'axios'
-import mock from '../mocks/$mock'
-if (process.env.NODE_ENV === 'development') {
-  mock()
-}
-
-export default {
-  async get(url) {
-    const response = await axios.get(url)
-    return response
-  },
-  async post(url, data, option) {
-    const response = await axios.post(url, data, option)
-    return response
-  }
-}
-```
 
 ### vue.config.jsの修正
 

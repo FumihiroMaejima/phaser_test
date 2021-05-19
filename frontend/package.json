@@ -8,7 +8,9 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "prepare": "husky install"
+    "prepare": "cd .. && husky install frontend/.husky",
+    "create-precommit": "cd .. && husky add frontend/.husky/pre-commit \"yarn lint-staged\"",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "vue": "^3.0.0",
@@ -43,6 +45,8 @@
     "vue-jest": "^5.0.0-0"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix"
+    "*.ts": "eslint --cache --fix",
+    "*.js": "eslint --cache --fix",
+    "*.css": "stylelint --fix"
   }
 }

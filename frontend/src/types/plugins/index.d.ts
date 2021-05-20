@@ -8,8 +8,8 @@ import { IAppConfig } from '@/types/config'
 // 2. 拡張したい型が含まれるファイルを指定
 // Vue のコンストラクタの型は types/vue.d.ts に入っている
 declare module 'vue/types/vue' {
-    // 3. 拡張した Vue を定義
-    interface Vue {
-        $AppConfig: IAppConfig
-    }
+  // 3. 拡張した Vue を定義
+  interface Vue {
+    $AppConfig: IAppConfig
+  }
 }

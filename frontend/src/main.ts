@@ -13,4 +13,4 @@ app.config.globalProperties.$AppConfig = config
 
 app.use(store).use(router).mount('#app')
 
-// require('@/assets/scss/App.scss')
+require('@/assets/scss/App.scss')

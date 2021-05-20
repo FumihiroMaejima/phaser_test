@@ -2,5 +2,5 @@
 export * from '@/types/plugins/game/chara'
 
 export interface IGameClass {
-    [key: string]: string
+  [key: string]: string
 }

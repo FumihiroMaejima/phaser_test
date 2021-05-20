@@ -5,5 +5,5 @@
  * @return {void}
  */
 export function dd(value: any, text = 'test') {
-    console.log(`${text}: ${JSON.stringify(value, null, 2)}`)
+  console.log(`${text}: ${JSON.stringify(value, null, 2)}`)
 }

@@ -410,31 +410,6 @@ package.jsonにJestの設定
 }
 ```
 
-
-/tests/unit/ディレクトリの作成し、その中にテストファイルを作成する。
-
-eslintが邪魔するなら「/* eslint-disable no-undef */」を先頭に追記
-
-Sampleコンポーネントファイルのテストファイル、Sample.spec.tsとすると下記の様な具合
-/tests/unit/Sample.spec.ts
-
-```TypeScript
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import { shallowMount } from '@vue/test-utils'
-import Sample from '@/components/molecules/Sample.vue'
-
-Vue.use(Vuetify)
-const wrapper = shallowMount(Sample)
-
-describe('Sample test', () => {
-  it('sampleFunction param true', () => {
-    expect(wrapper.vm.sampleFunction(true)).toBeTruthy()
-  })
-})
-```
-
-
 ---
 
 ## tailwindcssの設定
@@ -487,14 +462,15 @@ postcssの設定
 
 ```shell-session
 $ yarn add autoprefixer
-$ yarn add postcss-cli
+$ yarn add postcss
 $ yarn add autoprefixer postcss-cli
 ```
 (2020/10現在 autoprefixerは^9.8.6を指定)
 (2020/11現在 tailwindcss2.0が出たが暫くpostCSSの後方互換性のある物をインストールした方が良い)
+(2021/5現在 apostcss@8をインストールしてもエラーになる。)
 
 ```shell-session
-$ yarn remove tailwindcss postcss-cli postcss autoprefixer
+$ yarn remove tailwindcss postcss postcss autoprefixer
 $ yarn add tailwindcss@compat postcss@^7 autoprefixer@^9
 ```
 

@@ -205,9 +205,7 @@ package.jsonの編集
     "lint": "vue-cli-service lint",
     "test:unit": "jest",
     "fmt": "prettier --write \"src/**/*.js\"",
-    "lint:css": "stylelint src/**/*.css",
-    "mock:build": "axios-mock-server -b",
-    "mock:watch": "axios-mock-server -w"
+    "lint:css": "stylelint src/**/*.css"
   },
 ```
 
@@ -301,6 +299,21 @@ package.jsonの`srcripts`に`prepare`が追記されている為下記の通り�
     "lint-staged": "lint-staged"
   },
 ```
+
+また、自分のホームディレクトリに`~/.huskyrc`を作成してnvmの設定しないと`yarn`コマンドが使えなくなる為設定する。
+
+```Shell-session
+$ touch ~/.huskyrc
+$ vim ~/.huskyrc
+```
+
+```Shell-session
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# 現在利用しているnodeバージョンをuseする
+nvm use stable
+```
+
 
 ## Componentsディレクトリの設定
 

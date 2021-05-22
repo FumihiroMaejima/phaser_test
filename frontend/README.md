@@ -586,30 +586,48 @@ $ yarn add vee-validate@next
 $ yarn add --dev @storybook/vue
 ```
 
-### その他パッケージのインストール
+`Vue3`を使う場合は`vue3`版を用意する必要がある。
 
 ```shell-session
-$ yarn add --dev babel-preset-vue
-$ yarn add --dev ts-loader
+$ yarn add --dev @storybook/vue3
+```
+
+v16以上の`vue-loader`をインストールする。
+
+```shell-session
+$ yarn add vue-loader@next
+```
+
+### その他パッケージのインストール
+
+202105現在、ts-loaderは8系で利用出来る。
+
+tailwindcssを使う場合、`postcss-loader`が必要になる。
+
+```shell-session
+$ yarn add --dev style-loader
+$ yarn add --dev ts-loader@^8.1.0
 $ yarn add --dev sass-resources-loader
+$ yarn add --dev postcss-loader
 ```
 
 ```shell-session
-$ yarn add --dev babel-preset-vue ts-loader sass-resources-loader
+$ yarn add --dev ts-loader@^8.1.0 style-loader sass-resources-loader postcss-loader
 ```
 
 ### addonのインストール
 
 ```shell-session
 $ yarn add --dev @storybook/addon-knobs
-$ yarn add --dev @storybook/addon-notes
+$ yarn add --dev @storybook/addon-docs
+$ yarn add --dev @storybook/addon-notes@6.0.0-alpha.6
 $ yarn add --dev @storybook/addon-a11y
 $ yarn add --dev @storybook/addon-essentials
 $ yarn add --dev @storybook/source-loader
 ```
 
 ```shell-session
-$ yarn add --dev @storybook/addon-knobs @storybook/addon-notes @storybook/addon-a11y @storybook/addon-essentials @storybook/source-loader
+$ yarn add --dev @storybook/addon-knobs @storybook/addon-docs @storybook/addon-notes @storybook/addon-a11y @storybook/addon-essentials @storybook/source-loader
 ```
 下記のエラーが発生する場合は`style-loader`をインストールする。
 
@@ -636,7 +654,7 @@ pasckage.jsonの`scripts`に下記の設定を追記する。
 
 ```Json
   "scripts": {
-    "storybook": "start-storybook -p 9100"
+    "storybook": "start-storybook -p 6100"
   },
 ```
 

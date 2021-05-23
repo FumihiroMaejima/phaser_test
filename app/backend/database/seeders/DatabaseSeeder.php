@@ -16,9 +16,6 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         // $this->call(AdminsLogTableSeeder::class);
         $this->call(AdminsTableSeeder::class);
-        $this->call(PermissionsTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
-        $this->call(RolePermissionsTableSeeder::class);
         $this->call(AdminsRolesTableSeeder::class);
         $this->call(GameAbilityTableSeeder::class);
         $this->call(GameAreaTableSeeder::class);
@@ -32,6 +29,5 @@ class DatabaseSeeder extends Seeder
         $this->call(GamePlayerTableSeeder::class);
         $this->call(GamePlayerLogTableSeeder::class);
         $this->call(GamePlayerItemListTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
     }
 }

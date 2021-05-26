@@ -4,7 +4,6 @@ namespace App\Services\Game;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
-
 use App\Http\Resources\Game\GameEnemiesServiceResource;
 use App\Repositories\GameEnemies\GameEnemiesRepository;
 use App\Repositories\GameEnemies\GameEnemiesRepositoryInterface;

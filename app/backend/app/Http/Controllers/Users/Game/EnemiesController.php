@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admins\Game;
+namespace App\Http\Controllers\Users\Game;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,13 +15,13 @@ class EnemiesController extends Controller
     private $service;
 
     /**
-     * Create a new RolesController instance.
+     * Create a new EnemiesController instance.
      *
      * @return void
      */
     public function __construct(GameEnemiesService $enemiesService)
     {
-        $this->middleware('auth:api-admins');
+        $this->middleware('auth:api');
         $this->service = $enemiesService;
     }
 
@@ -34,9 +34,9 @@ class EnemiesController extends Controller
     public function index(Request $request)
     {
         // 権限チェック
-        if (!$this->checkRequestAuthority($request, Config::get('myapp.executionRole.services.game.enemies'))) {
+        /* if (!$this->checkRequestAuthority($request, Config::get('myapp.executionRole.services.game.enemies'))) {
             return response()->json(['error' => 'Forbidden'], 403);
-        }
+        } */
 
         // サービスの実行
         return $this->service->getEnemies($request);

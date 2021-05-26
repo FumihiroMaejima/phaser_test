@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\UploadedFile;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\Game\EnemiesTemplateExport;
 
 class GameEnemiesServiceTest extends TestCase
 {
@@ -30,15 +27,14 @@ class GameEnemiesServiceTest extends TestCase
         Artisan::call('migrate:fresh');
         Artisan::call('db:seed');
 
-        $response = $this->json('POST', route('auth.admin'), [
-            'email'    => Config::get('myapp.test.admin.login.email'),
-            'password' => Config::get('myapp.test.admin.login.password')
+        $response = $this->json('POST', route('auth.user.login'), [
+            'email'    => Config::get('myapp.test.user.login.email'),
+            'password' => Config::get('myapp.test.user.login.password')
         ])->json();
 
         return [
             'token'          => $response['access_token'],
-            'user_id'        => $response['user']['id'],
-            'user_authority' => $response['user']['authority']
+            'user_id'        => $response['user']['id']
         ];
     }
 
@@ -71,7 +67,7 @@ class GameEnemiesServiceTest extends TestCase
      */
     public function testGetEnemies(): void
     {
-        $response = $this->get(route('admin.game.enemies.index'));
+        $response = $this->get(route('service.game.enemies.index'));
         $response->assertStatus(200)
             ->assertJsonCount(12, 'data');
     }

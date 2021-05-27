@@ -19,7 +19,7 @@ export default defineComponent({
   name: 'Home',
   components: {
     Card,
-    GridRows
+    GridRows,
   },
   setup() {
     // methods
@@ -31,8 +31,8 @@ export default defineComponent({
       console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
     }
     return {
-      catchAppInputEvent
+      catchAppInputEvent,
     }
-  }
+  },
 })
 </script>

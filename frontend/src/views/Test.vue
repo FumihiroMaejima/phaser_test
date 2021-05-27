@@ -69,7 +69,15 @@
     <h1 class="italic my-2">grid-flow-col button</h1>
     <div class="grid grid-flow-col rounded bg-gray-200 my-1 mx-1">
       <button
-        class="bg-red-500 hover:bg-red-600 border-yellow-900 text-white text-sm py-2 px-4 rounded"
+        class="
+          bg-red-500
+          hover:bg-red-600
+          border-yellow-900
+          text-white text-sm
+          py-2
+          px-4
+          rounded
+        "
       >
         testボタン
       </button>
@@ -78,13 +86,28 @@
     <h1 class="italic my-2">grid-cols bg-clip-border</h1>
     <div class="grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4">
       <div
-        class="bg-clip-border p-4 border-4 border-dashed border-purple-800 bg-purple-500"
+        class="
+          bg-clip-border
+          p-4
+          border-4 border-dashed border-purple-800
+          bg-purple-500
+        "
       ></div>
       <div
-        class="bg-clip-padding p-4 border-4 border-dashed border-purple-800 bg-purple-500"
+        class="
+          bg-clip-padding
+          p-4
+          border-4 border-dashed border-purple-800
+          bg-purple-500
+        "
       ></div>
       <div
-        class="bg-clip-content p-4 border-4 border-dashed border-purple-800 bg-purple-500"
+        class="
+          bg-clip-content
+          p-4
+          border-4 border-dashed border-purple-800
+          bg-purple-500
+        "
       ></div>
     </div>
 
@@ -97,17 +120,45 @@
         Button
       </button>
       <button
-        class="rounded transition duration-500 ease-in-out bg-blue-600 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 text-white"
+        class="
+          rounded
+          transition
+          duration-500
+          ease-in-out
+          bg-blue-600
+          hover:bg-red-600
+          transform
+          hover:-translate-y-1
+          hover:scale-110
+          text-white
+        "
       >
         Hover me
       </button>
       <button
-        class="rounded bg-blue-600 hover:bg-red-600 transform hover:scale-110 motion-reduce:transform-none text-white"
+        class="
+          rounded
+          bg-blue-600
+          hover:bg-red-600
+          transform
+          hover:scale-110
+          motion-reduce:transform-none
+          text-white
+        "
       >
         Hover me
       </button>
       <button
-        class="py-2 px-4 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700"
+        class="
+          py-2
+          px-4
+          font-semibold
+          rounded-lg
+          shadow-md
+          text-white
+          bg-green-500
+          hover:bg-green-700
+        "
       >
         Click me
       </button>
@@ -115,35 +166,97 @@
 
     <h1 class="italic my-2">input</h1>
     <div
-      class="grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4 bg-purple-100 py-2 px-2"
+      class="
+        grid
+        rounded
+        md:grid-cols-3
+        sm:grid-cols-1
+        gap-4
+        bg-purple-100
+        py-2
+        px-2
+      "
     >
       <form>
         <input
-          class="rounded border border-transparent shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+          class="
+            rounded
+            border border-transparent
+            shadow-sm
+            focus:outline-none
+            focus:ring-2 focus:ring-purple-600
+            focus:border-transparent
+          "
         />
         <button
-          class="ml-2 py-1 px-2 rounded bg-purple-600 hover:bg-purple-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 text-white"
+          class="
+            ml-2
+            py-1
+            px-2
+            rounded
+            bg-purple-600
+            hover:bg-purple-700
+            shadow-sm
+            focus:outline-none
+            focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50
+            text-white
+          "
         >
           Sign up
         </button>
       </form>
       <form>
         <input
-          class="rounded shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+          class="
+            rounded
+            shadow-inner
+            focus:outline-none
+            focus:ring-2 focus:ring-purple-600
+            focus:border-transparent
+          "
         />
         <button
-          class="ml-2 py-1 px-2 rounded bg-purple-600 hover:bg-purple-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 text-white"
+          class="
+            ml-2
+            py-1
+            px-2
+            rounded
+            bg-purple-600
+            hover:bg-purple-700
+            shadow-sm
+            focus:outline-none
+            focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50
+            text-white
+          "
         >
           Sign up
         </button>
       </form>
       <form>
         <input
-          class="rounded shadow-inner placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+          class="
+            rounded
+            shadow-inner
+            placeholder-gray-500 placeholder-opacity-50
+            focus:outline-none
+            focus:ring-2 focus:ring-purple-600
+            focus:border-transparent
+          "
           placeholder="test-name@example.com"
         />
         <button
-          class="ml-2 py-1 px-2 rounded bg-purple-600 hover:bg-purple-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 text-white"
+          class="
+            ml-2
+            py-1
+            px-2
+            rounded
+            bg-purple-600
+            hover:bg-purple-700
+            shadow-sm
+            focus:outline-none
+            focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50
+            text-white
+          "
         >
           Sign up
         </button>
@@ -153,7 +266,15 @@
     <h1 class="italic my-2">card</h1>
     <div class="grid rounded grid-flow-col gap-4 bg-purple-100 py-2 px-2">
       <div
-        class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
+        class="
+          max-w-md
+          mx-auto
+          bg-white
+          rounded-xl
+          shadow-md
+          overflow-hidden
+          md:max-w-2xl
+        "
       >
         <div class="md:flex">
           <div class="md:flex-shrink-0">
@@ -165,13 +286,26 @@
           </div>
           <div class="p-8">
             <div
-              class="uppercase tracking-wide text-sm text-indigo-500 font-semibold"
+              class="
+                uppercase
+                tracking-wide
+                text-sm text-indigo-500
+                font-semibold
+              "
             >
               Case study
             </div>
             <a
               href="#"
-              class="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
+              class="
+                block
+                mt-1
+                text-lg
+                leading-tight
+                font-medium
+                text-black
+                hover:underline
+              "
               >Finding customers for your new business</a
             >
             <p class="mt-2 text-gray-500">
@@ -229,9 +363,7 @@
 
     <h1 class="italic my-2">component button test</h1>
     <grid-cols>
-      <app-button>
-        test
-      </app-button>
+      <app-button> test </app-button>
       <chip />
     </grid-cols>
 
@@ -277,7 +409,7 @@ export default defineComponent({
     Card,
     Chip,
     GridCols,
-    GridRows
+    GridRows,
   },
   setup() {
     // methods
@@ -289,8 +421,8 @@ export default defineComponent({
       console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
     }
     return {
-      catchAppInputEvent
+      catchAppInputEvent,
     }
-  }
+  },
 })
 </script>

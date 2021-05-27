@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class AuthController extends Controller
 {
@@ -25,10 +26,10 @@ class AuthController extends Controller
      */
     public function login()
     {
-        // $credentials = request(['email', 'password']);
-        $credentials = request(['name', 'password']);
+        $credentials = request(['email', 'password']);
+        // $credentials = request(['name', 'password']);
 
-        if (!$token = auth()->attempt($credentials)) {
+        if (!$token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -44,7 +45,8 @@ class AuthController extends Controller
      */
     public function getAuthUser()
     {
-        return response()->json(auth()->user());
+        $user = auth('api')->user();
+        return response()->json($this->getUserResource($user));
     }
 
     /**
@@ -56,7 +58,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        auth('api')->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -69,7 +71,7 @@ class AuthController extends Controller
     public function refresh()
     {
         // Tymon\JWTAuth\JWT
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(auth('api')->refresh());
     }
 
     /**
@@ -81,17 +83,30 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
+        $user = auth('api')->user();
+
         // Tymon\JWTAuth\factory
         // Tymon\JWTAuth\Claims\Factory
         // ユーザー情報を返す。
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => [
-                'id' => auth('api')->user()->id,
-                'name' => auth('api')->user()->name
-            ]
+            'token_type'   => 'bearer',
+            'expires_in'   => auth('api')->factory()->getTTL() * 60,
+            'user'         => $this->getUserResource($user)
         ]);
+    }
+
+    /**
+     * ユーザー情報のリソースを取得
+     *
+     * @param Authenticatable $user
+     * @return array
+     */
+    protected function getUserResource(Authenticatable $user): array
+    {
+        return [
+            'id'        => $user->id,
+            'name'      => $user->name
+        ];
     }
 }

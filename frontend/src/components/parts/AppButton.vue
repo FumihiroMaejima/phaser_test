@@ -1,9 +1,7 @@
 <template>
   <button
     class="rounded-lg shadow-md py-2 px-4"
-    :class="
-      `bg-${color}-500 hover:bg-${color}-700 border-${color}-600 active:bg-${color}-300 ${font} ${textColor} ${option}`
-    "
+    :class="`bg-${color}-500 hover:bg-${color}-700 border-${color}-600 active:bg-${color}-300 ${font} ${textColor} ${option}`"
     @click="onClick"
   >
     {{ text }}
@@ -26,24 +24,24 @@ export default defineComponent({
   props: {
     text: {
       type: String,
-      default: 'button text'
+      default: 'button text',
     },
     color: {
       type: String,
-      default: 'green'
+      default: 'green',
     },
     textColor: {
       type: String,
-      default: 'text-white'
+      default: 'text-white',
     },
     font: {
       type: String,
-      default: 'font-semibold'
+      default: 'font-semibold',
     },
     option: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   setup() {
     /**
@@ -54,8 +52,8 @@ export default defineComponent({
       console.log('click: ' + JSON.stringify(event, null, 2))
     }
     return {
-      onClick
+      onClick,
     }
-  }
+  },
 })
 </script>

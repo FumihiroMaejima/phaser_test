@@ -20,7 +20,13 @@
 
             <div class="flex items-center justify-between">
               <a
-                class="inline-block align-baseline font-normal text-sm text-c-500 hover:text-blue-800"
+                class="
+                  inline-block
+                  align-baseline
+                  font-normal
+                  text-sm text-c-500
+                  hover:text-blue-800
+                "
                 href="#"
               >
                 Forgot Password?
@@ -46,7 +52,7 @@ export default defineComponent({
   components: {
     AppButton,
     AppInput,
-    GridCols
+    GridCols,
   },
   setup() {
     // methods
@@ -67,8 +73,8 @@ export default defineComponent({
     }
     return {
       catchAppInputEvent,
-      onClick
+      onClick,
     }
-  }
+  },
 })
 </script>

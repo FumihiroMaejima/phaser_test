@@ -1,6 +1,14 @@
 <template>
   <input
-    class="rounded shadow-inner focus:outline-none focus:ring-2 focus:border-transparent py-1 px-2"
+    class="
+      rounded
+      shadow-inner
+      focus:outline-none
+      focus:ring-2
+      focus:border-transparent
+      py-1
+      px-2
+    "
     :class="`focus:ring-${color}-600 ${font} ${option}`"
     :type="type"
     :placeholder="placeholder"
@@ -13,7 +21,7 @@
 import { defineComponent, computed, SetupContext } from 'vue'
 
 type Props = {
-  value: string | number | boolean | object
+  value: string | number | boolean | any
   color: string
   type: string
   disabled: boolean
@@ -26,32 +34,32 @@ export default defineComponent({
   props: {
     value: {
       type: [String, Number, Boolean, Object],
-      default: ''
+      default: '',
     },
     color: {
       type: String,
-      default: 'blue'
+      default: 'blue',
     },
     type: {
       type: String,
-      default: 'text'
+      default: 'text',
     },
     placeholder: {
       type: String,
-      default: ''
+      default: '',
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     font: {
       type: String,
-      default: 'font-sans' // font-mono, font-semibold, font-serif, font-sans
+      default: 'font-sans', // font-mono, font-semibold, font-serif, font-sans
     },
     option: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   setup(props: Props, context: SetupContext) {
     // computed
@@ -59,12 +67,12 @@ export default defineComponent({
       get: () => props.value,
       set: (val) => {
         context.emit('app-input', val)
-      }
+      },
     })
 
     return {
-      inputValue
+      inputValue,
     }
-  }
+  },
 })
 </script>

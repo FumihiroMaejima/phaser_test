@@ -1,6 +1,14 @@
 <template>
   <div
-    class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
+    class="
+      max-w-md
+      mx-auto
+      bg-white
+      rounded-xl
+      shadow-md
+      overflow-hidden
+      md:max-w-2xl
+    "
   >
     <div class="md:flex">
       <div class="md:flex-shrink-0">
@@ -18,12 +26,18 @@
         </div>
         <a
           href="#"
-          class="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
+          class="
+            block
+            mt-1
+            text-lg
+            leading-tight
+            font-medium
+            text-black
+            hover:underline
+          "
           >Text Header</a
         >
-        <p class="mt-2 text-gray-500">
-          This is Card Text.This is Card Text.
-        </p>
+        <p class="mt-2 text-gray-500">This is Card Text.This is Card Text.</p>
       </div>
     </div>
   </div>
@@ -45,27 +59,27 @@ export default defineComponent({
   props: {
     text: {
       type: String,
-      default: 'chip text'
+      default: 'chip text',
     },
     color: {
       type: String,
-      default: 'green'
+      default: 'green',
     },
     textColor: {
       type: String,
-      default: 'text-white'
+      default: 'text-white',
     },
     font: {
       type: String,
-      default: 'font-sans'
+      default: 'font-sans',
     },
     option: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   setup() {
     return {}
-  }
+  },
 })
 </script>

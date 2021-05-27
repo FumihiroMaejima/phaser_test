@@ -1,9 +1,7 @@
 <template>
   <div
     class="grid rounded"
-    :class="
-      `md:grid-cols-${mdCols} sm:grid-cols-${smCols} gap-${gap} ${option}`
-    "
+    :class="`md:grid-cols-${mdCols} sm:grid-cols-${smCols} gap-${gap} ${option}`"
   >
     <slot />
   </div>
@@ -24,20 +22,20 @@ export default defineComponent({
   props: {
     mdCols: {
       type: Number,
-      default: 3
+      default: 3,
     },
     smCols: {
       type: Number,
-      default: 1
+      default: 1,
     },
     gap: {
       type: Number,
-      default: 4
+      default: 4,
     },
     option: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   setup(/* props: Props */) {
     // computed
@@ -47,6 +45,6 @@ export default defineComponent({
       // mdColsClass,
       // smColsClass
     }
-  }
+  },
 })
 </script>

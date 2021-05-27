@@ -17,9 +17,9 @@ export default defineComponent({
     const currentYear = process.env.VUE_APP_CURRENT_YEAR || 2021
 
     return {
-      currentYear
+      currentYear,
     }
-  }
+  },
 })
 </script>
 <style lang="scss" scoped></style>

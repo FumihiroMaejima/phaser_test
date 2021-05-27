@@ -11,3 +11,9 @@
 
 # mysql data
 mysql_data
+
+# debug setting file
+.vscode/launch.json
+
+# old
+frontend-old

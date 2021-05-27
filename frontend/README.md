@@ -8,10 +8,10 @@ my vue rpg test test.
 
 | 名前 | バージョン |
 | :--- | :---: |
-| npm | 6.12.1 |
-| node | 12.13.1 |
-| vue/cli | 4.5.9 |
-| TypeScript | 3.8.3 |
+| npm | 6.14.8 |
+| node | 12.20.0 |
+| vue/cli | 4.5.13 |
+| TypeScript | 4.1.3 |
 
 ---
 
@@ -25,7 +25,7 @@ $ npm uninstall yarn -g
 $ npm install yarn -g
 
 $ yarn --version
-1.22.5
+1.22.10
 ```
 
 
@@ -33,16 +33,16 @@ $ yarn --version
 
 ```Shell-session
 $ vue --version
-@vue/cli 4.4.6
+@vue/cli 4.5.10
 
 $ yarn global add @vue/cli
 
 $ vue --version
-@vue/cli 4.5.4
+@vue/cli 4.5.13
 
 
 $ yarn -v
-1.22.5
+1.22.10
 ```
 
 ## TypeScriptのインストール
@@ -52,7 +52,7 @@ $ yarn -v
 ```Shell-session
 $ npm install -g typescript
 $ tsc -v
-Version 3.8.3
+Version 4.1.3
 ```
 
 ### プロジェクトにインストールする
@@ -205,9 +205,7 @@ package.jsonの編集
     "lint": "vue-cli-service lint",
     "test:unit": "jest",
     "fmt": "prettier --write \"src/**/*.js\"",
-    "lint:css": "stylelint src/**/*.css",
-    "mock:build": "axios-mock-server -b",
-    "mock:watch": "axios-mock-server -w"
+    "lint:css": "stylelint src/**/*.css"
   },
 ```
 
@@ -279,45 +277,42 @@ module.exports = {
 }
 ```
 
-## Vuetifyの設定
-
-インストール
-
-```Shell-session
-$ vue add vuetify
-$ yarn add material-design-icons-iconfont
-```
-
-Typescriptを使っている場合は下記の通りtsconfig.jsonの「types」に「vuetify」を追加する
-
-```Json
-{
-  "compilerOptions": {
-    "types": [
-      "webpack-env",
-      "vuetify",
-      "jest"
-    ],
-  }
-}
-```
-
 ## huskyの設定
 
 huskyが設定されていなければ追加する
+
+v5系から設定方法が変わっている。
 
 ```Shell-session
 $ yarn add --dev husky
 ```
 
-lint-stagedを設定する
+package.jsonの`srcripts`に`prepare`が追記されている為下記の通り修正する。(モノレポ用の設定)
 
-```Shell-session
-$ npx mrm lint-staged
+`frontend/.huskyディレクトリ`を作成する為に`yarn prepare`と`yarn create-precommit`をそれぞれ実行する。
+
+```json
+  "scripts": {
+    ...
+    "prepare": "cd .. && husky install frontend/.husky",
+    "create-precommit": "cd .. && husky add frontend/.husky/pre-commit \"cd frontend && yarn lint-staged\"",
+    "lint-staged": "lint-staged"
+  },
 ```
 
-package.jsonに「gitHooks」の設定があれば削除する
+また、自分のホームディレクトリに`~/.huskyrc`を作成してnvmの設定しないと`yarn`コマンドが使えなくなる為設定する。
 
+```Shell-session
+$ touch ~/.huskyrc
+$ vim ~/.huskyrc
+```
+
+```Shell-session
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# 現在利用しているnodeバージョンをuseする
+nvm use stable
+```
 
 
 ## Componentsディレクトリの設定
@@ -328,246 +323,6 @@ modules
 views
 ```
 
-## vue-routerの設定
-
-/src/router.jsの作成と編集
-
-```TypeScript
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import TestPage from './components/Pages/TestPage.vue'
-
-Vue.use(Router)
-
-export default new Router({
-    mode: 'history',
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: HelloWorld
-        },
-        {
-            path: '/test',
-            name: 'test',
-            component: TestPage
-        },
-    ]
-})
-
-```
-
-## vuexの設定
-
-TypeScriptでvuexを使う為にvuex-classをインストール
-
-```Shell
-$ yarn add vuex-class
-```
-
-/src/store.jsの作成と編集
-
-関連するモジュールも作成しておくこと
-
-```TypeScript
-import Vue from 'vue'
-import Vuex from 'vuex'
-// import testModule from './store/modules/testModule'
-
-Vue.use(Vuex)
-
-const store = new Vuex.Store({
-  strict: process.env.NODE_ENV !== 'production',
-  modules: {
-    // test: testModule
-  },
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  }
-})
-
-export default store
-```
-
-
-/src/store/modulesディレクトリの作成
-
-```shell-session
-$ mkdir /src/store/modules
-```
-
-/src/store/modules/testModule.jsの作成と編集
-
-コードは省略
-
-
-## モジュールを利用するコンポーネントの作成
-
-「/test」にアクセスした時に利用するコンポーネント
-
-/src/components/Pages/TestPage.vueの作成と編集
-
-```TypeScript
-<template>
-    <div>
-        <TestSubModuleComponent module="subModule1"/>
-        <TestSubModuleComponent module="subModule2"/>
-        <TestModuleComponent/>
-    </div>
-</template>
-
-<script>
-import TestSubModuleComponent from './TestSubModuleComponent.vue'
-import TestModuleComponent from './TestModuleComponent.vue'
-
-export default {
-    name: 'app',
-    components: {
-        TestSubModuleComponent,
-        TestModuleComponent,
-    }
-}
-```
-
-## main.tsの設定
-
-main.tsの編集
-
-```TypeScript
-import Vue from 'vue'
-import App from './App.vue'
-import router from './routers/'
-import store from './store/'
-import client from './client'
-import vuetify from './plugins/vuetify';
-
-Vue.config.productionTip = false
-Vue.prototype.$client = client
-
-new Vue({
-  router,
-  store,
-  vuetify,
-  render: h => h(App)
-}).$mount('#app')
-require("@/assets/scss/App.scss");
-```
-
-基本的な設定は上記の通り
-
-次はより詳細な設定を記載する。
-
----
-
-## App.vueの設定
-
-App.vueの編集
-
-```TypeScript
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <router-view/>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'app'
-}
-</script>
-```
-
-
-## vuetifyのインストール
-
-vuetifのインストール
-
-yarnでinstallしないことに注意
-
-```shell-session
-$ vue add vuetify
-```
-
-
-## axios-mock-serverの設定
-
-### mocksディレクトリの作成
-
-```shell-session
-$ mkdir mocks
-```
-
-### apiファイルとdataファイルを作成
-
-/mocks/api/users/user.ts
-/mocks/data/users/user.json
-
-・user.ts
-
-```TypeScript
-import data from '../../data/users/user.json'
-
-export default {
-  get() {
-    return [
-      200,
-      data
-    ]
-  }
-}
-```
-
-・user.json
-
-```Json
-{
-  "id": 0,
-  "name": "foo"
-}
-```
-
-### mockのビルド
-
-```shell-session
-$ yarn mock:build
-yarn mock:build
-yarn run v1.22.1
-$ axios-mock-server -b
-mocks/$mock.js was built successfully.
-```
-
-/mocks/$mock.jsファイルが作成される。
-
-### client.tsの修正
-
-client.tsを下記の通りに修正
-
-```TypeScript
-import axios from 'axios'
-import mock from '../mocks/$mock'
-if (process.env.NODE_ENV === 'development') {
-  mock()
-}
-
-export default {
-  async get(url) {
-    const response = await axios.get(url)
-    return response
-  },
-  async post(url, data, option) {
-    const response = await axios.post(url, data, option)
-    return response
-  }
-}
-```
 
 ### vue.config.jsの修正
 
@@ -668,31 +423,6 @@ package.jsonにJestの設定
 }
 ```
 
-
-/tests/unit/ディレクトリの作成し、その中にテストファイルを作成する。
-
-eslintが邪魔するなら「/* eslint-disable no-undef */」を先頭に追記
-
-Sampleコンポーネントファイルのテストファイル、Sample.spec.tsとすると下記の様な具合
-/tests/unit/Sample.spec.ts
-
-```TypeScript
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import { shallowMount } from '@vue/test-utils'
-import Sample from '@/components/molecules/Sample.vue'
-
-Vue.use(Vuetify)
-const wrapper = shallowMount(Sample)
-
-describe('Sample test', () => {
-  it('sampleFunction param true', () => {
-    expect(wrapper.vm.sampleFunction(true)).toBeTruthy()
-  })
-})
-```
-
-
 ---
 
 ## tailwindcssの設定
@@ -745,14 +475,15 @@ postcssの設定
 
 ```shell-session
 $ yarn add autoprefixer
-$ yarn add postcss-cli
+$ yarn add postcss
 $ yarn add autoprefixer postcss-cli
 ```
 (2020/10現在 autoprefixerは^9.8.6を指定)
 (2020/11現在 tailwindcss2.0が出たが暫くpostCSSの後方互換性のある物をインストールした方が良い)
+(2021/5現在 apostcss@8をインストールしてもエラーになる。)
 
 ```shell-session
-$ yarn remove tailwindcss postcss-cli postcss autoprefixer
+$ yarn remove tailwindcss postcss postcss autoprefixer
 $ yarn add tailwindcss@compat postcss@^7 autoprefixer@^9
 ```
 
@@ -835,7 +566,19 @@ $ yarn add webpack-cli
 
 ---
 
-## Storybookの設定(v6.0.0以降)
+## VeeValidateの設定
+
+## VeeValidateをインストール
+
+現状は`Vue3版`をインストールする
+
+```Shell-session
+$ yarn add vee-validate@next
+```
+
+---
+
+## Storybookの設定(v6.2.0以降)
 
 ### Storybookのインストール
 
@@ -843,30 +586,48 @@ $ yarn add webpack-cli
 $ yarn add --dev @storybook/vue
 ```
 
-### その他パッケージのインストール
+`Vue3`を使う場合は`vue3`版を用意する必要がある。
 
 ```shell-session
-$ yarn add --dev babel-preset-vue
-$ yarn add --dev ts-loader
+$ yarn add --dev @storybook/vue3
+```
+
+v16以上の`vue-loader`をインストールする。
+
+```shell-session
+$ yarn add vue-loader@next
+```
+
+### その他パッケージのインストール
+
+202105現在、ts-loaderは8系で利用出来る。
+
+tailwindcssを使う場合、`postcss-loader`が必要になる。
+
+```shell-session
+$ yarn add --dev style-loader
+$ yarn add --dev ts-loader@^8.1.0
 $ yarn add --dev sass-resources-loader
+$ yarn add --dev postcss-loader
 ```
 
 ```shell-session
-$ yarn add --dev babel-preset-vue ts-loader sass-resources-loader
+$ yarn add --dev ts-loader@^8.1.0 style-loader sass-resources-loader postcss-loader
 ```
 
 ### addonのインストール
 
 ```shell-session
 $ yarn add --dev @storybook/addon-knobs
-$ yarn add --dev @storybook/addon-notes
+$ yarn add --dev @storybook/addon-docs
+$ yarn add --dev @storybook/addon-notes@6.0.0-alpha.6
 $ yarn add --dev @storybook/addon-a11y
 $ yarn add --dev @storybook/addon-essentials
 $ yarn add --dev @storybook/source-loader
 ```
 
 ```shell-session
-$ yarn add --dev @storybook/addon-knobs @storybook/addon-notes @storybook/addon-a11y @storybook/addon-essentials @storybook/source-loader
+$ yarn add --dev @storybook/addon-knobs @storybook/addon-docs @storybook/addon-notes @storybook/addon-a11y @storybook/addon-essentials @storybook/source-loader
 ```
 下記のエラーが発生する場合は`style-loader`をインストールする。
 
@@ -893,7 +654,7 @@ pasckage.jsonの`scripts`に下記の設定を追記する。
 
 ```Json
   "scripts": {
-    "storybook": "start-storybook -p 9100"
+    "storybook": "start-storybook -p 6100"
   },
 ```
 
@@ -1039,6 +800,87 @@ export const HelloTest = () => ({
 ```shell-session
 $ yarn storybook
 ```
+
+---
+
+## E2Eテストの設定
+
+`cypress`を利用する。
+
+プロジェクト作成時にcypressをインストールしている事を前提とする。
+
+### tsconfig.jsonの設定
+
+TypeScriptの設定の為に`types`に`cypress`を追記
+
+```json
+{
+  "types": [
+    "webpack-env",
+    "@types/jest",
+    "cypress",
+    "jest"
+  ],
+}
+```
+
+### 外部ファイルインポートの設定
+
+データ等を外部ファイル化した時にimport宣言した時にエラーが発生する現象の対応。
+
+`@cypress/webpack-preprocessor`をインストールする。
+
+```
+$ yarn add --dev @cypress/webpack-preprocessor
+```
+
+
+`frontend/tests/e2e/plugins/index.js`の、`const webpack`と`on`のコメントアウトになっている箇所のコメントを外す。
+
+これでテストファイル内でimport宣言が出来る様になる。
+
+
+```javascript
+/* eslint-disable @typescript-eslint/no-var-requires */
+const webpack = require('@cypress/webpack-preprocessor')
+
+module.exports = (on, config) => {
+  on('file:preprocessor', webpack({
+    webpackOptions: require('@vue/cli-service/webpack.config'),
+    watchOptions: {}
+  }))
+
+  return Object.assign({}, config, {
+    fixturesFolder: 'tests/e2e/fixtures',
+    integrationFolder: 'tests/e2e/specs',
+    screenshotsFolder: 'tests/e2e/screenshots',
+    videosFolder: 'tests/e2e/videos',
+    supportFile: 'tests/e2e/support/index.js'
+  })
+}
+```
+### 参考のテスト
+
+```TypeScript
+describe('Root Page Test', () => {
+  it('Visits the app root url with no authData.', () => {
+    cy.visit('/')
+
+    // redirect login form
+    cy.contains('div', 'Login Form')
+    cy.get('button').should('be.disabled')
+
+    cy.get('#email')
+      .should('have.value', '')
+
+    cy.get('#password')
+      .should('have.value', '')
+  })
+})
+```
+
+---
+
 
 ### Vuetifyを使う場合
 

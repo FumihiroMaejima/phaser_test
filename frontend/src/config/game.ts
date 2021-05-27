@@ -1,12 +1,12 @@
 import {
   IPreloadCallBack,
-  ICreatedCallBack /* IappGameConfig */
+  ICreatedCallBack /* IappGameConfig */,
 } from '@/types'
 export const preloadCallBack: IPreloadCallBack = () => {
   console.log('preload')
 }
 
-export const createCallBack: ICreatedCallBack = (data: object) => {
+export const createCallBack: ICreatedCallBack = (data: any) => {
   console.log(JSON.stringify(data, null, 2))
 }
 
@@ -17,11 +17,11 @@ export const appGameConfig = {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 200 }
-    }
+      gravity: { y: 200 },
+    },
   },
   scene: {
     preload: preloadCallBack,
-    create: createCallBack
-  }
+    create: createCallBack,
+  },
 }

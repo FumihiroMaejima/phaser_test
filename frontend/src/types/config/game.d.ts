@@ -3,7 +3,7 @@ export interface IappGameConfig {
     | string
     | string[]
     | number
-    | object
+    | any
     | IPreloadCallBack
     | ICreatedCallBack
   type: number
@@ -22,10 +22,10 @@ export interface IappGameConfig {
 }
 
 export type IPreloadCallBack = () => void
-export type ICreatedCallBack = (data: object) => void
+export type ICreatedCallBack = (data: any) => void
 
 export interface IGamePhysicSetting {
-  [key: string]: string | number | object
+  [key: string]: string | number | any
   default: string
   arcade: {
     gravity: { y: number }

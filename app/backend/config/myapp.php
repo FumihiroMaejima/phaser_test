@@ -11,7 +11,7 @@ return [
         'user' => [
             'login' => [
                 'email'    => 'test' . 'user1' . '@example.com',
-                'password' => env('TEST_ADMIN_SEEDER_PASSWORD', 'password')
+                'password' => env('TEST_USR_SEEDER_PASSWORD', 'password')
             ]
         ],
         'game' => [

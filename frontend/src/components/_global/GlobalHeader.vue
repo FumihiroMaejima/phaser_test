@@ -1,15 +1,5 @@
 <template>
-  <nav
-    class="
-      flex
-      items-center
-      justify-between
-      flex-wrap
-
-      p-6
-      global-header
-    "
-  >
+  <nav class="flex items-center justify-between flex-wrap p-6 global-header">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
       <span class="font-semibold text-xl tracking-tight">{{ header }}</span>
     </div>
@@ -29,7 +19,7 @@
         "
         @click="isOpen = !isOpen"
       >
-        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20">
+        <svg class="fill-current h-3 w-3" :viewBox="viewBoxValue">
           <title>Menu</title>
           <path
             v-show="!isOpen"
@@ -69,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, ref } from 'vue'
+import { computed, defineComponent, getCurrentInstance, ref } from 'vue'
 
 export default defineComponent({
   name: 'GlobalHeader',
@@ -77,6 +67,10 @@ export default defineComponent({
     let header = ref<string>('header')
     let contents = ref<string[]>([])
     const isOpen = ref<boolean>(false)
+
+    const viewBoxValue = computed((): string =>
+      isOpen.value === true ? '0 0 30 30' : '0 0 20 20'
+    )
 
     // thisの取得
     const instance = getCurrentInstance()
@@ -88,6 +82,7 @@ export default defineComponent({
     }
 
     return {
+      viewBoxValue,
       header,
       contents,
       isOpen,

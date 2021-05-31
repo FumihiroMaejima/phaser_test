@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="w-full block items-center flex w-auto bg-gray-600 justify-end px-2"
+    class="w-full block items-center flex w-auto justify-end px-2"
   >
     <address class="text-sm text-gray-300">
       Copyright(C){{ currentYear }} calicocat.tokyo,Allright Reserved.
@@ -22,4 +22,8 @@ export default defineComponent({
   },
 })
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.global-footer {
+  background-color: rgba(75, 85, 99, 0.1);
+}
+</style>

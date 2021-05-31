@@ -5,7 +5,7 @@
       items-center
       justify-between
       flex-wrap
-      bg-gray-600
+
       p-6
       global-header
     "
@@ -56,7 +56,7 @@
             mt-4
             lg:inline-block
             lg:mt-0
-            text-gray-300
+            text-gray-500
             hover:text-white
           "
           :class="{ 'mr-4': key !== contents.length - 1 }"
@@ -97,6 +97,8 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .global-header {
+  background-color: rgba(75, 85, 99, 0.1);
+
   /* button:focus {
     outline: none !important; // for Google Chrome
   } */

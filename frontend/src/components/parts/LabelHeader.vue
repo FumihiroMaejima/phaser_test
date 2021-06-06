@@ -21,13 +21,13 @@ export default defineComponent({
     color: {
       type: String as PropType<ColorType>,
       default: 'green',
-    }
+    },
   },
   setup(props: Props) {
     const labelColor = computed((): string => `label-header__${props.color}`)
 
     return {
-      labelColor
+      labelColor,
     }
   },
 })
@@ -52,22 +52,18 @@ export default defineComponent({
     &::before {
       background-color: #1565c0;
     }
-
   }
 
   &__green {
     &::before {
-      background-color: #006F5F;
+      background-color: #006f5f;
     }
-
   }
 
   &__red {
     &::before {
-      background-color: #AC291D;
+      background-color: #ac291d;
     }
-
   }
 }
 </style>
-

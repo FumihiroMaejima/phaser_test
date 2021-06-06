@@ -1,5 +1,7 @@
 <template>
-  <footer class="w-full block items-center flex w-auto justify-end px-2">
+  <footer
+    class="global-footer w-full block items-center flex w-auto justify-end px-2"
+  >
     <address class="text-sm text-gray-300">
       Copyright(C){{ currentYear }} calicocat.tokyo,Allright Reserved.
     </address>

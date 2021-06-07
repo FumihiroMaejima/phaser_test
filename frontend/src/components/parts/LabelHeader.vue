@@ -34,7 +34,8 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .label-header {
-  font-size: 15px;
+  font-size: 18px;
+  font-family: monospace, fantasy;
   line-height: 27px;
   position: relative;
   text-indent: 20px;

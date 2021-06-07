@@ -121,7 +121,7 @@ export default defineComponent({
   &__content-area {
     background-color: #f4f2db;
     padding: 0.5em 1em;
-    margin: 2em 0;
+    margin: 10px 0;
     border-bottom: solid 3px #8f8d80;
     border-radius: 9px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);

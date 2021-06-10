@@ -29,19 +29,13 @@
         v-html="aboutMessage.contact"
       ></div>
     </div>
-    <app-button> test </app-button>
-    <grid-cols>
-      <app-button> test </app-button>
-    </grid-cols>
 
-    <div class="mt-10 grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4"></div>
+    <div class="my-56"></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import AppButton from '@/components/parts/AppButton.vue'
-import GridCols from '@/components/parts/GridCols.vue'
 import LabelHeader from '@/components/parts/LabelHeader.vue'
 
 import { IAppConfig, AboutMessageType } from '@/types'
@@ -51,8 +45,6 @@ const config: IAppConfig = require('@/config/data')
 export default defineComponent({
   name: 'About',
   components: {
-    AppButton,
-    GridCols,
     LabelHeader,
   },
   setup() {

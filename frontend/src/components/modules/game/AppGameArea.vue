@@ -1,28 +1,46 @@
 <template>
-  <div class="container mx-auto">
-    <h1 class="italic my-2">Game</h1>
-    <app-create-user-form />
+  <div
+    class="
+      app-game-area__content-area
+      grid
+      rounded
+      md:grid-cols-1
+      sm:grid-cols-1
+      gap-4
+    "
+  >
+    <label-header text="このWebサイトについて" color="blue" />
+    <div
+      class="md:px-4 grid md:grid-cols-1s sm:grid-cols-1 gap-2"
+      v-html="aboutMessage.main"
+    ></div>
 
-    <app-game-area />
+    <label-header text="このサイトを作った人" color="blue" />
+    <div
+      class="md:px-4 grid md:grid-cols-1 sm:grid-cols-1 gap-2"
+      v-html="aboutMessage.author"
+    ></div>
 
-    <div class="my-56"></div>
+    <label-header text="お問合せについて" color="blue" />
+    <div
+      class="md:px-4 grid md:grid-cols-1 sm:grid-cols-1 gap-2"
+      v-html="aboutMessage.contact"
+    ></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import AppCreateUserForm from '@/components/modules/game/AppCreateUserForm.vue'
-import AppGameArea from '@/components/modules/game/AppGameArea.vue'
+import LabelHeader from '@/components/parts/LabelHeader.vue'
 
 import { IAppConfig, AboutMessageType } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const config: IAppConfig = require('@/config/data')
 
 export default defineComponent({
-  name: 'Game',
+  name: 'AppGameArea',
   components: {
-    AppCreateUserForm,
-    AppGameArea,
+    LabelHeader,
   },
   setup() {
     // computed
@@ -44,7 +62,7 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-.game {
+.app-game-area {
   &__content-area {
     background-color: #f4f2db;
     padding: 20px 20px;

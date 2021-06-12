@@ -9,51 +9,19 @@
       gap-4
     "
   >
-    <!-- <label-header text="このWebサイトについて" color="blue" />
-    <div
-      class="md:px-4 grid md:grid-cols-1s sm:grid-cols-1 gap-2"
-      v-html="aboutMessage.main"
-    ></div>
-
-    <label-header text="このサイトを作った人" color="blue" />
-    <div
-      class="md:px-4 grid md:grid-cols-1 sm:grid-cols-1 gap-2"
-      v-html="aboutMessage.author"
-    ></div>
-
-    <label-header text="お問合せについて" color="blue" />
-    <div
-      class="md:px-4 grid md:grid-cols-1 sm:grid-cols-1 gap-2"
-      v-html="aboutMessage.contact"
-    ></div> -->
-
     <div class="bg-gray-900 rounded">test</div>
 
     <div class="grid rounded md:grid-cols-12 sm:grid-cols-1 gap-1">
       <button class="app-game-area__action-button">test</button>
       <button class="app-game-area__action-button">test</button>
       <button class="app-game-area__action-button">test</button>
-      <!-- <div class="app-game-area__action-button-wrapper"><button class="app-game-area__action-button">test</button></div>
-      <div class="app-game-area__action-button-wrapper"><button class="app-game-area__action-button">test</button></div> -->
-      <!-- <button class="app-game-area__action-button">test</button>
-      <button class="app-game-area__action-button">test</button> -->
     </div>
-
-    <!-- <div class="space-x-4 ...">
-      <div class="inline-block bg-gray-500">1</div>
-      <div class="inline-block bg-gray-500">2</div>
-      <div class="inline-block bg-gray-500">3</div>
-    </div> -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import LabelHeader from '@/components/parts/LabelHeader.vue'
-
-// import { $btn-border-radius } '@/assets/scss/_variables.scss'
-// import * from '@/assets/scss/_variables.scss'
-// import '@/assets/scss/_variables.scss'
 
 import { IAppConfig, AboutMessageType } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
@@ -84,7 +52,8 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-// @use '../../../assets/scss/_variables.scss';
+@import '@/assets/scss/_variables.scss';
+@import '@/assets/scss/mixins.scss';
 
 .app-game-area {
   &__content-area {
@@ -97,8 +66,14 @@ export default defineComponent({
   }
 
   &__action-button {
+    @include min-screen($tailwind-breakpoint-tablet) {
+      padding: 25% 0 25% 0;
+    }
+    @include max-screen(var($tailwind-breakpoint-tablet - 1)) {
+      padding: 5% 0 5% 0;
+    }
+
     width: 100%;
-    padding: 25% 0 25% 0;
     border-radius: 0.25rem;
     background-color: rgba(107, 114, 128, 0.5);
 
@@ -112,6 +87,7 @@ export default defineComponent({
     &:active {
       background-color: rgba(107, 114, 128, 0.2);
       border-bottom: initial;
+      box-shadow: initial;
     }
   }
 }

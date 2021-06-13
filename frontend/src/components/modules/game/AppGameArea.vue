@@ -9,9 +9,24 @@
       gap-4
     "
   >
-    <div class="bg-gray-900 rounded">test</div>
+    <div class="bg-gray-900 rounded">
+      <div class="bg-gray-600 rounded mt-2 mx-2">HP:100</div>
+      <div class="bg-gray-600 rounded mt-1 mb-2 mx-2">
+        <div class="bg-gray-600 rounded app-game-area__screen-area">
+          HP:100<br>
+          <!-- HP:100<br>
+          HP:100<br>
+          HP:100<br>
+          HP:100<br>
+          HP:100<br>
+          HP:100<br> -->
+        </div>
+      </div>
+      test
+    </div>
 
     <div class="grid rounded md:grid-cols-12 sm:grid-cols-1 gap-1">
+      <button class="app-game-area__action-button">test</button>
       <button class="app-game-area__action-button">test</button>
       <button class="app-game-area__action-button">test</button>
       <button class="app-game-area__action-button">test</button>
@@ -63,6 +78,16 @@ export default defineComponent({
     border-bottom: solid 3px #8f8d80;
     border-radius: 9px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+  }
+
+  &__screen-area {
+    background-image: url('../../../assets/img/mainBackGround.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    // 画面をスクロールする際、 背景画像をその位置に固定
+    // background-attachment: fixed;
+    // 画像の縦横比を崩すことなく画像ができるだけ大きくなるよう拡大縮小させる
+    background-size: cover;
   }
 
   &__action-button {

@@ -24,7 +24,7 @@ export default defineComponent({
 <style lang="scss">
 body {
   // background: url('./assets/img/testGrid.svg') repeat;
-  background-image: url('./assets/img/testBackGround.svg');
+  background-image: url('./assets/img/mainBackGround.svg');
   background-repeat: no-repeat;
   background-position: center;
   // 画面をスクロールする際、 背景画像をその位置に固定

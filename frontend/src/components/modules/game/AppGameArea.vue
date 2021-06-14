@@ -13,13 +13,25 @@
       <div class="bg-gray-600 rounded mt-2 mx-2">HP:100</div>
       <div class="bg-gray-600 rounded mt-1 mb-2 mx-2">
         <div class="bg-gray-600 rounded app-game-area__screen-area">
-          HP:100<br>
-          <!-- HP:100<br>
-          HP:100<br>
-          HP:100<br>
-          HP:100<br>
-          HP:100<br>
-          HP:100<br> -->
+          HP:100<br />
+          HP:100<br />
+          HP:100<br />
+          HP:100<br />
+          HP:100<br />
+          HP:100<br />
+          <img
+            src="../../../assets/img/monsterBackGround.svg"
+            alt="テスト"
+          />
+          <!-- <div class="app-game-area__monster-icon">
+            HP:100<br>
+            HP:100<br>
+            HP:100<br>
+            HP:100<br>
+            HP:100<br>
+            HP:100<br>
+            HP:100<br>
+          </div> -->
         </div>
       </div>
       test
@@ -81,12 +93,17 @@ export default defineComponent({
   }
 
   &__screen-area {
-    background-image: url('../../../assets/img/mainBackGround.svg');
+    background-image: url('../../../assets/img/gameBackGround.svg');
     background-repeat: no-repeat;
     background-position: center;
-    // 画面をスクロールする際、 背景画像をその位置に固定
-    // background-attachment: fixed;
-    // 画像の縦横比を崩すことなく画像ができるだけ大きくなるよう拡大縮小させる
+    background-size: cover;
+  }
+
+  &__monster-icon {
+    height: 150px;
+    background-image: url('../../../assets/img/monsterBackGround.svg');
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
   }
 

@@ -10,31 +10,16 @@
     "
   >
     <div class="bg-gray-900 rounded">
-      <div class="bg-gray-600 rounded mt-2 mx-2">HP:100</div>
-      <div class="bg-gray-600 rounded mt-1 mb-2 mx-2">
+      <div class="bg-gray-600 rounded my-2 mx-2">
         <div class="bg-gray-600 rounded app-game-area__screen-area">
-          HP:100<br />
-          HP:100<br />
-          HP:100<br />
-          HP:100<br />
-          HP:100<br />
-          HP:100<br />
+          <div class="bg-gray-600 rounded mx-2">HP:100</div>
           <img
+            class="app-game-area__monster-icon"
             src="../../../assets/img/monsterBackGround.svg"
-            alt="テスト"
+            alt="monster icon"
           />
-          <!-- <div class="app-game-area__monster-icon">
-            HP:100<br>
-            HP:100<br>
-            HP:100<br>
-            HP:100<br>
-            HP:100<br>
-            HP:100<br>
-            HP:100<br>
-          </div> -->
         </div>
       </div>
-      test
     </div>
 
     <div class="grid rounded md:grid-cols-12 sm:grid-cols-1 gap-1">
@@ -48,7 +33,6 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import LabelHeader from '@/components/parts/LabelHeader.vue'
 
 import { IAppConfig, AboutMessageType } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
@@ -56,9 +40,7 @@ const config: IAppConfig = require('@/config/data')
 
 export default defineComponent({
   name: 'AppGameArea',
-  components: {
-    // LabelHeader,
-  },
+  components: {},
   setup() {
     // computed
     const aboutMessage = computed((): AboutMessageType => config.aboutMessage)
@@ -93,18 +75,20 @@ export default defineComponent({
   }
 
   &__screen-area {
+    // 他の画像との配置関係の設定
+    position: relative;
+    height: 350px;
+    // 背景設定
     background-image: url('../../../assets/img/gameBackGround.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-  }
 
-  &__monster-icon {
-    height: 150px;
-    background-image: url('../../../assets/img/monsterBackGround.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    .app-game-area__monster-icon {
+      position: absolute;
+      top: calc(50% - 150px);
+      left: calc(50% - 150px);
+    }
   }
 
   &__action-button {
@@ -118,7 +102,6 @@ export default defineComponent({
     width: 100%;
     border-radius: 0.25rem;
     background-color: rgba(107, 114, 128, 0.5);
-
     border-bottom: solid 3px #8f8d80;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 

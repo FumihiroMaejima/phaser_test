@@ -4,8 +4,6 @@
     <app-create-user-form />
 
     <app-game-area />
-
-    <div class="my-56"></div>
   </div>
 </template>
 

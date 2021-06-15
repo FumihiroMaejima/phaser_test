@@ -29,8 +29,6 @@
         v-html="aboutMessage.contact"
       ></div>
     </div>
-
-    <div class="my-56"></div>
   </div>
 </template>
 

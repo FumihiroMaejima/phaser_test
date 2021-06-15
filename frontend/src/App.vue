@@ -1,9 +1,11 @@
 <template>
-  <dev>
+  <div class="app-main">
     <global-header />
-    <router-view />
+    <div class="app-content">
+      <router-view />
+    </div>
     <global-footer />
-  </dev>
+  </div>
 </template>
 
 <script lang="ts">
@@ -33,5 +35,15 @@ body {
   background-size: cover;
   // 背景画像が読み込まれる前に表示される背景のカラー
   background-color: #002b40;
+}
+
+.app-main {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+.app-content {
+  flex: 1;
 }
 </style>

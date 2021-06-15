@@ -92,13 +92,6 @@ export default defineComponent({
   }
 
   &__action-button {
-    @include min-screen($tailwind-breakpoint-tablet) {
-      padding: 25% 0 25% 0;
-    }
-    @include max-screen(var($tailwind-breakpoint-tablet - 1)) {
-      padding: 5% 0 5% 0;
-    }
-
     width: 100%;
     border-radius: 0.25rem;
     background-color: rgba(107, 114, 128, 0.5);
@@ -109,10 +102,24 @@ export default defineComponent({
       background-color: rgba(107, 114, 128, 1);
     }
 
-    &:active {
-      background-color: rgba(107, 114, 128, 0.2);
-      border-bottom: initial;
-      box-shadow: initial;
+    @include min-screen($tailwind-breakpoint-tablet) {
+      padding: 25% 0 25% 0;
+
+      &:active {
+        background-color: rgba(107, 114, 128, 0.2);
+        border-bottom: initial;
+        box-shadow: initial;
+      }
+    }
+
+    @include max-screen(var($tailwind-breakpoint-tablet - 1)) {
+      padding: 5% 0 5% 0;
+
+      &:active {
+        background-color: rgba(107, 114, 128, 0.2);
+        border-bottom: initial;
+        box-shadow: initial;
+      }
     }
   }
 }

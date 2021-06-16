@@ -9,8 +9,8 @@ export const editableRole = ['master', 'administrator']
 const playerData = {
   id: 0,
   name: '',
-  level: 100,
-  hp: 0,
+  level: 1,
+  hp: 100,
   mp: 0,
   offence: 0,
   defense: 0,
@@ -37,7 +37,7 @@ export const usePlayer = () => {
    * return player data
    * @return {PlayerType} state.player
    */
-  const getPlayer = () => {
+  const getPlayer = (): PlayerType => {
     return state.player
   }
 
@@ -88,7 +88,7 @@ export const usePlayer = () => {
   }
 }
 
-// make provide/injection key
+// make provide/inject key
 export type usePlayerType = ReturnType<typeof usePlayer>
 export const GamePlayerStateKey: InjectionKey<usePlayerType> =
   Symbol('gameState')

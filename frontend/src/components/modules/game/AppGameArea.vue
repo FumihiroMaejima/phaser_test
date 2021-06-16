@@ -14,8 +14,8 @@
         <div class="bg-gray-600 rounded app-game-area__screen-area py-2">
           <div class="grid rounded md:grid-cols-4 sm:grid-cols-1 gap-1">
             <div class="app-game-area__status-area">
-              <p>Name:</p>
-              <p>HP:</p>
+              <p>Name: {{ getPlayer.name }}</p>
+              <p>HP: {{ getPlayer.hp }}</p>
             </div>
           </div>
           <img
@@ -46,13 +46,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, provide } from 'vue'
+import { defineComponent, computed, inject } from 'vue'
 import {
-  usePlayer,
+  PlayerType,
   usePlayerType,
   GamePlayerStateKey,
 } from '@/hooks/game/usePlayer'
-import { IAppConfig, AboutMessageType } from '@/types'
+import { IAppConfig } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const config: IAppConfig = require('@/config/data')
 
@@ -61,12 +61,12 @@ export default defineComponent({
   components: {},
   setup() {
     // data
-    const playerService = usePlayer()
 
-    // provide
-    provide(GamePlayerStateKey, playerService)
+    // inject
+    const playerService = inject(GamePlayerStateKey) as usePlayerType
+
     // computed
-    const aboutMessage = computed((): AboutMessageType => config.aboutMessage)
+    const getPlayer = computed((): PlayerType => playerService.getPlayer())
 
     // methods
     /**
@@ -77,7 +77,7 @@ export default defineComponent({
       console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
     }
     return {
-      aboutMessage,
+      getPlayer,
       catchAppInputEvent,
     }
   },

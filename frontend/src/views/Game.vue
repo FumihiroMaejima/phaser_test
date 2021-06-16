@@ -8,10 +8,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, provide } from 'vue'
 import AppCreateUserForm from '@/components/modules/game/AppCreateUserForm.vue'
 import AppGameArea from '@/components/modules/game/AppGameArea.vue'
-
+import {
+  usePlayer,
+  usePlayerType,
+  GamePlayerStateKey,
+} from '@/hooks/game/usePlayer'
 import { IAppConfig, AboutMessageType } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const config: IAppConfig = require('@/config/data')
@@ -23,6 +27,12 @@ export default defineComponent({
     AppGameArea,
   },
   setup() {
+    // data
+    const playerService = usePlayer()
+
+    // provide
+    provide(GamePlayerStateKey, playerService)
+
     // computed
     const aboutMessage = computed((): AboutMessageType => config.aboutMessage)
 

@@ -18,10 +18,6 @@
               <p>HP:</p>
             </div>
           </div>
-          <div class="app-game-area__status-area">
-            <p>Name:</p>
-            <p>HP:</p>
-          </div>
           <img
             class="app-game-area__monster-icon"
             src="../../../assets/img/monsterBackGround.svg"
@@ -50,8 +46,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
-
+import { defineComponent, computed, provide } from 'vue'
+import {
+  usePlayer,
+  usePlayerType,
+  GamePlayerStateKey,
+} from '@/hooks/game/usePlayer'
 import { IAppConfig, AboutMessageType } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const config: IAppConfig = require('@/config/data')
@@ -60,6 +60,11 @@ export default defineComponent({
   name: 'AppGameArea',
   components: {},
   setup() {
+    // data
+    const playerService = usePlayer()
+
+    // provide
+    provide(GamePlayerStateKey, playerService)
     // computed
     const aboutMessage = computed((): AboutMessageType => config.aboutMessage)
 

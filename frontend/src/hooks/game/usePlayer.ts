@@ -4,8 +4,6 @@ import { IAppConfig } from '@/types'
 
 const config: IAppConfig = require('@/config/data')
 
-export const editableRole = ['master', 'administrator']
-
 const playerData = {
   id: 0,
   name: '',
@@ -24,13 +22,22 @@ export type PlayerTextKeys = Extract<PlayerTypeKeys, 'name'>
 export type PlayerNumberKeys = Exclude<PlayerTypeKeys, 'id' | PlayerTextKeys>
 export type PlayerSelectKeys = Exclude<PlayerTypeKeys, PlayerTextKeys | 'id'>
 
+const playerFormData = {
+  name: '',
+}
+
+export type PlayerFormType = typeof playerFormData
+export type PlayerFormTypeKeys = keyof PlayerFormType
+
 export type usePlayerStateType = {
   player: PlayerType
+  form: PlayerFormType
 }
 
 export const usePlayer = () => {
   const state = reactive<usePlayerStateType>({
     player: { ...playerData },
+    form: { ...playerFormData },
   })
 
   /**
@@ -39,6 +46,14 @@ export const usePlayer = () => {
    */
   const getPlayer = (): PlayerType => {
     return state.player
+  }
+
+  /**
+   * return player form data
+   * @return {PlayerFormType} state.form
+   */
+  const getPlayerForm = (): PlayerFormType => {
+    return state.form
   }
 
   /**
@@ -51,6 +66,15 @@ export const usePlayer = () => {
   }
 
   /**
+   * insert player form data to state
+   * @param {PlayerFormType} value
+   * @return {void}
+   */
+  const setPlayerForm = (value: PlayerFormType) => {
+    state.form = value
+  }
+
+  /**
    * reset player data
    * @return {void}
    */
@@ -59,12 +83,20 @@ export const usePlayer = () => {
   }
 
   /**
+   * reset player form data
+   * @return {void}
+   */
+  const resetPlayerForm = () => {
+    state.form = { ...playerFormData }
+  }
+
+  /**
    * update player text value
    * @param {PlayerTextKeys} key
    * @param {string} value
    * @return {void}
    */
-  const updateStateTextValue = (key: PlayerTextKeys, value: string) => {
+  const updatePlayerTextValue = (key: PlayerTextKeys, value: string) => {
     state.player[key] = value
   }
 
@@ -74,17 +106,31 @@ export const usePlayer = () => {
    * @param {number} value
    * @return {void}
    */
-  const updateStateNumberValue = (key: PlayerNumberKeys, value: number) => {
+  const updatePlayerNumberValue = (key: PlayerNumberKeys, value: number) => {
     state.player[key] = value
+  }
+
+  /**
+   * update player form text value
+   * @param {PlayerFormTypeKeys} key
+   * @param {string} value
+   * @return {void}
+   */
+  const updateFormTextValue = (key: PlayerFormTypeKeys, value: string) => {
+    state.form[key] = value
   }
 
   return {
     state,
     getPlayer,
+    getPlayerForm,
     setPlayer,
+    setPlayerForm,
     resetPlayer,
-    updateStateTextValue,
-    updateStateNumberValue,
+    resetPlayerForm,
+    updatePlayerTextValue,
+    updatePlayerNumberValue,
+    updateFormTextValue,
   }
 }
 

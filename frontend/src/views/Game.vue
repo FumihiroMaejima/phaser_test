@@ -14,6 +14,7 @@ import AppGameArea from '@/components/modules/game/AppGameArea.vue'
 import {
   usePlayer,
   usePlayerType,
+  PlayerFormType,
   GamePlayerStateKey,
 } from '@/hooks/game/usePlayer'
 import { IAppConfig, AboutMessageType } from '@/types'
@@ -34,7 +35,15 @@ export default defineComponent({
     provide(GamePlayerStateKey, playerService)
 
     // computed
-    const aboutMessage = computed((): AboutMessageType => config.aboutMessage)
+    const playerForm = computed((): PlayerFormType => playerService.getPlayerForm())
+
+    const formValue = computed({
+      get: (): string => playerService.getPlayerForm().name,
+      set: (value: string) => {
+        playerService.updateFormTextValue('name', value)
+        // context.emit('update:selectEnemies', value)
+      }
+    })
 
     // methods
     /**
@@ -45,7 +54,7 @@ export default defineComponent({
       console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
     }
     return {
-      aboutMessage,
+      playerForm,
       catchAppInputEvent,
     }
   },

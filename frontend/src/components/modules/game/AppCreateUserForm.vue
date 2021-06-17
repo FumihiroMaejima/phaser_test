@@ -18,10 +18,7 @@
         >
           <grid-cols :mdCols="1" option="py-2 px-2">
             <p>名前(カタカナ)を入力してください。</p>
-            <app-input
-              placeholder="test@example.com"
-              @app-input="catchAppInputEvent"
-            />
+            <app-input v-model="textValue" placeholder="test@example.com" />
             <app-button text="Start Game" />
           </grid-cols>
         </div>
@@ -31,14 +28,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, SetupContext } from 'vue'
 import AppButton from '@/components/parts/AppButton.vue'
 import AppInput from '@/components/parts/AppInput.vue'
 import GridCols from '@/components/parts/GridCols.vue'
 
-import { IAppConfig, AboutMessageType } from '@/types'
+import { IAppConfig } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const config: IAppConfig = require('@/config/data')
+
+type Props = {
+  modelValue: string
+}
 
 export default defineComponent({
   name: 'AppCreateUserForm',
@@ -47,9 +48,21 @@ export default defineComponent({
     AppInput,
     GridCols,
   },
-  setup() {
+  props: {
+    modelValue: {
+      type: String,
+      required: true,
+      default: '',
+    },
+  },
+  setup(props: Props, ctx: SetupContext) {
     // computed
-    const aboutMessage = computed((): AboutMessageType => config.aboutMessage)
+    const textValue = computed({
+      get: (): string => props.modelValue,
+      set: (value: string) => {
+        ctx.emit('update:modelValue', value)
+      },
+    })
 
     // methods
     /**
@@ -59,8 +72,9 @@ export default defineComponent({
     const catchAppInputEvent = (event: any) => {
       console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
     }
+
     return {
-      aboutMessage,
+      textValue,
       catchAppInputEvent,
     }
   },

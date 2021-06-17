@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto">
     <h1 class="italic my-2">Game</h1>
-    <app-create-user-form />
+    <app-create-user-form v-model="formValue" />
 
     <app-game-area />
   </div>
@@ -35,14 +35,15 @@ export default defineComponent({
     provide(GamePlayerStateKey, playerService)
 
     // computed
-    const playerForm = computed((): PlayerFormType => playerService.getPlayerForm())
+    const playerForm = computed(
+      (): PlayerFormType => playerService.getPlayerForm()
+    )
 
     const formValue = computed({
       get: (): string => playerService.getPlayerForm().name,
       set: (value: string) => {
         playerService.updateFormTextValue('name', value)
-        // context.emit('update:selectEnemies', value)
-      }
+      },
     })
 
     // methods
@@ -55,6 +56,7 @@ export default defineComponent({
     }
     return {
       playerForm,
+      formValue,
       catchAppInputEvent,
     }
   },

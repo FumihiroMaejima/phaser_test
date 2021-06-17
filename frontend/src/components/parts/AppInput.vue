@@ -21,7 +21,7 @@
 import { defineComponent, computed, SetupContext } from 'vue'
 
 type Props = {
-  value: string | number | boolean | any
+  modelValue: string | number | boolean | any
   color: string
   type: string
   disabled: boolean
@@ -32,7 +32,7 @@ type Props = {
 export default defineComponent({
   name: 'AppInput',
   props: {
-    value: {
+    modelValue: {
       type: [String, Number, Boolean, Object],
       default: '',
     },
@@ -64,9 +64,9 @@ export default defineComponent({
   setup(props: Props, context: SetupContext) {
     // computed
     const inputValue = computed({
-      get: () => props.value,
+      get: () => props.modelValue,
       set: (val) => {
-        context.emit('app-input', val)
+        context.emit('update:modelValue', val)
       },
     })
 

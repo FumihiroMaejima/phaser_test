@@ -2,14 +2,13 @@
   <button
     class="rounded-lg shadow-md py-2 px-4"
     :class="`bg-${color}-500 hover:bg-${color}-700 border-${color}-600 active:bg-${color}-300 ${font} ${textColor} ${option}`"
-    @click="onClick"
   >
     {{ text }}
   </button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, SetupContext } from 'vue'
 
 type Props = {
   text: string
@@ -43,16 +42,21 @@ export default defineComponent({
       default: '',
     },
   },
-  setup() {
+  setup(_, ctx: SetupContext) {
+
+    // methods
     /**
      * catch click event
+     * buttonタグのみなので。emitしなくても親コンポーネントでclickイベントをcatch出来る
+     * @param {Event} event
      * @return {void}
      */
-    const onClick = (event: any) => {
-      console.log('click: ' + JSON.stringify(event, null, 2))
+    const onClickHandler = (event: Event) => {
+      ctx.emit('click', event)
     }
+
     return {
-      onClick,
+      onClickHandler,
     }
   },
 })

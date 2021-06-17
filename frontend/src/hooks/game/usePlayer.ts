@@ -120,6 +120,15 @@ export const usePlayer = () => {
     state.form[key] = value
   }
 
+  /**
+   * copy form data to player state
+   * @return {void}
+   */
+  const copyFormData = () => {
+    state.player.name = state.form.name
+    // resetPlayerForm()
+  }
+
   return {
     state,
     getPlayer,
@@ -131,6 +140,7 @@ export const usePlayer = () => {
     updatePlayerTextValue,
     updatePlayerNumberValue,
     updateFormTextValue,
+    copyFormData,
   }
 }
 

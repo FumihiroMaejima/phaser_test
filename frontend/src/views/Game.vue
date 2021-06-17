@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto">
     <h1 class="italic my-2">Game</h1>
-    <app-create-user-form v-model="formValue" />
+    <app-create-user-form v-model="formValue" @click="clickFormButtonEventHandler" />
 
     <app-game-area />
   </div>
@@ -48,16 +48,18 @@ export default defineComponent({
 
     // methods
     /**
-     * catch app-input event
+     * catch form button event handling
+     * @param {Event} _
      * @return {void}
      */
-    const catchAppInputEvent = (event: any) => {
-      console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
+    const clickFormButtonEventHandler = (_: Event) => {
+      playerService.copyFormData()
     }
+
     return {
       playerForm,
       formValue,
-      catchAppInputEvent,
+      clickFormButtonEventHandler,
     }
   },
 })

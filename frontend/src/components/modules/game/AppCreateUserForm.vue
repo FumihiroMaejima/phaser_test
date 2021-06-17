@@ -19,7 +19,7 @@
           <grid-cols :mdCols="1" option="py-2 px-2">
             <p>名前(カタカナ)を入力してください。</p>
             <app-input v-model="textValue" placeholder="test@example.com" />
-            <app-button text="Start Game" />
+            <app-button text="Start Game" @click="onClickHandler" />
           </grid-cols>
         </div>
       </div>
@@ -66,16 +66,17 @@ export default defineComponent({
 
     // methods
     /**
-     * catch app-input event
+     * catch click event
+     * @param {Event} event
      * @return {void}
      */
-    const catchAppInputEvent = (event: any) => {
-      console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
+    const onClickHandler = (event: Event) => {
+      ctx.emit('click', event)
     }
 
     return {
       textValue,
-      catchAppInputEvent,
+      onClickHandler,
     }
   },
 })

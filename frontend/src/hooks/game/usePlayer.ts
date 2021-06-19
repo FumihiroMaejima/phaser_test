@@ -158,9 +158,15 @@ export const usePlayer = () => {
    * @return {void}
    */
   const startGame = () => {
-    state.player.name = state.form.name
-    setIsStart(true)
-    resetPlayerForm()
+    const value = getPlayerForm().name
+    if (!valideteNameSceme(value)) {
+      // バリデーションエラー時はリロード
+      history.go(0)
+    } else {
+      updatePlayerTextValue('name', value)
+      setIsStart(true)
+      resetPlayerForm()
+    }
   }
 
   return {

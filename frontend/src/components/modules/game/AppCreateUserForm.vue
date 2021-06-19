@@ -18,7 +18,11 @@
         >
           <grid-cols :mdCols="1" option="py-2 px-2">
             <p>名前(カタカナ)を入力してください。</p>
-            <app-input v-model="textValue" placeholder="test@example.com" />
+            <app-input
+              v-model="textValue"
+              placeholder="test@example.com"
+              :maxLength="10"
+            />
             <app-button text="Start Game" @click="onClickHandler" />
           </grid-cols>
         </div>

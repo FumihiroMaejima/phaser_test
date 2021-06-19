@@ -2,7 +2,10 @@
   <div class="container mx-auto">
     <h1 class="italic my-2">Game</h1>
     <template v-if="!isStart">
-      <app-create-user-form v-model="formValue" @game-start="clickFormButtonEventHandler" />
+      <app-create-user-form
+        v-model="formValue"
+        @game-start="clickFormButtonEventHandler"
+      />
     </template>
     <template v-else>
       <app-game-area />
@@ -49,9 +52,7 @@ export default defineComponent({
       },
     })
 
-    const isStart = computed(
-      (): boolean => playerService.getIsStart()
-    )
+    const isStart = computed((): boolean => playerService.getIsStart())
 
     // methods
     /**
@@ -60,7 +61,7 @@ export default defineComponent({
      * @return {void}
      */
     const clickFormButtonEventHandler = (_: Event) => {
-      playerService.copyFormData()
+      playerService.startGame()
     }
 
     return {

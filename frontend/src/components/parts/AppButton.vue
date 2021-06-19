@@ -43,7 +43,6 @@ export default defineComponent({
     },
   },
   setup(_, ctx: SetupContext) {
-
     // methods
     /**
      * catch click event

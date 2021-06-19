@@ -12,18 +12,21 @@
     :class="`focus:ring-${color}-600 ${font} ${option}`"
     :type="type"
     :placeholder="placeholder"
+    :maxlength="maxLength"
     :disabled="disabled"
     v-model="inputValue"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, SetupContext } from 'vue'
+import { defineComponent, computed, SetupContext, PropType } from 'vue'
 
 type Props = {
   modelValue: string | number | boolean | any
   color: string
   type: string
+  placeholder: string
+  maxLength: number | undefined
   disabled: boolean
   font: string
   option: string
@@ -47,6 +50,11 @@ export default defineComponent({
     placeholder: {
       type: String,
       default: '',
+    },
+    maxLength: {
+      type: Number,
+      required: false,
+      default: undefined,
     },
     disabled: {
       type: Boolean,

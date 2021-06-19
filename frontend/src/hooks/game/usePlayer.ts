@@ -148,13 +148,13 @@ export const usePlayer = () => {
   }
 
   /**
-   * copy form data to player state
+   * start game & refresh form data
    * @return {void}
    */
-  const copyFormData = () => {
+  const startGame = () => {
     state.player.name = state.form.name
     setIsStart(true)
-    // resetPlayerForm()
+    resetPlayerForm()
   }
 
   return {
@@ -171,7 +171,7 @@ export const usePlayer = () => {
     updatePlayerTextValue,
     updatePlayerNumberValue,
     updateFormTextValue,
-    copyFormData,
+    startGame,
   }
 }
 

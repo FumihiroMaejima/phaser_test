@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Ref, reactive, InjectionKey } from 'vue'
 import { IAppConfig } from '@/types'
+import { validateName } from '@/util/validation'
+
+export const valideteNameSceme = (value: string): boolean => {
+  const message = validateName(value, 10)
+  return message === ''
+}
 
 const config: IAppConfig = require('@/config/data')
 

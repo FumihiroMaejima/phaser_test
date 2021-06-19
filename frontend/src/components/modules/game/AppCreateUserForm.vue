@@ -2,7 +2,7 @@
   <div class="flex items-center justify-center">
     <div class="w-full max-w-md">
       <div class="create-user-form__form-area shadow-md rounded mt-8 mb-4">
-        <h2 class="italic bg-gray-600 text-white rounded-t-lg px-2 py-2">
+        <h2 class="italic text-white rounded-t-lg px-2 py-2">
           Game Start Form
         </h2>
         <div
@@ -17,7 +17,7 @@
           "
         >
           <grid-cols :mdCols="1" option="py-2 px-2">
-            <p>名前(カタカナ)を入力してください。</p>
+            <p>名前(全角カタカナ10文字以内)を入力してください。</p>
             <app-input
               v-model="textValue"
               placeholder="プレイヤーネーム"
@@ -41,6 +41,8 @@ import { defineComponent, computed, SetupContext } from 'vue'
 import PartsButton from '@/components/parts/PartsButton.vue'
 import AppInput from '@/components/parts/AppInput.vue'
 import GridCols from '@/components/parts/GridCols.vue'
+
+import { valideteNameSceme } from '@/hooks/game/usePlayer'
 
 type Props = {
   modelValue: string
@@ -70,11 +72,11 @@ export default defineComponent({
     })
 
     const buttonLabel = computed((): string =>
-      props.modelValue.trim().length !== 0 ? 'Start Game' : 'Input Name!'
+      valideteNameSceme(props.modelValue) ? 'Start Game' : 'Input Name!'
     )
 
-    const isClickable = computed(
-      (): boolean => props.modelValue.trim().length !== 0
+    const isClickable = computed((): boolean =>
+      valideteNameSceme(props.modelValue)
     )
 
     // methods
@@ -100,6 +102,7 @@ export default defineComponent({
 .create-user-form {
   &__form-area {
     h2 {
+      background-color: #601f1c;
       box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
     }
   }

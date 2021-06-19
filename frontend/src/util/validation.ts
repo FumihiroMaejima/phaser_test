@@ -71,8 +71,10 @@ export function validateName(value: string, textSize = 10): string {
     return (message = 'This is required')
   } else if (!checkTextMaxLength(value, textSize)) {
     return (message = `input over ${textSize} length text`)
-  } else if (!checkKatakana(value)) {
-    return (message = `input katakana text`)
   }
+  // TODO カタカナ制御は後で外す
+  /*  else if (!checkKatakana(value)) {
+    return (message = `input katakana text`)
+  } */
   return message
 }

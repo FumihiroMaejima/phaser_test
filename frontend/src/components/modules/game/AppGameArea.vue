@@ -13,10 +13,10 @@
       <div class="bg-gray-600 rounded my-2 mx-2">
         <div class="bg-gray-600 rounded app-game-area__screen-area py-2">
           <div class="grid rounded md:grid-cols-4 sm:grid-cols-1 gap-1">
-            <div class="app-game-area__status-area">
+            <parts-message-area>
               <p>Name: {{ getPlayer.name }}</p>
               <p>HP: {{ getPlayer.hp }}</p>
-            </div>
+            </parts-message-area>
           </div>
           <img
             class="app-game-area__monster-icon"
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="app-game-area__message-area">
+    <parts-message-area>
       <p>Game Message</p>
       <div class="grid rounded md:grid-cols-12 sm:grid-cols-1 gap-1">
         <button class="app-game-area__action-button">test</button>
@@ -35,7 +35,7 @@
         <button class="app-game-area__action-button">test</button>
         <button class="app-game-area__action-button">test</button>
       </div>
-    </div>
+    </parts-message-area>
     <!-- <div class="grid rounded md:grid-cols-12 sm:grid-cols-1 gap-1">
       <button class="app-game-area__action-button">test</button>
       <button class="app-game-area__action-button">test</button>
@@ -47,6 +47,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, inject } from 'vue'
+import PartsMessageArea from '@/components/parts/PartsMessageArea.vue'
 import {
   PlayerType,
   usePlayerType,
@@ -58,7 +59,9 @@ const config: IAppConfig = require('@/config/data')
 
 export default defineComponent({
   name: 'AppGameArea',
-  components: {},
+  components: {
+    PartsMessageArea,
+  },
   setup() {
     // data
 
@@ -107,31 +110,11 @@ export default defineComponent({
     background-position: center;
     background-size: cover;
 
-    .app-game-area__status-area {
-      margin: 0 8px;
-      padding: 8px 8px;
-      color: #f4f2db;
-      background-color: #601f1c;
-      border: 2px dashed #f4f2db;
-      border-radius: 5px;
-      box-shadow: 0 0 0 4px #601f1c;
-    }
-
     .app-game-area__monster-icon {
       position: absolute;
       top: calc(50% - 150px);
       left: calc(50% - 150px);
     }
-  }
-
-  &__message-area {
-    margin: 0 8px;
-    padding: 8px 8px;
-    color: #f4f2db;
-    background-color: #601f1c;
-    border: 2px dashed #f4f2db;
-    border-radius: 5px;
-    box-shadow: 0 0 0 4px #601f1c;
   }
 
   &__action-button {

@@ -11,19 +11,19 @@
         gap-4
       "
     >
-      <label-header text="このWebサイトについて" color="blue" />
+      <parts-label-header text="このWebサイトについて" color="blue" />
       <div
         class="md:px-4 grid md:grid-cols-1s sm:grid-cols-1 gap-2"
         v-html="aboutMessage.main"
       ></div>
 
-      <label-header text="このサイトを作った人" color="blue" />
+      <parts-label-header text="このサイトを作った人" color="blue" />
       <div
         class="md:px-4 grid md:grid-cols-1 sm:grid-cols-1 gap-2"
         v-html="aboutMessage.author"
       ></div>
 
-      <label-header text="お問合せについて" color="blue" />
+      <parts-label-header text="お問合せについて" color="blue" />
       <div
         class="md:px-4 grid md:grid-cols-1 sm:grid-cols-1 gap-2"
         v-html="aboutMessage.contact"
@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import LabelHeader from '@/components/parts/LabelHeader.vue'
+import PartsLabelHeader from '@/components/parts/PartsLabelHeader.vue'
 
 import { IAppConfig, AboutMessageType } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
@@ -43,7 +43,7 @@ const config: IAppConfig = require('@/config/data')
 export default defineComponent({
   name: 'About',
   components: {
-    LabelHeader,
+    PartsLabelHeader,
   },
   setup() {
     // computed

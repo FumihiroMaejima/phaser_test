@@ -12,7 +12,7 @@ type Props = {
 }
 
 export default defineComponent({
-  name: 'LabelHeader',
+  name: 'PartsLabelHeader',
   props: {
     text: {
       type: String,

@@ -7,18 +7,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-type Props = {
-  text: string
-}
-
 export default defineComponent({
   name: 'PartsMessageArea',
-  props: {
-    text: {
-      type: String,
-      default: 'button text',
-    },
-  },
+  props: {},
   setup() {
     return {}
   },

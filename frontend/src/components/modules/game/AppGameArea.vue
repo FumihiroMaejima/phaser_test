@@ -1,13 +1,6 @@
 <template>
-  <div
-    class="
-      app-game-area__content-area
-      grid
-      rounded
-      md:grid-cols-1
-      sm:grid-cols-1
-      gap-4
-    "
+  <parts-contents-board
+    class="grid rounded md:grid-cols-1 sm:grid-cols-1 gap-4"
   >
     <div class="bg-gray-900 rounded">
       <div class="bg-gray-600 rounded my-2 mx-2">
@@ -42,11 +35,12 @@
       <button class="app-game-area__action-button">test</button>
       <button class="app-game-area__action-button">test</button>
     </div> -->
-  </div>
+  </parts-contents-board>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, inject } from 'vue'
+import PartsContentsBoard from '@/components/parts/PartsContentsBoard.vue'
 import PartsMessageArea from '@/components/parts/PartsMessageArea.vue'
 import {
   PlayerType,
@@ -60,6 +54,7 @@ const config: IAppConfig = require('@/config/data')
 export default defineComponent({
   name: 'AppGameArea',
   components: {
+    PartsContentsBoard,
     PartsMessageArea,
   },
   setup() {
@@ -91,15 +86,6 @@ export default defineComponent({
 @import '@/assets/scss/mixins.scss';
 
 .app-game-area {
-  &__content-area {
-    background-color: #f4f2db;
-    padding: 20px 20px;
-    margin: 10px 0;
-    border-bottom: solid 3px #8f8d80;
-    border-radius: 9px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
-  }
-
   &__screen-area {
     // 他の画像との配置関係の設定
     position: relative;

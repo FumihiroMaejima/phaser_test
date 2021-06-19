@@ -1,15 +1,8 @@
 <template>
   <div class="container mx-auto">
     <h1 class="italic my-2">About</h1>
-    <div
-      class="
-        about__content-area
-        grid
-        rounded
-        md:grid-cols-1
-        sm:grid-cols-1
-        gap-4
-      "
+    <parts-contents-board
+      class="grid rounded md:grid-cols-1 sm:grid-cols-1 gap-4"
     >
       <parts-label-header text="このWebサイトについて" color="blue" />
       <div
@@ -28,12 +21,13 @@
         class="md:px-4 grid md:grid-cols-1 sm:grid-cols-1 gap-2"
         v-html="aboutMessage.contact"
       ></div>
-    </div>
+    </parts-contents-board>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
+import PartsContentsBoard from '@/components/parts/PartsContentsBoard.vue'
 import PartsLabelHeader from '@/components/parts/PartsLabelHeader.vue'
 
 import { IAppConfig, AboutMessageType } from '@/types'
@@ -43,6 +37,7 @@ const config: IAppConfig = require('@/config/data')
 export default defineComponent({
   name: 'About',
   components: {
+    PartsContentsBoard,
     PartsLabelHeader,
   },
   setup() {
@@ -64,15 +59,6 @@ export default defineComponent({
   },
 })
 </script>
-<style lang="scss" scoped>
-.about {
-  &__content-area {
-    background-color: #f4f2db;
-    padding: 20px 20px;
-    margin: 10px 0;
-    border-bottom: solid 3px #8f8d80;
-    border-radius: 9px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
-  }
-}
-</style>
+<!-- <style lang="scss" scoped>
+.about {}
+</style> -->

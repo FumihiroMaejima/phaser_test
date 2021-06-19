@@ -20,10 +20,15 @@
             <p>名前(カタカナ)を入力してください。</p>
             <app-input
               v-model="textValue"
-              placeholder="test@example.com"
+              placeholder="プレイヤーネーム"
               :maxLength="10"
             />
-            <app-button text="Start Game" @click="onClickHandler" />
+            <parts-button
+              class="text-class test"
+              :text="buttonLabel"
+              @click="onClickHandler"
+              :disabled="!isClickable"
+            />
           </grid-cols>
         </div>
       </div>
@@ -33,13 +38,9 @@
 
 <script lang="ts">
 import { defineComponent, computed, SetupContext } from 'vue'
-import AppButton from '@/components/parts/AppButton.vue'
+import PartsButton from '@/components/parts/PartsButton.vue'
 import AppInput from '@/components/parts/AppInput.vue'
 import GridCols from '@/components/parts/GridCols.vue'
-
-import { IAppConfig } from '@/types'
-/* eslint-disable-next-line @typescript-eslint/no-var-requires */
-const config: IAppConfig = require('@/config/data')
 
 type Props = {
   modelValue: string
@@ -48,7 +49,7 @@ type Props = {
 export default defineComponent({
   name: 'AppCreateUserForm',
   components: {
-    AppButton,
+    PartsButton,
     AppInput,
     GridCols,
   },
@@ -68,6 +69,14 @@ export default defineComponent({
       },
     })
 
+    const buttonLabel = computed((): string =>
+      props.modelValue.trim().length !== 0 ? 'Start Game' : 'Input Name!'
+    )
+
+    const isClickable = computed(
+      (): boolean => props.modelValue.trim().length !== 0
+    )
+
     // methods
     /**
      * catch click event
@@ -80,6 +89,8 @@ export default defineComponent({
 
     return {
       textValue,
+      buttonLabel,
+      isClickable,
       onClickHandler,
     }
   },

@@ -1,7 +1,19 @@
 <template>
   <button
-    class="rounded-lg shadow-md py-2 px-4"
-    :class="`bg-${color}-500 hover:bg-${color}-700 border-${color}-600 active:bg-${color}-300 ${font} ${textColor} ${option}`"
+    class="
+      rounded-lg
+      shadow-md
+      py-2
+      px-4
+      font-semibold
+      text-white
+      border-green-600
+    "
+    :class="{
+      'bg-green-500 hover:bg-green-700 border-green-600 active:bg-green-300':
+        !disabled,
+      'bg-green-800 parts-button__disabled': disabled,
+    }"
     :disabled="disabled"
   >
     {{ text }}
@@ -21,7 +33,7 @@ type Props = {
 }
 
 export default defineComponent({
-  name: 'AppButton',
+  name: 'PartsButton',
   props: {
     text: {
       type: String,
@@ -66,3 +78,10 @@ export default defineComponent({
   },
 })
 </script>
+<style lang="scss" scoped>
+.parts-button {
+  &__disabled {
+    cursor: not-allowed;
+  }
+}
+</style>

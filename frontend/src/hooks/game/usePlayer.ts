@@ -32,12 +32,14 @@ export type PlayerFormTypeKeys = keyof PlayerFormType
 export type usePlayerStateType = {
   player: PlayerType
   form: PlayerFormType
+  isStart: boolean
 }
 
 export const usePlayer = () => {
   const state = reactive<usePlayerStateType>({
     player: { ...playerData },
     form: { ...playerFormData },
+    isStart: false,
   })
 
   /**
@@ -57,7 +59,15 @@ export const usePlayer = () => {
   }
 
   /**
-   * insert player data to state
+   * return game start flag
+   * @return {bpplean} state.isStart
+   */
+  const getIsStart = (): boolean => {
+    return state.isStart
+  }
+
+  /**
+   * set player data to state
    * @param {PlayerType} value
    * @return {void}
    */
@@ -66,7 +76,7 @@ export const usePlayer = () => {
   }
 
   /**
-   * insert player form data to state
+   * set player form data to state
    * @param {PlayerFormType} value
    * @return {void}
    */
@@ -75,11 +85,28 @@ export const usePlayer = () => {
   }
 
   /**
+   * set game start flag to state
+   * @param {boolean} value
+   * @return {void}
+   */
+  const setIsStart = (value: boolean) => {
+    state.isStart = value
+  }
+
+  /**
    * reset player data
    * @return {void}
    */
   const resetPlayer = () => {
     state.player = { ...playerData }
+  }
+
+  /**
+   * reset game start flag
+   * @return {void}
+   */
+  const resetIsStart = () => {
+    state.isStart = false
   }
 
   /**
@@ -126,6 +153,7 @@ export const usePlayer = () => {
    */
   const copyFormData = () => {
     state.player.name = state.form.name
+    setIsStart(true)
     // resetPlayerForm()
   }
 
@@ -133,10 +161,13 @@ export const usePlayer = () => {
     state,
     getPlayer,
     getPlayerForm,
+    getIsStart,
     setPlayer,
     setPlayerForm,
+    setIsStart,
     resetPlayer,
     resetPlayerForm,
+    resetIsStart,
     updatePlayerTextValue,
     updatePlayerNumberValue,
     updateFormTextValue,

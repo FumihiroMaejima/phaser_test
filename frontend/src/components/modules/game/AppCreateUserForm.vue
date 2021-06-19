@@ -71,7 +71,7 @@ export default defineComponent({
      * @return {void}
      */
     const onClickHandler = (event: Event) => {
-      ctx.emit('click', event)
+      ctx.emit('game-start', event)
     }
 
     return {

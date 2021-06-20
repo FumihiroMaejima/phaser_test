@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center">
     <div class="w-full max-w-md">
-      <div class="create-user-form__form-area shadow-md rounded mt-8 mb-4">
+      <div class="create-user-form__form-area shadow-md rounded mt-8 mb-4 mx-2">
         <h2 class="italic text-white rounded-t-lg px-2 py-2">
           Game Start Form
         </h2>
@@ -103,6 +103,7 @@ export default defineComponent({
   &__form-area {
     h2 {
       background-color: #601f1c;
+      color: #f4f2db;
       box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
     }
   }

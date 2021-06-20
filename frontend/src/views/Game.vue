@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto">
-    <h1 class="italic my-2">Game</h1>
+    <parts-main-header class="italic my-2">Game</parts-main-header>
     <template v-if="!isStart">
       <app-create-user-form
         v-model="formValue"
@@ -17,6 +17,7 @@
 import { defineComponent, computed, provide } from 'vue'
 import AppCreateUserForm from '@/components/modules/game/AppCreateUserForm.vue'
 import AppGameArea from '@/components/modules/game/AppGameArea.vue'
+import PartsMainHeader from '@/components/parts/PartsMainHeader.vue'
 import {
   usePlayer,
   usePlayerType,
@@ -32,6 +33,7 @@ export default defineComponent({
   components: {
     AppCreateUserForm,
     AppGameArea,
+    PartsMainHeader,
   },
   setup() {
     // data

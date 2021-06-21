@@ -22,24 +22,14 @@
 
     <parts-message-area>
       <p>Game Message</p>
-      <div class="grid rounded md:grid-cols-12 sm:grid-cols-1 gap-1">
-        <button class="app-game-area__action-button">test</button>
-        <button class="app-game-area__action-button">test</button>
-        <button class="app-game-area__action-button">test</button>
-        <button class="app-game-area__action-button">test</button>
-      </div>
+      <app-action-buttons />
     </parts-message-area>
-    <!-- <div class="grid rounded md:grid-cols-12 sm:grid-cols-1 gap-1">
-      <button class="app-game-area__action-button">test</button>
-      <button class="app-game-area__action-button">test</button>
-      <button class="app-game-area__action-button">test</button>
-      <button class="app-game-area__action-button">test</button>
-    </div> -->
   </parts-contents-board>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, inject } from 'vue'
+import AppActionButtons from '@/components/modules/game/AppActionButtons.vue'
 import PartsContentsBoard from '@/components/parts/PartsContentsBoard.vue'
 import PartsMessageArea from '@/components/parts/PartsMessageArea.vue'
 import {
@@ -54,6 +44,7 @@ const config: IAppConfig = require('@/config/data')
 export default defineComponent({
   name: 'AppGameArea',
   components: {
+    AppActionButtons,
     PartsContentsBoard,
     PartsMessageArea,
   },
@@ -100,38 +91,6 @@ export default defineComponent({
       position: absolute;
       top: calc(50% - 150px);
       left: calc(50% - 150px);
-    }
-  }
-
-  &__action-button {
-    width: 100%;
-    border-radius: 0.25rem;
-    background-color: rgba(107, 114, 128, 0.5);
-    border-bottom: solid 3px #8f8d80;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
-
-    &:hover {
-      background-color: rgba(107, 114, 128, 1);
-    }
-
-    @include min-screen($tailwind-breakpoint-tablet) {
-      padding: 25% 0 25% 0;
-
-      &:active {
-        background-color: rgba(107, 114, 128, 0.2);
-        border-bottom: initial;
-        box-shadow: initial;
-      }
-    }
-
-    @include max-screen(var($tailwind-breakpoint-tablet - 1)) {
-      padding: 5% 0 5% 0;
-
-      &:active {
-        background-color: rgba(107, 114, 128, 0.2);
-        border-bottom: initial;
-        box-shadow: initial;
-      }
     }
   }
 }

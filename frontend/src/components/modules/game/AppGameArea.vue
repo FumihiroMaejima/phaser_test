@@ -73,12 +73,8 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-@import '@/assets/scss/_variables.scss';
-@import '@/assets/scss/mixins.scss';
-
 .app-game-area {
   &__screen-area {
-    // 他の画像との配置関係の設定
     position: relative;
     height: 300px;
     // 背景設定

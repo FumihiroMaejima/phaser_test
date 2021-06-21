@@ -51,7 +51,7 @@ export default defineComponent({
     }
 
     /**
-     * attack event handling
+     * heal event handling
      * @return {void}
      */
     const clickHealButtonHandler = (event: Event) => {
@@ -60,7 +60,7 @@ export default defineComponent({
     }
 
     /**
-     * attack event handling
+     * escape event handling
      * @return {void}
      */
     const clickEscapeButtonHandler = (event: Event) => {

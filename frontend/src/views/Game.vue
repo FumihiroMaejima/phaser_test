@@ -20,11 +20,11 @@ import AppGameArea from '@/components/modules/game/AppGameArea.vue'
 import PartsMainHeader from '@/components/parts/PartsMainHeader.vue'
 import {
   usePlayer,
-  usePlayerType,
+  UsePlayerType,
   PlayerFormType,
   GamePlayerStateKey,
 } from '@/hooks/game/usePlayer'
-import { IAppConfig, AboutMessageType } from '@/types'
+import { IAppConfig } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const config: IAppConfig = require('@/config/data')
 

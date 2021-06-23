@@ -39,9 +39,15 @@ import PartsMessageArea from '@/components/parts/PartsMessageArea.vue'
 import PartsMessageBoard from '@/components/parts/PartsMessageBoard.vue'
 import {
   PlayerType,
-  usePlayerType,
+  UsePlayerType,
   GamePlayerStateKey,
 } from '@/hooks/game/usePlayer'
+import {
+  useNavigationMessage,
+  UseNavigationMessageType,
+  UseNavigationMessageStateType,
+  GameNavigationMessageStateKey,
+} from '@/hooks/game/useNavigationMessage'
 import { IAppConfig } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const config: IAppConfig = require('@/config/data')
@@ -56,14 +62,14 @@ export default defineComponent({
   },
   setup() {
     // data
-    const text = ref<string>('game start')
+    const navigationService = useNavigationMessage()
 
     // inject
-    const playerService = inject(GamePlayerStateKey) as usePlayerType
+    const playerService = inject(GamePlayerStateKey) as UsePlayerType
 
     // computed
     const getPlayer = computed((): PlayerType => playerService.getPlayer())
-    const textMessage = computed((): string => text.value)
+    const textMessage = computed((): string => navigationService.getMessage())
 
     // methods
     /**

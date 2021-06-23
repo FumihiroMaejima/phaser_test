@@ -66,7 +66,7 @@ export const usePlayer = () => {
 
   /**
    * return game start flag
-   * @return {bpplean} state.isStart
+   * @return {boolean} state.isStart
    */
   const getIsStart = (): boolean => {
     return state.isStart
@@ -188,6 +188,6 @@ export const usePlayer = () => {
 }
 
 // make provide/inject key
-export type usePlayerType = ReturnType<typeof usePlayer>
-export const GamePlayerStateKey: InjectionKey<usePlayerType> =
-  Symbol('gameState')
+export type UsePlayerType = ReturnType<typeof usePlayer>
+export const GamePlayerStateKey: InjectionKey<UsePlayerType> =
+  Symbol('gamePlayerState')

@@ -4,25 +4,19 @@
       class="app-action-buttons__button app-action-buttons__attack"
       @click="clickAttackButtonHandler"
     >
-      test
+      Attack
     </button>
     <button
       class="app-action-buttons__button app-action-buttons__heal"
       @click="clickHealButtonHandler"
     >
-      test
+      Heal
     </button>
     <button
       class="app-action-buttons__button app-action-buttons__escape"
       @click="clickEscapeButtonHandler"
     >
-      test
-    </button>
-    <button
-      class="app-action-buttons__button app-action-buttons__attack"
-      @click="clickAttackButtonHandler"
-    >
-      test
+      Escape
     </button>
   </div>
 </template>

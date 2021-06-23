@@ -6,10 +6,10 @@
       <div class="bg-gray-600 rounded my-2 mx-2">
         <div class="bg-gray-600 rounded app-game-area__screen-area py-2">
           <div class="grid rounded md:grid-cols-4 sm:grid-cols-1 gap-1">
-            <parts-message-area>
+            <parts-message-board>
               <p>Name: {{ getPlayer.name }}</p>
               <p>HP: {{ getPlayer.hp }}</p>
-            </parts-message-area>
+            </parts-message-board>
           </div>
           <img
             class="app-game-area__monster-icon"
@@ -20,10 +20,12 @@
       </div>
     </div>
 
-    <parts-message-area>
-      <p>Game Message</p>
+    <parts-message-board>
+      <div>
+        <p>Game Message</p>
+      </div>
       <app-action-buttons />
-    </parts-message-area>
+    </parts-message-board>
   </parts-contents-board>
 </template>
 
@@ -31,7 +33,7 @@
 import { defineComponent, computed, inject } from 'vue'
 import AppActionButtons from '@/components/modules/game/AppActionButtons.vue'
 import PartsContentsBoard from '@/components/parts/PartsContentsBoard.vue'
-import PartsMessageArea from '@/components/parts/PartsMessageArea.vue'
+import PartsMessageBoard from '@/components/parts/PartsMessageBoard.vue'
 import {
   PlayerType,
   usePlayerType,
@@ -46,7 +48,7 @@ export default defineComponent({
   components: {
     AppActionButtons,
     PartsContentsBoard,
-    PartsMessageArea,
+    PartsMessageBoard,
   },
   setup() {
     // data

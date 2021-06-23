@@ -21,18 +21,21 @@
     </div>
 
     <parts-message-board>
-      <div>
-        <p>Game Message</p>
-      </div>
-      <app-action-buttons />
+      <parts-message-area :text="textMessage" />
     </parts-message-board>
+    <app-action-buttons
+      @attack-event="catchAppInputEvent"
+      @heal-event="catchAppInputEvent"
+      @escape-event="catchAppInputEvent"
+    />
   </parts-contents-board>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, inject } from 'vue'
+import { defineComponent, ref, computed, inject } from 'vue'
 import AppActionButtons from '@/components/modules/game/AppActionButtons.vue'
 import PartsContentsBoard from '@/components/parts/PartsContentsBoard.vue'
+import PartsMessageArea from '@/components/parts/PartsMessageArea.vue'
 import PartsMessageBoard from '@/components/parts/PartsMessageBoard.vue'
 import {
   PlayerType,
@@ -48,16 +51,19 @@ export default defineComponent({
   components: {
     AppActionButtons,
     PartsContentsBoard,
+    PartsMessageArea,
     PartsMessageBoard,
   },
   setup() {
     // data
+    const text = ref<string>('game start')
 
     // inject
     const playerService = inject(GamePlayerStateKey) as usePlayerType
 
     // computed
     const getPlayer = computed((): PlayerType => playerService.getPlayer())
+    const textMessage = computed((): string => text.value)
 
     // methods
     /**
@@ -69,6 +75,7 @@ export default defineComponent({
     }
     return {
       getPlayer,
+      textMessage,
       catchAppInputEvent,
     }
   },

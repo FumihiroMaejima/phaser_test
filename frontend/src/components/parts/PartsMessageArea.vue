@@ -1,17 +1,32 @@
 <template>
   <div class="parts-message-area my-2">
-    <slot />
+    {{ messageText }}
+    <!-- <slot /> -->
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+
+type Props = {
+  text: string
+}
 
 export default defineComponent({
   name: 'PartsMessageArea',
-  props: {},
-  setup() {
-    return {}
+  props: {
+    text: {
+      type: String,
+      required: false,
+      default: '',
+    },
+  },
+  setup(props: Props) {
+    // computed
+    const messageText = computed((): string => props.text)
+    return {
+      messageText,
+    }
   },
 })
 </script>

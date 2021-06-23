@@ -80,6 +80,7 @@ export default defineComponent({
     background-color: rgba(107, 114, 128, 0.5);
     border-bottom: solid 3px #8f8d80;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    color: #f4f2db;
 
     /* &:hover {
       // background-color: rgba(107, 114, 128, 1);

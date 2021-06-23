@@ -12,18 +12,21 @@
     :class="`focus:ring-${color}-600 ${font} ${option}`"
     :type="type"
     :placeholder="placeholder"
+    :maxlength="maxLength"
     :disabled="disabled"
     v-model="inputValue"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, SetupContext } from 'vue'
+import { defineComponent, computed, SetupContext, PropType } from 'vue'
 
 type Props = {
-  value: string | number | boolean | any
+  modelValue: string | number | boolean | any
   color: string
   type: string
+  placeholder: string
+  maxLength: number | undefined
   disabled: boolean
   font: string
   option: string
@@ -32,7 +35,7 @@ type Props = {
 export default defineComponent({
   name: 'AppInput',
   props: {
-    value: {
+    modelValue: {
       type: [String, Number, Boolean, Object],
       default: '',
     },
@@ -47,6 +50,11 @@ export default defineComponent({
     placeholder: {
       type: String,
       default: '',
+    },
+    maxLength: {
+      type: Number,
+      required: false,
+      default: undefined,
     },
     disabled: {
       type: Boolean,
@@ -64,9 +72,9 @@ export default defineComponent({
   setup(props: Props, context: SetupContext) {
     // computed
     const inputValue = computed({
-      get: () => props.value,
+      get: () => props.modelValue,
       set: (val) => {
-        context.emit('app-input', val)
+        context.emit('update:modelValue', val)
       },
     })
 

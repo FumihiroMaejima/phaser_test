@@ -1,15 +1,5 @@
 <template>
-  <nav
-    class="
-      flex
-      items-center
-      justify-between
-      flex-wrap
-      bg-gray-600
-      p-6
-      global-header
-    "
-  >
+  <nav class="flex items-center justify-between flex-wrap p-6 global-header">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
       <span class="font-semibold text-xl tracking-tight">{{ header }}</span>
     </div>
@@ -29,7 +19,7 @@
         "
         @click="isOpen = !isOpen"
       >
-        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20">
+        <svg class="fill-current h-3 w-3" :viewBox="viewBoxValue">
           <title>Menu</title>
           <path
             v-show="!isOpen"
@@ -56,7 +46,7 @@
             mt-4
             lg:inline-block
             lg:mt-0
-            text-gray-300
+            text-gray-500
             hover:text-white
           "
           :class="{ 'mr-4': key !== contents.length - 1 }"
@@ -69,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, ref } from 'vue'
+import { computed, defineComponent, getCurrentInstance, ref } from 'vue'
 
 export default defineComponent({
   name: 'GlobalHeader',
@@ -77,6 +67,10 @@ export default defineComponent({
     let header = ref<string>('header')
     let contents = ref<string[]>([])
     const isOpen = ref<boolean>(false)
+
+    const viewBoxValue = computed((): string =>
+      isOpen.value === true ? '0 0 30 30' : '0 0 20 20'
+    )
 
     // thisの取得
     const instance = getCurrentInstance()
@@ -88,6 +82,7 @@ export default defineComponent({
     }
 
     return {
+      viewBoxValue,
       header,
       contents,
       isOpen,
@@ -97,6 +92,8 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .global-header {
+  background-color: rgba(75, 85, 99, 0.1);
+
   /* button:focus {
     outline: none !important; // for Google Chrome
   } */

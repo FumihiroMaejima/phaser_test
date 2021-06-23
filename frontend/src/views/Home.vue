@@ -4,8 +4,6 @@
     <grid-rows mdRows="1" option="bg-blue-100 py-2 px-2">
       <card />
     </grid-rows>
-
-    <div class="mt-10 grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4"></div>
   </div>
 </template>
 

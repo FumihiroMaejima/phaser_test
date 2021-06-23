@@ -1,27 +1,49 @@
 <template>
   <div class="container mx-auto">
-    <h1 class="italic my-2">ゲーム</h1>
-    <grid-rows mdRows="1" option="bg-blue-100 py-2 px-2">
-      <card />
-    </grid-rows>
+    <h1 class="italic my-2">About</h1>
+    <parts-contents-board
+      class="grid rounded md:grid-cols-1 sm:grid-cols-1 gap-4"
+    >
+      <parts-label-header text="このWebサイトについて" color="blue" />
+      <div
+        class="md:px-4 grid md:grid-cols-1s sm:grid-cols-1 gap-2"
+        v-html="aboutMessage.main"
+      ></div>
 
-    <div class="mt-10 grid rounded md:grid-cols-3 sm:grid-cols-1 gap-4"></div>
+      <parts-label-header text="このサイトを作った人" color="blue" />
+      <div
+        class="md:px-4 grid md:grid-cols-1 sm:grid-cols-1 gap-2"
+        v-html="aboutMessage.author"
+      ></div>
+
+      <parts-label-header text="お問合せについて" color="blue" />
+      <div
+        class="md:px-4 grid md:grid-cols-1 sm:grid-cols-1 gap-2"
+        v-html="aboutMessage.contact"
+      ></div>
+    </parts-contents-board>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import Card from '@/components/parts/Card.vue'
-// import GridCols from '@/components/parts/GridCols.vue'
-import GridRows from '@/components/parts/GridRows.vue'
+import { defineComponent, computed } from 'vue'
+import PartsContentsBoard from '@/components/parts/PartsContentsBoard.vue'
+import PartsLabelHeader from '@/components/parts/PartsLabelHeader.vue'
+
+import { IAppConfig, AboutMessageType } from '@/types'
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
+const config: IAppConfig = require('@/config/data')
 
 export default defineComponent({
   name: 'About',
   components: {
-    Card,
-    GridRows,
+    PartsContentsBoard,
+    PartsLabelHeader,
   },
   setup() {
+    // computed
+    const aboutMessage = computed((): AboutMessageType => config.aboutMessage)
+
     // methods
     /**
      * catch app-input event
@@ -31,8 +53,12 @@ export default defineComponent({
       console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
     }
     return {
+      aboutMessage,
       catchAppInputEvent,
     }
   },
 })
 </script>
+<!-- <style lang="scss" scoped>
+.about {}
+</style> -->

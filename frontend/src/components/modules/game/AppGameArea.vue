@@ -24,9 +24,9 @@
       <parts-message-area :text="textMessage" />
     </parts-message-board>
     <app-action-buttons
-      @attack-event="catchAppInputEvent"
-      @heal-event="catchAppInputEvent"
-      @escape-event="catchAppInputEvent"
+      @attack-event="attackEventEventHandler"
+      @heal-event="healEventEventHandler"
+      @escape-event="escapeEventEventHandler"
     />
   </parts-contents-board>
 </template>
@@ -73,16 +73,38 @@ export default defineComponent({
 
     // methods
     /**
-     * catch app-input event
+     * attack event handling
      * @return {void}
      */
-    const catchAppInputEvent = (event: any) => {
-      console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
+    const attackEventEventHandler = (event: any) => {
+      console.log('attackEventEventHandler: ' + JSON.stringify(event, null, 2))
+      navigationService.setMessage('attack!')
     }
+
+    /**
+     * heal event handling
+     * @return {void}
+     */
+    const healEventEventHandler = (event: any) => {
+      console.log('healEventEventHandler: ' + JSON.stringify(event, null, 2))
+      navigationService.setMessage('heal!')
+    }
+
+    /**
+     * escape event handling
+     * @return {void}
+     */
+    const escapeEventEventHandler = (event: any) => {
+      console.log('escapeEventEventHandler: ' + JSON.stringify(event, null, 2))
+      navigationService.setMessage('Don`t Escape!')
+    }
+
     return {
       getPlayer,
       textMessage,
-      catchAppInputEvent,
+      attackEventEventHandler,
+      healEventEventHandler,
+      escapeEventEventHandler,
     }
   },
 })

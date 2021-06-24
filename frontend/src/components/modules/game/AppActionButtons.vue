@@ -1,5 +1,5 @@
 <template>
-  <div class="grid rounded md:grid-cols-12 sm:grid-cols-1 gap-1">
+  <div class="grid rounded grid-flow-col md:grid-cols-12 sm:grid-rows-1 gap-1">
     <button
       class="app-action-buttons__button app-action-buttons__attack"
       @click="clickAttackButtonHandler"
@@ -96,12 +96,12 @@ export default defineComponent({
       }
     }
 
-    @include max-screen(var($tailwind-breakpoint-tablet - 1)) {
-      padding: 5% 0 5% 0;
+    @include max-screen($tailwind-breakpoint-tablet - 1) {
+      padding: 10% 0 10% 0;
 
       &:active {
         // background-color: rgba(107, 114, 128, 0.2);
-        border-bottom: initial;
+        border-bottom: solid 3px #f4f2db;
         box-shadow: initial;
       }
     }

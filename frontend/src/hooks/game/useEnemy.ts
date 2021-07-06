@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Ref, reactive, InjectionKey } from 'vue'
-import { IAppConfig } from '@/types'
+import { useRequest, UseRequestType } from '@/hooks/useRequest'
+import {
+  IAppConfig,
+  ServerRequestResponseType,
+  ServerErrorResponseType,
+} from '@/types'
 
 const config: IAppConfig = require('@/config/data')
 
@@ -78,7 +83,7 @@ export const useEnemy = () => {
    * reset enemy data
    * @return {void}
    */
-  const resetPlayer = () => {
+  const resetEnemy = () => {
     state.enemy = { ...enemyData }
   }
 
@@ -88,6 +93,21 @@ export const useEnemy = () => {
    */
   const resetIsStart = () => {
     state.isStart = false
+  }
+
+  /**
+   * get enemy data request
+   * @return {void}
+   */
+  const getEnemyDataRequest = async () => {
+    await useRequest()
+      .getRequest('/api/v1/tesst')
+      .then((response) => {
+        console.log('then: ' + JSON.stringify(response, null, 2))
+      })
+      .catch((error) => {
+        console.log('catch: ' + JSON.stringify(error, null, 2))
+      })
   }
 
   /**
@@ -112,8 +132,9 @@ export const useEnemy = () => {
     getIsStart,
     setEnemy,
     setIsStart,
-    resetPlayer,
+    resetEnemy,
     resetIsStart,
+    getEnemyDataRequest,
   }
 }
 

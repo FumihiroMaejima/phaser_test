@@ -8,12 +8,12 @@ export const useRequest = () => {
   /**
    * GET request
    * @param {string} url
-   * @param {AxiosRequestConfig} options
+   * @param {AxiosRequestConfig | undefined} options
    * @return {Promise<ServerRequestResponseType<T>>}
    */
   const getRequest = async <T = any>(
     url: string,
-    options: AxiosRequestConfig
+    options?: AxiosRequestConfig
   ): Promise<ServerRequestResponseType<T>> => {
     axios.defaults.withCredentials = true
     return await axios
@@ -24,7 +24,7 @@ export const useRequest = () => {
       .catch((error: AxiosError<ServerErrorResponseType>) => {
         /* eslint-disable-next-line no-console */
         console.error('axios error' + JSON.stringify(error.message, null, 2))
-        return {
+        throw {
           data: error,
           status: error.response ? error.response.status : 401,
         }
@@ -34,12 +34,12 @@ export const useRequest = () => {
   /**
    * Delete request
    * @param {string} url
-   * @param {AxiosRequestConfig} options
+   * @param {AxiosRequestConfig | undefined} options
    * @return {Promise<ServerRequestResponseType<T>>}
    */
   const deleteRequest = async <T = any>(
     url: string,
-    options: AxiosRequestConfig
+    options?: AxiosRequestConfig
   ): Promise<ServerRequestResponseType<T>> => {
     axios.defaults.withCredentials = true
     return await axios
@@ -50,7 +50,7 @@ export const useRequest = () => {
       .catch((error: AxiosError<ServerErrorResponseType>) => {
         /* eslint-disable-next-line no-console */
         console.error('axios error' + JSON.stringify(error.message, null, 2))
-        return {
+        throw {
           data: error,
           status: error.response ? error.response.status : 401,
         }
@@ -61,13 +61,13 @@ export const useRequest = () => {
    * POST request
    * @param {string} url
    * @param {any} data
-   * @param {AxiosRequestConfig} options
+   * @param {AxiosRequestConfig | undefined} options
    * @return {Promise<ServerRequestResponseType<T>>}
    */
   const postRequest = async <T = any>(
     url: string,
     data: any,
-    options: AxiosRequestConfig
+    options?: AxiosRequestConfig
   ): Promise<ServerRequestResponseType<T>> => {
     axios.defaults.withCredentials = true
     return await axios
@@ -78,7 +78,7 @@ export const useRequest = () => {
       .catch((error: AxiosError<ServerErrorResponseType>) => {
         /* eslint-disable-next-line no-console */
         console.error('axios error' + JSON.stringify(error.message, null, 2))
-        return {
+        throw {
           data: error,
           status: error.response ? error.response.status : 401,
         }
@@ -89,13 +89,13 @@ export const useRequest = () => {
    * PUT request
    * @param {string} url
    * @param {any} data
-   * @param {AxiosRequestConfig} options
+   * @param {AxiosRequestConfig | undefined} options
    * @return {Promise<ServerRequestResponseType<T>>}
    */
   const putRequest = async <T = any>(
     url: string,
     data: any,
-    options: AxiosRequestConfig
+    options?: AxiosRequestConfig
   ): Promise<ServerRequestResponseType<T>> => {
     axios.defaults.withCredentials = true
     return await axios
@@ -106,7 +106,7 @@ export const useRequest = () => {
       .catch((error: AxiosError<ServerErrorResponseType>) => {
         /* eslint-disable-next-line no-console */
         console.error('axios error' + JSON.stringify(error.message, null, 2))
-        return {
+        throw {
           data: error,
           status: error.response ? error.response.status : 401,
         }
@@ -117,13 +117,13 @@ export const useRequest = () => {
    * PATCH request
    * @param {string} url
    * @param {any} data
-   * @param {AxiosRequestConfig} options
+   * @param {AxiosRequestConfig | undefined} options
    * @return {Promise<ServerRequestResponseType<T>>}
    */
   const patchRequest = async <T = any>(
     url: string,
     data: any,
-    options: AxiosRequestConfig
+    options?: AxiosRequestConfig
   ): Promise<ServerRequestResponseType<T>> => {
     axios.defaults.withCredentials = true
     return await axios
@@ -134,7 +134,7 @@ export const useRequest = () => {
       .catch((error: AxiosError<ServerErrorResponseType>) => {
         /* eslint-disable-next-line no-console */
         console.error('axios error' + JSON.stringify(error.message, null, 2))
-        return {
+        throw {
           data: error,
           status: error.response ? error.response.status : 401,
         }

@@ -24,6 +24,11 @@ import {
   PlayerFormType,
   GamePlayerStateKey,
 } from '@/hooks/game/usePlayer'
+import {
+  useEnemy,
+  UseEnemyType,
+  GameEnemyStateKey,
+} from '@/hooks/game/useEnemy'
 import { IAppConfig } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const config: IAppConfig = require('@/config/data')
@@ -38,9 +43,13 @@ export default defineComponent({
   setup() {
     // data
     const playerService = usePlayer()
+    const enemyService = useEnemy()
 
     // provide
     provide(GamePlayerStateKey, playerService)
+    provide(GameEnemyStateKey, enemyService)
+
+    // enemyService.getEnemyDataRequest()
 
     // computed
     const playerForm = computed(

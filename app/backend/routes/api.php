@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Users\Demo\DemoController;
 use App\Http\Controllers\Users\Game\EnemiesController;
 use App\Http\Controllers\Users\AuthController;
 
@@ -23,6 +24,17 @@ use App\Http\Controllers\Users\AuthController;
 // api test
 Route::get('test', function () {
     return 'api connection test!';
+});
+
+// demo
+Route::group(['prefix' => 'v1/game'], function () {
+    // game
+    Route::group(['prefix' => 'demo'], function () {
+        // enemies
+        Route::group(['prefix' => 'enemies'], function () {
+            Route::get('/', [DemoController::class, 'index'])->name('service.demo.enemies.index');
+        });
+    });
 });
 
 /*
@@ -48,7 +60,7 @@ Route::group(['prefix' => 'auth', 'middleware' => 'auth:api'], function () {
 });
 
 // user
-Route::group(['prefix' => 'v1/service', 'middleware' => 'auth:api'], function () {
+/* Route::group(['prefix' => 'v1/service', 'middleware' => 'auth:api'], function () {
     // game
     Route::group(['prefix' => 'game'], function () {
         // enemies
@@ -56,4 +68,4 @@ Route::group(['prefix' => 'v1/service', 'middleware' => 'auth:api'], function ()
             Route::get('/', [EnemiesController::class, 'index'])->name('service.game.enemies.index');
         });
     });
-});
+}); */

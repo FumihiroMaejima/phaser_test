@@ -1,3 +1,4 @@
+// tsだとproxyが効かない為、jsにする
 module.exports = {
   publicPath: '/',
   // ポートなどの設定
@@ -9,11 +10,12 @@ module.exports = {
         target: 'http://localhost:8000/api',
         https: false
       } */
-      // development
+      // swagger mock server
       /* '/api': {
-        target: 'http://localhost:50180/',
+        target: 'http://localhost:3200',
         https: false
       } */
+      // backend server
       '/api': {
         target: 'http://localhost/',
         https: false,

@@ -32,7 +32,7 @@ Route::group(['prefix' => 'v1/game'], function () {
     Route::group(['prefix' => 'demo'], function () {
         // enemies
         Route::group(['prefix' => 'enemies'], function () {
-            Route::get('/', [DemoController::class, 'index'])->name('service.demo.enemies.index');
+            Route::get('/', [DemoController::class, 'index'])->name('game.demo.enemies.index');
         });
     });
 });

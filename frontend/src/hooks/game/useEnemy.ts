@@ -101,7 +101,7 @@ export const useEnemy = () => {
    */
   const getEnemyDataRequest = async () => {
     await useRequest()
-      .getRequest('/api/v1/tesst')
+      .getRequest('/api/v1/game/demo/enemies')
       .then((response) => {
         console.log('then: ' + JSON.stringify(response, null, 2))
       })

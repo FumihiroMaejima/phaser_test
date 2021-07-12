@@ -1,5 +1,6 @@
 <template>
   <div class="container mx-auto">
+    <parts-circle-loading :open="isLoading" />
     <parts-main-header class="italic my-2">Game</parts-main-header>
     <template v-if="!isStart">
       <app-create-user-form
@@ -14,9 +15,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, provide } from 'vue'
+import { defineComponent, computed, provide, ref } from 'vue'
 import AppCreateUserForm from '@/components/modules/game/AppCreateUserForm.vue'
 import AppGameArea from '@/components/modules/game/AppGameArea.vue'
+import PartsCircleLoading from '@/components/parts/PartsCircleLoading.vue'
 import PartsMainHeader from '@/components/parts/PartsMainHeader.vue'
 import {
   usePlayer,
@@ -29,7 +31,10 @@ import {
   UseEnemyType,
   GameEnemyStateKey,
 } from '@/hooks/game/useEnemy'
+import { CircleLoadingKey } from '@/keys'
 import { IAppConfig } from '@/types'
+import { inversionFlag } from '@/util'
+
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const config: IAppConfig = require('@/config/data')
 
@@ -38,18 +43,22 @@ export default defineComponent({
   components: {
     AppCreateUserForm,
     AppGameArea,
+    PartsCircleLoading,
     PartsMainHeader,
   },
   setup() {
     // data
+    const loadingFlag = ref<boolean>(false)
     const playerService = usePlayer()
     const enemyService = useEnemy()
 
     // provide
+    provide(CircleLoadingKey, loadingFlag)
     provide(GamePlayerStateKey, playerService)
     provide(GameEnemyStateKey, enemyService)
 
     // computed
+    const isLoading = computed((): boolean => loadingFlag.value)
     const playerForm = computed(
       (): PlayerFormType => playerService.getPlayerForm()
     )
@@ -70,11 +79,14 @@ export default defineComponent({
      * @return {void}
      */
     const clickFormButtonEventHandler = async (_: Event) => {
+      inversionFlag(loadingFlag)
       await enemyService.getEnemyDataRequest()
       playerService.startGame()
+      inversionFlag(loadingFlag)
     }
 
     return {
+      isLoading,
       playerForm,
       formValue,
       isStart,

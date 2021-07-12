@@ -49,8 +49,6 @@ export default defineComponent({
     provide(GamePlayerStateKey, playerService)
     provide(GameEnemyStateKey, enemyService)
 
-    // enemyService.getEnemyDataRequest()
-
     // computed
     const playerForm = computed(
       (): PlayerFormType => playerService.getPlayerForm()
@@ -71,7 +69,8 @@ export default defineComponent({
      * @param {Event} _
      * @return {void}
      */
-    const clickFormButtonEventHandler = (_: Event) => {
+    const clickFormButtonEventHandler = async (_: Event) => {
+      await enemyService.getEnemyDataRequest()
       playerService.startGame()
     }
 

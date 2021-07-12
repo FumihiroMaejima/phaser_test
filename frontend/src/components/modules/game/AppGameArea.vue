@@ -43,6 +43,11 @@ import {
   GamePlayerStateKey,
 } from '@/hooks/game/usePlayer'
 import {
+  useEnemy,
+  UseEnemyType,
+  GameEnemyStateKey,
+} from '@/hooks/game/useEnemy'
+import {
   useNavigationMessage,
   UseNavigationMessageType,
   UseNavigationMessageStateType,
@@ -66,6 +71,7 @@ export default defineComponent({
 
     // inject
     const playerService = inject(GamePlayerStateKey) as UsePlayerType
+    const enemyService = inject(GameEnemyStateKey) as UseEnemyType
 
     // computed
     const getPlayer = computed((): PlayerType => playerService.getPlayer())

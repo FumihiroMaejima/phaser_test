@@ -48,6 +48,11 @@ import {
   GameEnemyStateKey,
 } from '@/hooks/game/useEnemy'
 import {
+  useBattle,
+  UseBattleType,
+  GameBattleStateKey,
+} from '@/hooks/game/useBattle'
+import {
   useNavigationMessage,
   UseNavigationMessageType,
   UseNavigationMessageStateType,
@@ -68,6 +73,7 @@ export default defineComponent({
   setup() {
     // data
     const navigationService = useNavigationMessage()
+    const battleService = useBattle()
 
     // inject
     const playerService = inject(GamePlayerStateKey) as UsePlayerType
@@ -82,9 +88,13 @@ export default defineComponent({
      * attack event handling
      * @return {void}
      */
-    const attackEventEventHandler = (event: any) => {
+    const attackEventEventHandler = async (event: any) => {
       console.log('attackEventEventHandler: ' + JSON.stringify(event, null, 2))
-      navigationService.setMessage('attack!')
+      const data = await battleService.startBattle(
+        playerService.getPlayer(),
+        enemyService.getEnemy()
+      )
+      navigationService.setMessage(`attack!  ${data.message}`)
     }
 
     /**

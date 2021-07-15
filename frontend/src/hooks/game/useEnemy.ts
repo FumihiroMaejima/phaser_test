@@ -21,11 +21,11 @@ const enemyData = {
   magic: 0,
 }
 
-export type PlayerType = typeof enemyData
-export type PlayerTypeKeys = keyof PlayerType
-export type PlayerTextKeys = Extract<PlayerTypeKeys, 'name'>
-export type PlayerNumberKeys = Exclude<PlayerTypeKeys, 'id' | PlayerTextKeys>
-export type PlayerSelectKeys = Exclude<PlayerTypeKeys, PlayerTextKeys | 'id'>
+export type EnemyType = typeof enemyData
+export type EnemyTypeKeys = keyof EnemyType
+export type EnemyTextKeys = Extract<EnemyTypeKeys, 'name'>
+export type PlayerNumberKeys = Exclude<EnemyTypeKeys, 'id' | EnemyTextKeys>
+export type PlayerSelectKeys = Exclude<EnemyTypeKeys, EnemyTextKeys | 'id'>
 
 const playerFormData = {
   name: '',
@@ -35,48 +35,29 @@ export type PlayerFormType = typeof playerFormData
 export type PlayerFormTypeKeys = keyof PlayerFormType
 
 export type usePlayerStateType = {
-  enemy: PlayerType
-  isStart: boolean
+  enemy: EnemyType
 }
 
 export const useEnemy = () => {
   const state = reactive<usePlayerStateType>({
     enemy: { ...enemyData },
-    isStart: false,
   })
 
   /**
    * return enemy data
-   * @return {PlayerType} state.enemy
+   * @return {EnemyType} state.enemy
    */
-  const getEnemy = (): PlayerType => {
+  const getEnemy = (): EnemyType => {
     return state.enemy
   }
 
   /**
-   * return game start flag
-   * @return {boolean} state.isStart
-   */
-  const getIsStart = (): boolean => {
-    return state.isStart
-  }
-
-  /**
    * set enemy data to state
-   * @param {PlayerType} value
+   * @param {EnemyType} value
    * @return {void}
    */
-  const setEnemy = (value: PlayerType) => {
+  const setEnemy = (value: EnemyType) => {
     state.enemy = value
-  }
-
-  /**
-   * set game start flag to state
-   * @param {boolean} value
-   * @return {void}
-   */
-  const setIsStart = (value: boolean) => {
-    state.isStart = value
   }
 
   /**
@@ -85,14 +66,6 @@ export const useEnemy = () => {
    */
   const resetEnemy = () => {
     state.enemy = { ...enemyData }
-  }
-
-  /**
-   * reset game start flag
-   * @return {void}
-   */
-  const resetIsStart = () => {
-    state.isStart = false
   }
 
   /**
@@ -110,30 +83,11 @@ export const useEnemy = () => {
       })
   }
 
-  /**
-   * start game & refresh form data
-   * @return {void}
-   */
-  /* const startGame = () => {
-    const value = getEnemyForm().name
-    if (!valideteNameSceme(value)) {
-      // バリデーションエラー時はリロード
-      history.go(0)
-    } else {
-      updatePlayerTextValue('name', value)
-      setIsStart(true)
-      resetPlayerForm()
-    }
-  } */
-
   return {
     state,
     getEnemy,
-    getIsStart,
     setEnemy,
-    setIsStart,
     resetEnemy,
-    resetIsStart,
     getEnemyDataRequest,
   }
 }

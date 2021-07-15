@@ -2,12 +2,14 @@
 import { Ref, reactive, InjectionKey } from 'vue'
 import { useRequest, UseRequestType } from '@/hooks/useRequest'
 import {
+  playerData,
   PlayerType,
   usePlayer,
   UsePlayerType,
   GamePlayerStateKey,
 } from '@/hooks/game/usePlayer'
 import {
+  enemyData,
   EnemyType,
   useEnemy,
   UseEnemyType,
@@ -23,13 +25,65 @@ import {
 const config: IAppConfig = require('@/config/data')
 
 export type UseBattleStateType = {
-  value: undefined
+  player: PlayerType
+  enemy: EnemyType
 }
 
 export const useBattle = () => {
   const state = reactive<UseBattleStateType>({
-    value: undefined,
+    player: { ...playerData },
+    enemy: { ...enemyData },
   })
+
+  /**
+   * reset player data
+   * @return {void}
+   */
+  const resetPlayer = () => {
+    state.player = { ...playerData }
+  }
+
+  /**
+   * reset enemy data
+   * @return {void}
+   */
+  const resetEnemy = () => {
+    state.enemy = { ...enemyData }
+  }
+
+  /**
+   * return player data
+   * @return {PlayerType} state.player
+   */
+  const getPlayer = (): PlayerType => {
+    return state.player
+  }
+
+  /**
+   * return enemy data
+   * @return {EnemyType} state.enemy
+   */
+  const getEnemy = (): EnemyType => {
+    return state.enemy
+  }
+
+  /**
+   * set player data to state
+   * @param {PlayerType} value
+   * @return {void}
+   */
+  const setPlayer = (value: PlayerType) => {
+    state.player = value
+  }
+
+  /**
+   * set enemy data to state
+   * @param {EnemyType} value
+   * @return {void}
+   */
+  const setEnemy = (value: EnemyType) => {
+    state.enemy = value
+  }
 
   /**
    * player acrtion
@@ -112,6 +166,12 @@ export const useBattle = () => {
 
   return {
     state,
+    resetPlayer,
+    resetEnemy,
+    getPlayer,
+    getEnemy,
+    setPlayer,
+    setEnemy,
     playerAction,
     enemyAction,
     checkHP,

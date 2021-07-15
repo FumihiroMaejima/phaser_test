@@ -10,7 +10,7 @@ export const valideteNameSceme = (value: string): boolean => {
 
 const config: IAppConfig = require('@/config/data')
 
-const playerData = {
+export const playerData = {
   id: 0,
   name: '',
   level: 1,

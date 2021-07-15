@@ -9,7 +9,7 @@ import {
 
 const config: IAppConfig = require('@/config/data')
 
-const enemyData = {
+export const enemyData = {
   id: 0,
   name: '',
   level: 1,

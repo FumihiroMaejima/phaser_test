@@ -73,14 +73,15 @@ export default defineComponent({
   setup() {
     // data
     const navigationService = useNavigationMessage()
-    const battleService = useBattle()
+    // const battleService = useBattle()
 
     // inject
+    const battleService = inject(GameBattleStateKey) as UseBattleType
     const playerService = inject(GamePlayerStateKey) as UsePlayerType
     const enemyService = inject(GameEnemyStateKey) as UseEnemyType
 
     // computed
-    const getPlayer = computed((): PlayerType => playerService.getPlayer())
+    const getPlayer = computed((): PlayerType => battleService.getPlayer())
     const textMessage = computed((): string => navigationService.getMessage())
 
     // methods
@@ -90,10 +91,7 @@ export default defineComponent({
      */
     const attackEventEventHandler = async (event: any) => {
       console.log('attackEventEventHandler: ' + JSON.stringify(event, null, 2))
-      const data = await battleService.startBattle(
-        playerService.getPlayer(),
-        enemyService.getEnemy()
-      )
+      const data = await battleService.startBattle()
       navigationService.setMessage(`attack!  ${data.message}`)
     }
 

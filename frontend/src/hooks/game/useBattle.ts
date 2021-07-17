@@ -4,6 +4,7 @@ import { useRequest, UseRequestType } from '@/hooks/useRequest'
 import {
   playerData,
   PlayerType,
+  PlayerNumberKeys,
   usePlayer,
   UsePlayerType,
   GamePlayerStateKey,
@@ -11,6 +12,7 @@ import {
 import {
   enemyData,
   EnemyType,
+  EnemyNumberKeys,
   useEnemy,
   UseEnemyType,
   GameEnemyStateKey,
@@ -95,13 +97,15 @@ export const useBattle = () => {
     player: PlayerType,
     enemy: EnemyType
   ): Promise<boolean> => {
-    player.hp = player.hp - enemy.offence
-    if (player.hp < 0) {
+    // player.hp = player.hp - enemy.offence
+    state.player.hp = player.hp - enemy.offence
+    if (getPlayer().hp < 0) {
       return true
     }
 
-    enemy.hp = enemy.hp - player.offence
-    return enemy.hp < 0
+    // enemy.hp = enemy.hp - player.offence
+    state.enemy.hp = enemy.hp - player.offence
+    return getEnemy().hp < 0
   }
 
   /**
@@ -114,13 +118,15 @@ export const useBattle = () => {
     player: PlayerType,
     enemy: EnemyType
   ): Promise<boolean> => {
-    enemy.hp = enemy.hp - player.offence
-    if (enemy.hp < 0) {
+    // enemy.hp = enemy.hp - player.offence
+    state.enemy.hp = enemy.hp - player.offence
+    if (getEnemy().hp < 0) {
       return true
     }
 
-    player.hp = player.hp - enemy.offence
-    return player.hp < 0
+    // player.hp = player.hp - enemy.offence
+    state.player.hp = player.hp - enemy.offence
+    return getPlayer().hp < 0
   }
 
   /**
@@ -142,20 +148,23 @@ export const useBattle = () => {
    * @param {EnemyType} enemy
    * @return {void}
    */
-  const startBattle = async (player: PlayerType, enemy: EnemyType) => {
+  const startBattle = async () => {
     let result = false
+    const player = getPlayer()
+    const enemy = getEnemy()
+
     const value = { message: '', color: 'success' }
     if (player.speed >= enemy.speed) {
       // プレイヤーの先行
       if (await playerAction(player, enemy)) {
-        result = await checkHP(player, enemy)
+        result = await checkHP(getPlayer(), getEnemy())
         value.message = result ? 'プレイヤーの勝ち' : 'プレイヤーの負け'
         value.color = result ? 'success' : 'success'
       }
     } else {
       // 敵キャラクターーの先行
       if (await enemyAction(player, enemy)) {
-        result = await checkHP(player, enemy)
+        result = await checkHP(getPlayer(), getEnemy())
         value.message = result ? 'プレイヤーの勝ち' : 'プレイヤーの負け'
         value.color = result ? 'success' : 'success'
       }

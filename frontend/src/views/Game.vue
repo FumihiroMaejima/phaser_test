@@ -21,6 +21,11 @@ import AppGameArea from '@/components/modules/game/AppGameArea.vue'
 import PartsCircleLoading from '@/components/parts/PartsCircleLoading.vue'
 import PartsMainHeader from '@/components/parts/PartsMainHeader.vue'
 import {
+  useBattle,
+  UseBattleType,
+  GameBattleStateKey,
+} from '@/hooks/game/useBattle'
+import {
   usePlayer,
   UsePlayerType,
   PlayerFormType,
@@ -49,11 +54,13 @@ export default defineComponent({
   setup() {
     // data
     const loadingFlag = ref<boolean>(false)
+    const battleService = useBattle()
     const playerService = usePlayer()
     const enemyService = useEnemy()
 
     // provide
     provide(CircleLoadingKey, loadingFlag)
+    provide(GameBattleStateKey, battleService)
     provide(GamePlayerStateKey, playerService)
     provide(GameEnemyStateKey, enemyService)
 
@@ -82,6 +89,8 @@ export default defineComponent({
       inversionFlag(loadingFlag)
       await enemyService.getEnemyDataRequest()
       playerService.startGame()
+      battleService.setPlayer(playerService.getPlayer())
+      battleService.setEnemy(enemyService.getEnemy())
       inversionFlag(loadingFlag)
     }
 

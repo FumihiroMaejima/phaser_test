@@ -24,8 +24,8 @@ export const enemyData = {
 export type EnemyType = typeof enemyData
 export type EnemyTypeKeys = keyof EnemyType
 export type EnemyTextKeys = Extract<EnemyTypeKeys, 'name'>
-export type PlayerNumberKeys = Exclude<EnemyTypeKeys, 'id' | EnemyTextKeys>
-export type PlayerSelectKeys = Exclude<EnemyTypeKeys, EnemyTextKeys | 'id'>
+export type EnemyNumberKeys = Exclude<EnemyTypeKeys, 'id' | EnemyTextKeys>
+export type EnemySelectKeys = Exclude<EnemyTypeKeys, EnemyTextKeys | 'id'>
 
 const playerFormData = {
   name: '',

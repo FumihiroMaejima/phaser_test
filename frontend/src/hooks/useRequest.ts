@@ -25,7 +25,7 @@ export const useRequest = () => {
         /* eslint-disable-next-line no-console */
         console.error('axios error' + JSON.stringify(error.message, null, 2))
         throw {
-          data: error,
+          data: error.response ? error.response.data : error,
           status: error.response ? error.response.status : 401,
         }
       })
@@ -51,7 +51,7 @@ export const useRequest = () => {
         /* eslint-disable-next-line no-console */
         console.error('axios error' + JSON.stringify(error.message, null, 2))
         throw {
-          data: error,
+          data: error.response ? error.response.data : error,
           status: error.response ? error.response.status : 401,
         }
       })
@@ -79,7 +79,7 @@ export const useRequest = () => {
         /* eslint-disable-next-line no-console */
         console.error('axios error' + JSON.stringify(error.message, null, 2))
         throw {
-          data: error,
+          data: error.response ? error.response.data : error,
           status: error.response ? error.response.status : 401,
         }
       })
@@ -107,7 +107,7 @@ export const useRequest = () => {
         /* eslint-disable-next-line no-console */
         console.error('axios error' + JSON.stringify(error.message, null, 2))
         throw {
-          data: error,
+          data: error.response ? error.response.data : error,
           status: error.response ? error.response.status : 401,
         }
       })
@@ -135,7 +135,7 @@ export const useRequest = () => {
         /* eslint-disable-next-line no-console */
         console.error('axios error' + JSON.stringify(error.message, null, 2))
         throw {
-          data: error,
+          data: error.response ? error.response.data : error,
           status: error.response ? error.response.status : 401,
         }
       })

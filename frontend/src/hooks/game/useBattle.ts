@@ -118,7 +118,7 @@ export const useBattle = () => {
    * @param {PlayerType | EnemyType} second second attacker
    * @return {string}
    */
-  const makeBattleNavigationMessage = (
+  const makeActionNavigationMessage = (
     type: BattleActionTypes,
     first: PlayerType | EnemyType,
     second: PlayerType | EnemyType
@@ -141,6 +141,33 @@ export const useBattle = () => {
   }
 
   /**
+   * make navigation message about battle action.
+   * @param {boolean} isAttack
+   * @param {PlayerType | EnemyType} first first attacker
+   * @param {PlayerType | EnemyType} second second attacker
+   * @return {string}
+   */
+  const makeActionMessage = (
+    isAttack: boolean,
+    first: PlayerType | EnemyType,
+    second: PlayerType | EnemyType
+  ): string => {
+    return isAttack
+      ? `${first.name}は${second.name}に${first.offence}のダメージを与えた！`
+      : `${first.name}は${second.name}から${second.offence}のダメージを受けた！`
+  }
+
+  /**
+   * make multi line string.
+   * @param {string} fistLine
+   * @param {string} nextLine
+   * @return {string}
+   */
+  const makeMuitlLineMessage = (fistLine: string, nextLine: string): string => {
+    return `${fistLine}<br>${nextLine}`
+  }
+
+  /**
    * player acrtion
    * @param {PlayerType} player
    * @param {EnemyType} enemy
@@ -153,24 +180,23 @@ export const useBattle = () => {
     const value = { message: '', color: 'success' }
 
     updateEnemyNumberValue('hp', enemy.hp - player.offence)
+    value.message = makeActionMessage(true, getPlayer(), getEnemy())
     if (getEnemy().hp < 0) {
-      value.message = 'プレイヤーの勝ち!'
+      value.message = makeMuitlLineMessage(value.message, 'プレイヤーの勝ち!')
       return value
     }
 
     updatePlayerNumberValue('hp', player.hp - enemy.offence)
+    value.message = makeMuitlLineMessage(
+      value.message,
+      makeActionMessage(false, getPlayer(), getEnemy())
+    )
     if (getPlayer().hp < 0) {
-      value.message = 'プレイヤーの負け!'
-      value.message = 'error'
+      value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')
+      value.color = 'error'
       return value
     }
 
-    // バトル継続
-    value.message = makeBattleNavigationMessage(
-      'attack',
-      getPlayer(),
-      getEnemy()
-    )
     return value
   }
 
@@ -187,24 +213,23 @@ export const useBattle = () => {
     const value = { message: '', color: 'success' }
 
     updatePlayerNumberValue('hp', player.hp - enemy.offence)
+    value.message = makeActionMessage(false, getPlayer(), getEnemy())
     if (getPlayer().hp < 0) {
-      value.message = 'プレイヤーの負け!'
-      value.message = 'error'
+      value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')
+      value.color = 'error'
       return value
     }
 
     updateEnemyNumberValue('hp', enemy.hp - player.offence)
+    value.message = makeMuitlLineMessage(
+      value.message,
+      makeActionMessage(true, getPlayer(), getEnemy())
+    )
     if (getEnemy().hp < 0) {
-      value.message = 'プレイヤーの勝ち!'
+      value.message = makeMuitlLineMessage(value.message, 'プレイヤーの勝ち!')
       return value
     }
 
-    // バトル継続
-    value.message = makeBattleNavigationMessage(
-      'attack',
-      getPlayer(),
-      getEnemy()
-    )
     return value
   }
 
@@ -285,10 +310,12 @@ export const useBattle = () => {
     setEnemy,
     updatePlayerNumberValue,
     updateEnemyNumberValue,
+    makeActionNavigationMessage,
+    makeMuitlLineMessage,
+    makeActionMessage,
     playerBattleAction,
     enemyBattleAction,
     checkHP,
-    makeBattleNavigationMessage,
     startBattle,
     startAction,
   }

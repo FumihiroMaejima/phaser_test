@@ -26,12 +26,14 @@ import {
 
 const config: IAppConfig = require('@/config/data')
 
+export type BattleActionTypes = 'attack' | 'heal' | 'escape'
+
+export type ActionResponseType = Record<'message' | 'color', string>
+
 export type UseBattleStateType = {
   player: PlayerType
   enemy: EnemyType
 }
-
-export type BattleActionTypes = 'attack' | 'heal' | 'escape'
 
 export const useBattle = () => {
   const state = reactive<UseBattleStateType>({
@@ -200,7 +202,7 @@ export const useBattle = () => {
     isAdvantageous: boolean,
     player: PlayerType,
     enemy: EnemyType
-  ) => {
+  ): Promise<ActionResponseType> => {
     const value = { message: '', color: 'success' }
     // プレイヤーの先行
     if (isAdvantageous) {
@@ -244,7 +246,9 @@ export const useBattle = () => {
    * @param {BattleActionTypes} type
    * @return {void}
    */
-  const startAction = async (type: BattleActionTypes = 'attack') => {
+  const startAction = async (
+    type: BattleActionTypes = 'attack'
+  ): Promise<ActionResponseType> => {
     const player = getPlayer()
     const enemy = getEnemy()
 

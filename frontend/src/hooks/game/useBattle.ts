@@ -31,6 +31,8 @@ export type UseBattleStateType = {
   enemy: EnemyType
 }
 
+export type BattleActionTypes = 'attack' | 'heal' | 'escape'
+
 export const useBattle = () => {
   const state = reactive<UseBattleStateType>({
     player: { ...playerData },
@@ -117,17 +119,13 @@ export const useBattle = () => {
     player: PlayerType,
     enemy: EnemyType
   ): Promise<boolean> => {
-    // player.hp = player.hp - enemy.offence
-    // state.player.hp = player.hp - enemy.offence
-    updatePlayerNumberValue('hp', player.hp - enemy.offence)
-    if (getPlayer().hp < 0) {
+    updateEnemyNumberValue('hp', enemy.hp - player.offence)
+    if (getEnemy().hp < 0) {
       return true
     }
 
-    // enemy.hp = enemy.hp - player.offence
-    // state.enemy.hp = enemy.hp - player.offence
-    updateEnemyNumberValue('hp', enemy.hp - player.offence)
-    return getEnemy().hp < 0
+    updatePlayerNumberValue('hp', player.hp - enemy.offence)
+    return getPlayer().hp < 0
   }
 
   /**
@@ -140,17 +138,13 @@ export const useBattle = () => {
     player: PlayerType,
     enemy: EnemyType
   ): Promise<boolean> => {
-    // enemy.hp = enemy.hp - player.offence
-    // state.enemy.hp = enemy.hp - player.offence
-    updateEnemyNumberValue('hp', enemy.hp - player.offence)
-    if (getEnemy().hp < 0) {
+    updatePlayerNumberValue('hp', player.hp - enemy.offence)
+    if (getPlayer().hp < 0) {
       return true
     }
 
-    // player.hp = player.hp - enemy.offence
-    state.player.hp = player.hp - enemy.offence
-    updatePlayerNumberValue('hp', player.hp - enemy.offence)
-    return getPlayer().hp < 0
+    updateEnemyNumberValue('hp', enemy.hp - player.offence)
+    return getEnemy().hp < 0
   }
 
   /**
@@ -167,6 +161,35 @@ export const useBattle = () => {
   }
 
   /**
+   * make navigation message about battle.
+   * @param {BattleActionTypes} type
+   * @param {PlayerType | EnemyType} first first attacker
+   * @param {PlayerType | EnemyType} second second attacker
+   * @return {void}
+   */
+  const makeBattleNavigationMessage = (
+    type: BattleActionTypes,
+    first: PlayerType | EnemyType,
+    second: PlayerType | EnemyType
+  ): string => {
+    let message = ''
+    switch (type) {
+      case 'attack':
+        message = `${second.name}に${first.offence}のダメージを与えた！</br>${first.name}は${second.offence}のダメージを受けた！`
+        break
+      case 'heal':
+        message = 'test'
+        break
+      case 'escape':
+        message = 'test'
+        break
+      default:
+        break
+    }
+    return message
+  }
+
+  /**
    * start battle
    * @param {PlayerType} player
    * @param {EnemyType} enemy
@@ -178,26 +201,36 @@ export const useBattle = () => {
     const enemy = getEnemy()
 
     const value = { message: '', color: 'success' }
+    // プレイヤーの先行
     if (player.speed >= enemy.speed) {
-      // プレイヤーの先行
+      // バトルを実行し、どちらかのHPが0になった時
       if (await playerAction(player, enemy)) {
         result = await checkHP(getPlayer(), getEnemy())
         value.message = result ? 'プレイヤーの勝ち' : 'プレイヤーの負け'
         value.color = result ? 'success' : 'error'
       } else {
         // バトル継続中
-        value.message = `${enemy.name}に${player.offence}のダメージを与えた！\r\n${player.name}は${enemy.offence}のダメージを受けた！`
+        value.message = makeBattleNavigationMessage(
+          'attack',
+          getPlayer(),
+          getEnemy()
+        )
         value.color = 'success'
       }
     } else {
       // 敵キャラクターーの先行
+      // バトルを実行し、どちらかのHPが0になった時
       if (await enemyAction(player, enemy)) {
         result = await checkHP(getPlayer(), getEnemy())
         value.message = result ? 'プレイヤーの勝ち' : 'プレイヤーの負け'
         value.color = result ? 'success' : 'error'
       } else {
         // バトル継続中
-        value.message = `${player.name}は${enemy.offence}のダメージを受けた！\r\n${enemy.name}に${player.offence}のダメージを与えた！`
+        value.message = makeBattleNavigationMessage(
+          'attack',
+          getEnemy(),
+          getPlayer()
+        )
         value.color = 'success'
       }
     }
@@ -218,6 +251,7 @@ export const useBattle = () => {
     playerAction,
     enemyAction,
     checkHP,
+    makeBattleNavigationMessage,
     startBattle,
   }
 }

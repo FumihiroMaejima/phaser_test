@@ -1,8 +1,5 @@
 <template>
-  <div class="parts-message-area my-2">
-    {{ messageText }}
-    <!-- <slot /> -->
-  </div>
+  <div class="parts-message-area my-2" v-html="messageText"></div>
 </template>
 
 <script lang="ts">

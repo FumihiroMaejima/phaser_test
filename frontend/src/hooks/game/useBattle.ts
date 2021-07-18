@@ -28,7 +28,8 @@ const config: IAppConfig = require('@/config/data')
 
 export type BattleActionTypes = 'attack' | 'heal' | 'escape'
 
-export type ActionResponseType = Record<'message' | 'color', string>
+export type ActionResponseType = Record<'message' | 'color', string> &
+  Record<'isFinished', boolean>
 
 export type UseBattleStateType = {
   player: PlayerType
@@ -177,12 +178,13 @@ export const useBattle = () => {
     player: PlayerType,
     enemy: EnemyType
   ): Promise<ActionResponseType> => {
-    const value = { message: '', color: 'success' }
+    const value = { message: '', color: 'success', isFinished: false }
 
     updateEnemyNumberValue('hp', enemy.hp - player.offence)
     value.message = makeActionMessage(true, getPlayer(), getEnemy())
     if (getEnemy().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの勝ち!')
+      value.isFinished = true
       return value
     }
 
@@ -194,6 +196,7 @@ export const useBattle = () => {
     if (getPlayer().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')
       value.color = 'error'
+      value.isFinished = true
       return value
     }
 
@@ -210,13 +213,14 @@ export const useBattle = () => {
     player: PlayerType,
     enemy: EnemyType
   ): Promise<ActionResponseType> => {
-    const value = { message: '', color: 'success' }
+    const value = { message: '', color: 'success', isFinished: false }
 
     updatePlayerNumberValue('hp', player.hp - enemy.offence)
     value.message = makeActionMessage(false, getPlayer(), getEnemy())
     if (getPlayer().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')
       value.color = 'error'
+      value.isFinished = true
       return value
     }
 
@@ -227,6 +231,7 @@ export const useBattle = () => {
     )
     if (getEnemy().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの勝ち!')
+      value.isFinished = true
       return value
     }
 
@@ -258,7 +263,8 @@ export const useBattle = () => {
     player: PlayerType,
     enemy: EnemyType
   ): Promise<ActionResponseType> => {
-    let value = { message: '', color: 'success' }
+    let value: ActionResponseType
+
     if (isAdvantageous) {
       // プレイヤーの先行
       value = await playerBattleAction(player, enemy)
@@ -281,7 +287,7 @@ export const useBattle = () => {
     const player = getPlayer()
     const enemy = getEnemy()
 
-    let value = { message: '', color: 'success' }
+    let value = { message: '', color: 'success', isFinished: false }
 
     switch (type) {
       case 'attack':

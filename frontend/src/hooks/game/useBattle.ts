@@ -88,6 +88,26 @@ export const useBattle = () => {
   }
 
   /**
+   * set player number data to state
+   * @param {PlayerNumberKeys} key
+   * @param {number} value
+   * @return {void}
+   */
+  const updatePlayerNumberValue = (key: PlayerNumberKeys, value: number) => {
+    state.player[key] = value
+  }
+
+  /**
+   * set enemy number data to state
+   * @param {EnemyNumberKeys} key
+   * @param {number} value
+   * @return {void}
+   */
+  const updateEnemyNumberValue = (key: EnemyNumberKeys, value: number) => {
+    state.enemy[key] = value
+  }
+
+  /**
    * player acrtion
    * @param {PlayerType} player
    * @param {EnemyType} enemy
@@ -98,13 +118,15 @@ export const useBattle = () => {
     enemy: EnemyType
   ): Promise<boolean> => {
     // player.hp = player.hp - enemy.offence
-    state.player.hp = player.hp - enemy.offence
+    // state.player.hp = player.hp - enemy.offence
+    updatePlayerNumberValue('hp', player.hp - enemy.offence)
     if (getPlayer().hp < 0) {
       return true
     }
 
     // enemy.hp = enemy.hp - player.offence
-    state.enemy.hp = enemy.hp - player.offence
+    // state.enemy.hp = enemy.hp - player.offence
+    updateEnemyNumberValue('hp', enemy.hp - player.offence)
     return getEnemy().hp < 0
   }
 
@@ -119,13 +141,15 @@ export const useBattle = () => {
     enemy: EnemyType
   ): Promise<boolean> => {
     // enemy.hp = enemy.hp - player.offence
-    state.enemy.hp = enemy.hp - player.offence
+    // state.enemy.hp = enemy.hp - player.offence
+    updateEnemyNumberValue('hp', enemy.hp - player.offence)
     if (getEnemy().hp < 0) {
       return true
     }
 
     // player.hp = player.hp - enemy.offence
     state.player.hp = player.hp - enemy.offence
+    updatePlayerNumberValue('hp', player.hp - enemy.offence)
     return getPlayer().hp < 0
   }
 
@@ -159,14 +183,22 @@ export const useBattle = () => {
       if (await playerAction(player, enemy)) {
         result = await checkHP(getPlayer(), getEnemy())
         value.message = result ? 'プレイヤーの勝ち' : 'プレイヤーの負け'
-        value.color = result ? 'success' : 'success'
+        value.color = result ? 'success' : 'error'
+      } else {
+        // バトル継続中
+        value.message = `${enemy.name}に${player.offence}のダメージを与えた！\r\n${player.name}は${enemy.offence}のダメージを受けた！`
+        value.color = 'success'
       }
     } else {
       // 敵キャラクターーの先行
       if (await enemyAction(player, enemy)) {
         result = await checkHP(getPlayer(), getEnemy())
         value.message = result ? 'プレイヤーの勝ち' : 'プレイヤーの負け'
-        value.color = result ? 'success' : 'success'
+        value.color = result ? 'success' : 'error'
+      } else {
+        // バトル継続中
+        value.message = `${player.name}は${enemy.offence}のダメージを受けた！\r\n${enemy.name}に${player.offence}のダメージを与えた！`
+        value.color = 'success'
       }
     }
 
@@ -181,6 +213,8 @@ export const useBattle = () => {
     getEnemy,
     setPlayer,
     setEnemy,
+    updatePlayerNumberValue,
+    updateEnemyNumberValue,
     playerAction,
     enemyAction,
     checkHP,

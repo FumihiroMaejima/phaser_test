@@ -16,7 +16,7 @@ export const playerData = {
   level: 1,
   hp: 100,
   mp: 0,
-  offence: 0,
+  offence: 30,
   defense: 0,
   speed: 0,
   magic: 0,

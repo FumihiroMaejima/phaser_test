@@ -90,7 +90,6 @@ export default defineComponent({
      * @return {void}
      */
     const attackEventEventHandler = async (event: any) => {
-      console.log('attackEventEventHandler: ' + JSON.stringify(event, null, 2))
       const data = await battleService.startBattle()
       navigationService.setMessage(`attack!  ${data.message}`)
     }

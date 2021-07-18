@@ -27,6 +27,8 @@ export type EnemyTextKeys = Extract<EnemyTypeKeys, 'name'>
 export type EnemyNumberKeys = Exclude<EnemyTypeKeys, 'id' | EnemyTextKeys>
 export type EnemySelectKeys = Exclude<EnemyTypeKeys, EnemyTextKeys | 'id'>
 
+export type GetEnemyRequestResponse = Record<'data', EnemyType[]>
+
 const playerFormData = {
   name: '',
 }
@@ -74,11 +76,13 @@ export const useEnemy = () => {
    */
   const getEnemyDataRequest = async () => {
     await useRequest()
-      .getRequest('/api/v1/game/demo/enemies')
+      .getRequest<GetEnemyRequestResponse>('/api/v1/game/demo/enemies')
       .then((response) => {
         console.log('then: ' + JSON.stringify(response, null, 2))
+        const data = response.data as GetEnemyRequestResponse
+        setEnemy(data.data[0])
       })
-      .catch((error) => {
+      .catch((error: ServerErrorResponseType) => {
         console.log('catch: ' + JSON.stringify(error, null, 2))
       })
   }

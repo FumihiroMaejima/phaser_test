@@ -112,62 +112,11 @@ export const useBattle = () => {
   }
 
   /**
-   * player acrtion
-   * @param {PlayerType} player
-   * @param {EnemyType} enemy
-   * @return {Promise<boolean>}
-   */
-  const playerBattleAction = async (
-    player: PlayerType,
-    enemy: EnemyType
-  ): Promise<boolean> => {
-    updateEnemyNumberValue('hp', enemy.hp - player.offence)
-    if (getEnemy().hp < 0) {
-      return true
-    }
-
-    updatePlayerNumberValue('hp', player.hp - enemy.offence)
-    return getPlayer().hp < 0
-  }
-
-  /**
-   * enemy acrtion
-   * @param {PlayerType} player
-   * @param {EnemyType} enemy
-   * @return {Promise<boolean>}
-   */
-  const enemyBattleAction = async (
-    player: PlayerType,
-    enemy: EnemyType
-  ): Promise<boolean> => {
-    updatePlayerNumberValue('hp', player.hp - enemy.offence)
-    if (getPlayer().hp < 0) {
-      return true
-    }
-
-    updateEnemyNumberValue('hp', enemy.hp - player.offence)
-    return getEnemy().hp < 0
-  }
-
-  /**
-   * check hit point
-   * @param {PlayerType} player
-   * @param {EnemyType} enemy
-   * @return {void}
-   */
-  const checkHP = async (
-    player: PlayerType,
-    enemy: EnemyType
-  ): Promise<boolean> => {
-    return player.hp > enemy.hp
-  }
-
-  /**
    * make navigation message about battle.
    * @param {BattleActionTypes} type
    * @param {PlayerType | EnemyType} first first attacker
    * @param {PlayerType | EnemyType} second second attacker
-   * @return {void}
+   * @return {string}
    */
   const makeBattleNavigationMessage = (
     type: BattleActionTypes,
@@ -192,50 +141,105 @@ export const useBattle = () => {
   }
 
   /**
+   * player acrtion
+   * @param {PlayerType} player
+   * @param {EnemyType} enemy
+   * @return {Promise<ActionResponseType>}
+   */
+  const playerBattleAction = async (
+    player: PlayerType,
+    enemy: EnemyType
+  ): Promise<ActionResponseType> => {
+    const value = { message: '', color: 'success' }
+
+    updateEnemyNumberValue('hp', enemy.hp - player.offence)
+    if (getEnemy().hp < 0) {
+      value.message = 'プレイヤーの勝ち!'
+      return value
+    }
+
+    updatePlayerNumberValue('hp', player.hp - enemy.offence)
+    if (getPlayer().hp < 0) {
+      value.message = 'プレイヤーの負け!'
+      value.message = 'error'
+      return value
+    }
+
+    // バトル継続
+    value.message = makeBattleNavigationMessage(
+      'attack',
+      getPlayer(),
+      getEnemy()
+    )
+    return value
+  }
+
+  /**
+   * enemy acrtion
+   * @param {PlayerType} player
+   * @param {EnemyType} enemy
+   * @return {Promise<ActionResponseType>}
+   */
+  const enemyBattleAction = async (
+    player: PlayerType,
+    enemy: EnemyType
+  ): Promise<ActionResponseType> => {
+    const value = { message: '', color: 'success' }
+
+    updatePlayerNumberValue('hp', player.hp - enemy.offence)
+    if (getPlayer().hp < 0) {
+      value.message = 'プレイヤーの負け!'
+      value.message = 'error'
+      return value
+    }
+
+    updateEnemyNumberValue('hp', enemy.hp - player.offence)
+    if (getEnemy().hp < 0) {
+      value.message = 'プレイヤーの勝ち!'
+      return value
+    }
+
+    // バトル継続
+    value.message = makeBattleNavigationMessage(
+      'attack',
+      getPlayer(),
+      getEnemy()
+    )
+    return value
+  }
+
+  /**
+   * check hit point
+   * @param {PlayerType} player
+   * @param {EnemyType} enemy
+   * @return {void}
+   */
+  const checkHP = async (
+    player: PlayerType,
+    enemy: EnemyType
+  ): Promise<boolean> => {
+    return player.hp > enemy.hp
+  }
+
+  /**
    * start battle
    * @param {boolean} isAdvantageous
    * @param {PlayerType} player
    * @param {EnemyType} enemy
-   * @return {void}
+   * @return {Promise<ActionResponseType>}
    */
   const startBattle = async (
     isAdvantageous: boolean,
     player: PlayerType,
     enemy: EnemyType
   ): Promise<ActionResponseType> => {
-    const value = { message: '', color: 'success' }
-    // プレイヤーの先行
+    let value = { message: '', color: 'success' }
     if (isAdvantageous) {
-      // バトルを実行し、どちらかのHPが0になった時
-      if (await playerBattleAction(player, enemy)) {
-        const result = await checkHP(getPlayer(), getEnemy())
-        value.message = result ? 'プレイヤーの勝ち' : 'プレイヤーの負け'
-        value.color = result ? 'success' : 'error'
-      } else {
-        // バトル継続中
-        value.message = makeBattleNavigationMessage(
-          'attack',
-          getPlayer(),
-          getEnemy()
-        )
-        value.color = 'success'
-      }
+      // プレイヤーの先行
+      value = await playerBattleAction(player, enemy)
     } else {
-      // 敵キャラクターーの先行
-      // バトルを実行し、どちらかのHPが0になった時
-      if (await enemyBattleAction(player, enemy)) {
-        const result = await checkHP(getPlayer(), getEnemy())
-        value.message = result ? 'プレイヤーの勝ち' : 'プレイヤーの負け'
-        value.color = result ? 'success' : 'error'
-      } else {
-        // バトル継続中
-        value.message = makeBattleNavigationMessage(
-          'attack',
-          getEnemy(),
-          getPlayer()
-        )
-        value.color = 'success'
-      }
+      // 敵キャラクターの先行
+      value = await enemyBattleAction(player, enemy)
     }
 
     return value

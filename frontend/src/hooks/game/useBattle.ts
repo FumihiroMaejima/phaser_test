@@ -28,8 +28,8 @@ const config: IAppConfig = require('@/config/data')
 
 export type BattleActionTypes = 'attack' | 'heal' | 'escape'
 
-export type ActionResponseType = Record<'message' | 'color', string> &
-  Record<'isFinished', boolean>
+export type ActionResponseType = Record<'message', string> &
+  Record<'isFinished' | 'isVictory', boolean>
 
 export type UseBattleStateType = {
   player: PlayerType
@@ -178,7 +178,7 @@ export const useBattle = () => {
     player: PlayerType,
     enemy: EnemyType
   ): Promise<ActionResponseType> => {
-    const value = { message: '', color: 'success', isFinished: false }
+    const value = { message: '', isFinished: false, isVictory: false }
 
     updateEnemyNumberValue('hp', enemy.hp - player.offence)
     value.message = makeActionMessage(true, getPlayer(), getEnemy())
@@ -195,7 +195,7 @@ export const useBattle = () => {
     )
     if (getPlayer().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')
-      value.color = 'error'
+      // value.color = 'error'
       value.isFinished = true
       return value
     }
@@ -213,13 +213,13 @@ export const useBattle = () => {
     player: PlayerType,
     enemy: EnemyType
   ): Promise<ActionResponseType> => {
-    const value = { message: '', color: 'success', isFinished: false }
+    const value = { message: '', isFinished: false, isVictory: false }
 
     updatePlayerNumberValue('hp', player.hp - enemy.offence)
     value.message = makeActionMessage(false, getPlayer(), getEnemy())
     if (getPlayer().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')
-      value.color = 'error'
+      // value.color = 'error'
       value.isFinished = true
       return value
     }
@@ -287,7 +287,7 @@ export const useBattle = () => {
     const player = getPlayer()
     const enemy = getEnemy()
 
-    let value = { message: '', color: 'success', isFinished: false }
+    let value = { message: '', isFinished: false, isVictory: false }
 
     switch (type) {
       case 'attack':

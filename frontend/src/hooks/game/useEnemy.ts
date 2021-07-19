@@ -78,7 +78,7 @@ export const useEnemy = () => {
     await useRequest()
       .getRequest<GetEnemyRequestResponse>('/api/v1/game/demo/enemies')
       .then((response) => {
-        console.log('then: ' + JSON.stringify(response, null, 2))
+        // console.log('then: ' + JSON.stringify(response, null, 2))
         const data = response.data as GetEnemyRequestResponse
         setEnemy(data.data[0])
       })

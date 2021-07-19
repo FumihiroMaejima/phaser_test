@@ -17,6 +17,7 @@ import {
   UseEnemyType,
   GameEnemyStateKey,
 } from '@/hooks/game/useEnemy'
+import { getRoundingRandomInt } from '@/util'
 
 import {
   IAppConfig,
@@ -148,7 +149,7 @@ export const useBattle = () => {
    * @param {PlayerType | EnemyType} second second attacker
    * @return {string}
    */
-  const makeActionMessage = (
+  const makeBattleActionMessage = (
     isAttack: boolean,
     first: PlayerType | EnemyType,
     second: PlayerType | EnemyType
@@ -156,6 +157,19 @@ export const useBattle = () => {
     return isAttack
       ? `${first.name}は${second.name}に${first.offence}のダメージを与えた！`
       : `${first.name}は${second.name}から${second.offence}のダメージを受けた！`
+  }
+
+  /**
+   * make navigation message about heal action.
+   * @param {PlayerType | EnemyType} first first attacker
+   * @param {number} value
+   * @return {string}
+   */
+  const makeHealActionMessage = (
+    target: PlayerType | EnemyType,
+    value: number
+  ): string => {
+    return `${target.name}は回復呪文を唱えた！体力が${value}ポイント回復した！`
   }
 
   /**
@@ -169,7 +183,7 @@ export const useBattle = () => {
   }
 
   /**
-   * player acrtion
+   * player battle acrtion
    * @param {PlayerType} player
    * @param {EnemyType} enemy
    * @return {Promise<ActionResponseType>}
@@ -181,21 +195,21 @@ export const useBattle = () => {
     const value = { message: '', isFinished: false, isVictory: false }
 
     updateEnemyNumberValue('hp', enemy.hp - player.offence)
-    value.message = makeActionMessage(true, getPlayer(), getEnemy())
+    value.message = makeBattleActionMessage(true, getPlayer(), getEnemy())
     if (getEnemy().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの勝ち!')
       value.isFinished = true
+      value.isVictory = true
       return value
     }
 
     updatePlayerNumberValue('hp', player.hp - enemy.offence)
     value.message = makeMuitlLineMessage(
       value.message,
-      makeActionMessage(false, getPlayer(), getEnemy())
+      makeBattleActionMessage(false, getPlayer(), getEnemy())
     )
     if (getPlayer().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')
-      // value.color = 'error'
       value.isFinished = true
       return value
     }
@@ -216,10 +230,9 @@ export const useBattle = () => {
     const value = { message: '', isFinished: false, isVictory: false }
 
     updatePlayerNumberValue('hp', player.hp - enemy.offence)
-    value.message = makeActionMessage(false, getPlayer(), getEnemy())
+    value.message = makeBattleActionMessage(false, getPlayer(), getEnemy())
     if (getPlayer().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')
-      // value.color = 'error'
       value.isFinished = true
       return value
     }
@@ -227,11 +240,12 @@ export const useBattle = () => {
     updateEnemyNumberValue('hp', enemy.hp - player.offence)
     value.message = makeMuitlLineMessage(
       value.message,
-      makeActionMessage(true, getPlayer(), getEnemy())
+      makeBattleActionMessage(true, getPlayer(), getEnemy())
     )
     if (getEnemy().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの勝ち!')
       value.isFinished = true
+      value.isVictory = true
       return value
     }
 
@@ -239,16 +253,35 @@ export const useBattle = () => {
   }
 
   /**
-   * check hit point
+   * player heal acrtion
    * @param {PlayerType} player
    * @param {EnemyType} enemy
-   * @return {void}
+   * @return {Promise<ActionResponseType>}
    */
-  const checkHP = async (
+  const playerHealAction = async (
     player: PlayerType,
     enemy: EnemyType
-  ): Promise<boolean> => {
-    return player.hp > enemy.hp
+  ): Promise<ActionResponseType> => {
+    const value = { message: '', isFinished: false, isVictory: false }
+
+    // プレイヤーのHPの回復
+    const refreshValue = 50
+    updatePlayerNumberValue('hp', refreshValue)
+    value.message = makeHealActionMessage(getPlayer(), refreshValue)
+
+    //   敵キャラクターの攻撃
+    updatePlayerNumberValue('hp', player.hp - enemy.offence)
+    value.message = makeMuitlLineMessage(
+      value.message,
+      makeBattleActionMessage(false, getPlayer(), getEnemy())
+    )
+    if (getPlayer().hp < 0) {
+      value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')
+      value.isFinished = true
+      return value
+    }
+
+    return value
   }
 
   /**
@@ -277,6 +310,31 @@ export const useBattle = () => {
   }
 
   /**
+   * start heal
+   * @param {boolean} isAdvantageous
+   * @param {PlayerType} player
+   * @param {EnemyType} enemy
+   * @return {Promise<ActionResponseType>}
+   */
+  const startHeal = async (
+    isAdvantageous: boolean,
+    player: PlayerType,
+    enemy: EnemyType
+  ): Promise<ActionResponseType> => {
+    let value: ActionResponseType
+
+    if (isAdvantageous) {
+      // プレイヤーの先行
+      value = await playerHealAction(player, enemy)
+    } else {
+      // 敵キャラクターの先行
+      value = await enemyBattleAction(player, enemy)
+    }
+
+    return value
+  }
+
+  /**
    * start action
    * @param {BattleActionTypes} type
    * @return {void}
@@ -289,15 +347,18 @@ export const useBattle = () => {
 
     let value = { message: '', isFinished: false, isVictory: false }
 
+    // console.log('random: ' + JSON.stringify(getRoundingRandomInt(2), null, 2))
+    // console.log('floor: ' + JSON.stringify(Math.round(3.4), null, 2))
+
     switch (type) {
       case 'attack':
         value = await startBattle(player.speed >= enemy.speed, player, enemy)
         break
       case 'heal':
-        value = await startBattle(player.speed >= enemy.speed, player, enemy)
+        value = await startHeal(player.speed >= enemy.speed, player, enemy)
         break
       case 'escape':
-        value = await startBattle(player.speed >= enemy.speed, player, enemy)
+        value.message = 'But, Couldn`t Escape...'
         break
       default:
         break
@@ -318,11 +379,13 @@ export const useBattle = () => {
     updateEnemyNumberValue,
     makeActionNavigationMessage,
     makeMuitlLineMessage,
-    makeActionMessage,
+    makeBattleActionMessage,
+    makeHealActionMessage,
     playerBattleAction,
+    playerHealAction,
     enemyBattleAction,
-    checkHP,
     startBattle,
+    startHeal,
     startAction,
   }
 }

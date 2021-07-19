@@ -40,7 +40,7 @@ export default defineComponent({
      * @return {void}
      */
     const clickAttackButtonHandler = (event: Event) => {
-      console.log('clickAttackButtonHandler: ' + JSON.stringify(event, null, 2))
+      // console.log('clickAttackButtonHandler: ' + JSON.stringify(event, null, 2))
       ctx.emit('attack-event', event)
     }
 
@@ -49,7 +49,7 @@ export default defineComponent({
      * @return {void}
      */
     const clickHealButtonHandler = (event: Event) => {
-      console.log('clickHealButtonHandler: ' + JSON.stringify(event, null, 2))
+      // console.log('clickHealButtonHandler: ' + JSON.stringify(event, null, 2))
       ctx.emit('heal-event', event)
     }
 
@@ -58,7 +58,7 @@ export default defineComponent({
      * @return {void}
      */
     const clickEscapeButtonHandler = (event: Event) => {
-      console.log('clickEscapeButtonHandler: ' + JSON.stringify(event, null, 2))
+      // console.log('clickEscapeButtonHandler: ' + JSON.stringify(event, null, 2))
       ctx.emit('escape-event', event)
     }
     return {

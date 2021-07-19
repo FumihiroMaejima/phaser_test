@@ -90,7 +90,7 @@ export default defineComponent({
      * @return {void}
      */
     const attackEventEventHandler = async (event: any) => {
-      const data = await battleService.startAction()
+      const data = await battleService.startAction('attack')
       navigationService.setMessage(`${data.message}`)
     }
 
@@ -98,18 +98,20 @@ export default defineComponent({
      * heal event handling
      * @return {void}
      */
-    const healEventEventHandler = (event: any) => {
-      console.log('healEventEventHandler: ' + JSON.stringify(event, null, 2))
-      navigationService.setMessage('heal!')
+    const healEventEventHandler = async (event: any) => {
+      console.log('healEventEventHandler: ' + JSON.stringify(null, null, 2))
+      const data = await battleService.startAction('heal')
+      navigationService.setMessage(`${data.message}`)
     }
 
     /**
      * escape event handling
      * @return {void}
      */
-    const escapeEventEventHandler = (event: any) => {
-      console.log('escapeEventEventHandler: ' + JSON.stringify(event, null, 2))
-      navigationService.setMessage('Don`t Escape!')
+    const escapeEventEventHandler = async (event: any) => {
+      console.log('escapeEventEventHandler: ' + JSON.stringify(null, null, 2))
+      const data = await battleService.startAction('escape')
+      navigationService.setMessage(`${data.message}`)
     }
 
     return {

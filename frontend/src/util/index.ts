@@ -5,8 +5,56 @@ import { Ref } from 'vue'
  * @param {Ref<boolean>} value
  * @return {void}
  */
-export function inversionFlag(flag: Ref) {
+export const inversionFlag = (flag: Ref) => {
   flag.value = !flag.value
+}
+
+/**
+ * get rounding random number value.(四捨五入)
+ * @param {number} maxNumber
+ * @return {number}
+ */
+export const getRoundingRandomInt = (maxNumber: number) => {
+  return Math.round(Math.random() * maxNumber)
+}
+
+/**
+ * get floor random value.(切り捨て)
+ * @param {number} maxNumber
+ * @return {number}
+ */
+export const getFloorRandomInt = (maxNumber: number) => {
+  return Math.floor(Math.random() * maxNumber)
+}
+
+/**
+ * ファイルの読み込みとデータをテキストとして取得
+ * @param {File} file
+ * @return {Promise<string | ArrayBuffer | null>}
+ */
+export const readFileDataAsText = async (
+  file: File
+): Promise<string | ArrayBuffer | null> => {
+  return new Promise(
+    (resolve: (param: string | ArrayBuffer | null) => void) => {
+      const reader = new FileReader()
+      reader.onload = (e: ProgressEvent) => {
+        // 読み込んだ結果をresolve(解決)する
+        resolve(reader.result)
+      }
+      // 読み込み
+      reader.readAsText(file)
+    }
+  )
+}
+
+/**
+ * 日付の形式(yyyy/mm/dd)のチェック
+ * @param {string} value
+ * @return {boolean}
+ */
+export const checkDateFormat = (value: string): boolean => {
+  return value.match(/^[0-9]{4}\/[0-9]{2}\/[0-9]{2}/u) !== null
 }
 
 /**

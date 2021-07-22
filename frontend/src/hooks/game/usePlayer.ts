@@ -18,8 +18,8 @@ export const playerData = {
   mp: 0,
   offence: 30,
   defense: 0,
-  speed: 0,
-  magic: 0,
+  speed: 10,
+  magic: 30,
 }
 
 export type PlayerType = typeof playerData

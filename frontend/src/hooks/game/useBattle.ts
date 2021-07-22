@@ -206,10 +206,9 @@ export const useBattle = () => {
         // 回復
         updatePlayerNumberValue('hp', player.hp + player.magic)
         message = makeHealActionMessage(getPlayer(), player.magic)
-
         break
       case 'escape':
-        message = 'But, Couldn`t Escape...'
+        message = `${player.name}は逃げようとした！しかし、周り込まれてしまった...`
         break
       default:
         // 何もしない
@@ -225,14 +224,13 @@ export const useBattle = () => {
    * @param {number} value
    * @param {PlayerType} player
    * @param {EnemyType} enemy
-   * @return {void}
+   * @return {string}
    */
-  const getEnemyActionResponse = async (
+  const getEnemyActionResponse = (
     value: number,
     player: PlayerType,
     enemy: EnemyType
-  ): Promise<string> => {
-    // let response =  {message: '', isFinished: false, isVictory: false }
+  ): string => {
     let message = ''
 
     switch (value) {
@@ -269,10 +267,8 @@ export const useBattle = () => {
   ): Promise<ActionResponseType> => {
     const value = { message: '', isFinished: false, isVictory: false }
 
+    // プレイヤーのアクション
     value.message = getPlayerActionResponse(type, player, enemy)
-
-    /* updateEnemyNumberValue('hp', enemy.hp - player.offence)
-    value.message = makeBattleActionMessage(true, getPlayer(), getEnemy()) */
     if (getEnemy().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの勝ち!')
       value.isFinished = true
@@ -280,18 +276,10 @@ export const useBattle = () => {
       return value
     }
 
-    // updatePlayerNumberValue('hp', player.hp - enemy.offence)
-    /* value.message = makeMuitlLineMessage(
-      value.message,
-      makeBattleActionMessage(false, getPlayer(), getEnemy())
-    ) */
+    // 敵キャラクターのアクション
     value.message = makeMuitlLineMessage(
       value.message,
-      await getEnemyActionResponse(
-        getRoundingRandomInt(2),
-        getPlayer(),
-        getEnemy()
-      )
+      getEnemyActionResponse(getRoundingRandomInt(2), getPlayer(), getEnemy())
     )
     if (getPlayer().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')
@@ -310,15 +298,14 @@ export const useBattle = () => {
    * @return {Promise<ActionResponseType>}
    */
   const enemyPriorityAction = async (
-    type: BattleActionTypes = 'attack',
+    type: BattleActionTypes,
     player: PlayerType,
     enemy: EnemyType
   ): Promise<ActionResponseType> => {
     const value = { message: '', isFinished: false, isVictory: false }
 
-    // updatePlayerNumberValue('hp', player.hp - enemy.offence)
-    // value.message = makeBattleActionMessage(false, getPlayer(), getEnemy())
-    value.message = await getEnemyActionResponse(
+    // 敵キャラクターのアクション
+    value.message = getEnemyActionResponse(
       getRoundingRandomInt(2),
       getPlayer(),
       getEnemy()
@@ -329,108 +316,16 @@ export const useBattle = () => {
       return value
     }
 
-    // updateEnemyNumberValue('hp', enemy.hp - player.offence)
+    // プレイヤーのアクションs
     value.message = makeMuitlLineMessage(
       value.message,
-      getPlayerActionResponse(type, player, enemy)
+      getPlayerActionResponse(type, getPlayer(), getEnemy())
     )
     if (getEnemy().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの勝ち!')
       value.isFinished = true
       value.isVictory = true
       return value
-    }
-
-    return value
-  }
-
-  /**
-   * player heal acrtion
-   * @param {PlayerType} player
-   * @param {EnemyType} enemy
-   * @return {Promise<ActionResponseType>}
-   */
-  const playerHealAction = async (
-    player: PlayerType,
-    enemy: EnemyType
-  ): Promise<ActionResponseType> => {
-    const value = { message: '', isFinished: false, isVictory: false }
-
-    // プレイヤーのHPの回復
-    const refreshValue = 50
-    updatePlayerNumberValue('hp', refreshValue)
-    value.message = makeHealActionMessage(getPlayer(), refreshValue)
-
-    //   敵キャラクターの攻撃
-    // updatePlayerNumberValue('hp', player.hp - enemy.offence)
-    /* value.message = makeMuitlLineMessage(
-      value.message,
-      makeBattleActionMessage(false, getPlayer(), getEnemy())
-    ) */
-    value.message = makeMuitlLineMessage(
-      value.message,
-      await getEnemyActionResponse(
-        getRoundingRandomInt(2),
-        getPlayer(),
-        getEnemy()
-      )
-    )
-    if (getPlayer().hp < 0) {
-      value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')
-      value.isFinished = true
-      return value
-    }
-
-    return value
-  }
-
-  /**
-   * start battle
-   * @param {BattleActionTypes} type
-   * @param {boolean} isAdvantageous
-   * @param {PlayerType} player
-   * @param {EnemyType} enemy
-   * @return {Promise<ActionResponseType>}
-   */
-  const startBattle = async (
-    type: BattleActionTypes,
-    isAdvantageous: boolean,
-    player: PlayerType,
-    enemy: EnemyType
-  ): Promise<ActionResponseType> => {
-    let value: ActionResponseType
-
-    if (isAdvantageous) {
-      // プレイヤーの先行
-      value = await playerPriorityAction(type, player, enemy)
-    } else {
-      // 敵キャラクターの先行
-      value = await enemyPriorityAction(type, player, enemy)
-    }
-
-    return value
-  }
-
-  /**
-   * start heal
-   * @param {boolean} isAdvantageous
-   * @param {PlayerType} player
-   * @param {EnemyType} enemy
-   * @return {Promise<ActionResponseType>}
-   */
-  const startHeal = async (
-    isAdvantageous: boolean,
-    player: PlayerType,
-    enemy: EnemyType
-  ): Promise<ActionResponseType> => {
-    let value: ActionResponseType
-
-    if (isAdvantageous) {
-      // プレイヤーの先行
-      value = await playerHealAction(player, enemy)
-    } else {
-      // 敵キャラクターの先行
-      value = await enemyPriorityAction('heal', player, enemy)
     }
 
     return value
@@ -449,24 +344,13 @@ export const useBattle = () => {
 
     let value = { message: '', isFinished: false, isVictory: false }
 
-    value = await startBattle(type, player.speed >= enemy.speed, player, enemy)
-
-    // console.log('random: ' + JSON.stringify(getRoundingRandomInt(2), null, 2))
-    // console.log('floor: ' + JSON.stringify(Math.round(3.4), null, 2))
-
-    /* switch (type) {
-      case 'attack':
-        value = await startBattle(type, player.speed >= enemy.speed, player, enemy)
-        break
-      case 'heal':
-        value = await startHeal(player.speed >= enemy.speed, player, enemy)
-        break
-      case 'escape':
-        value.message = 'But, Couldn`t Escape...'
-        break
-      default:
-        break
-    } */
+    if (player.speed >= enemy.speed) {
+      // プレイヤーの先行
+      value = await playerPriorityAction(type, player, enemy)
+    } else {
+      // 敵キャラクターの先行
+      value = await enemyPriorityAction(type, player, enemy)
+    }
 
     return value
   }
@@ -488,10 +372,7 @@ export const useBattle = () => {
     makeHealActionMessage,
     getEnemyActionResponse,
     playerPriorityAction,
-    playerHealAction,
     enemyPriorityAction,
-    startBattle,
-    startHeal,
     startAction,
   }
 }

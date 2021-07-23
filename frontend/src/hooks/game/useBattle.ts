@@ -160,6 +160,19 @@ export const useBattle = () => {
   }
 
   /**
+   * make navigation message about battle action of magic.
+   * @param {PlayerType | EnemyType} first first attacker
+   * @param {PlayerType | EnemyType} second second attacker
+   * @return {string}
+   */
+  const makeMagicActionMessage = (
+    first: PlayerType | EnemyType,
+    second: PlayerType | EnemyType
+  ): string => {
+    return `${first.name}は不思議な呪文を唱えた！<br>${second.name}に${first.magic}のダメージを与えた！`
+  }
+
+  /**
    * make navigation message about heal action.
    * @param {PlayerType | EnemyType} first first attacker
    * @param {number} value
@@ -208,7 +221,7 @@ export const useBattle = () => {
         message = makeHealActionMessage(getPlayer(), player.magic)
         break
       case 'escape':
-        message = `${player.name}は逃げようとした！しかし、周り込まれてしまった...`
+        message = `${player.name}は逃げようとした！しかし、周り込まれてしまった...。`
         break
       default:
         // 何もしない
@@ -242,7 +255,7 @@ export const useBattle = () => {
       case 1:
         // 魔法攻撃
         updatePlayerNumberValue('hp', player.hp - enemy.magic)
-        message = makeBattleActionMessage(false, getPlayer(), getEnemy())
+        message = makeMagicActionMessage(getEnemy(), getPlayer())
         break
       default:
         // 何もしない
@@ -368,6 +381,7 @@ export const useBattle = () => {
     makeActionNavigationMessage,
     makeMuitlLineMessage,
     makeBattleActionMessage,
+    makeMagicActionMessage,
     getPlayerActionResponse,
     makeHealActionMessage,
     getEnemyActionResponse,

@@ -11,6 +11,7 @@ export default {
   parameters: {
     layout: 'centered',
     docs: {
+      /* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */
       extractComponentDescription: (component: any, { notes }: any) => {
         if (notes) {
           return notes.markdown
@@ -22,7 +23,7 @@ export default {
   },
 }
 
-export const HelloTest = () => ({
+export const HelloTest = (): any => ({
   components: { HelloWorld },
   template: `
     <div>

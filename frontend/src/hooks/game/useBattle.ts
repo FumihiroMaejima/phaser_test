@@ -1,31 +1,21 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Ref, reactive, InjectionKey } from 'vue'
-import { useRequest, UseRequestType } from '@/hooks/useRequest'
+import { reactive, InjectionKey } from 'vue'
+// import { useRequest, UseRequestType } from '@/hooks/useRequest'
 import {
   playerData,
   PlayerType,
   PlayerNumberKeys,
-  usePlayer,
-  UsePlayerType,
-  GamePlayerStateKey,
 } from '@/hooks/game/usePlayer'
-import {
-  enemyData,
-  EnemyType,
-  EnemyNumberKeys,
-  useEnemy,
-  UseEnemyType,
-  GameEnemyStateKey,
-} from '@/hooks/game/useEnemy'
+import { enemyData, EnemyType, EnemyNumberKeys } from '@/hooks/game/useEnemy'
 import { getRoundingRandomInt } from '@/util'
 
-import {
+/* import {
   IAppConfig,
   ServerRequestResponseType,
   ServerErrorResponseType,
-} from '@/types'
+} from '@/types' */
 
-const config: IAppConfig = require('@/config/data')
+// const config: IAppConfig = require('@/config/data')
 
 export type BattleActionTypes = 'attack' | 'heal' | 'escape'
 
@@ -37,6 +27,7 @@ export type UseBattleStateType = {
   enemy: EnemyType
 }
 
+/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */
 export const useBattle = () => {
   const state = reactive<UseBattleStateType>({
     player: { ...playerData },
@@ -320,8 +311,8 @@ export const useBattle = () => {
     // 敵キャラクターのアクション
     value.message = getEnemyActionResponse(
       getRoundingRandomInt(2),
-      getPlayer(),
-      getEnemy()
+      player,
+      enemy
     )
     if (getPlayer().hp < 0) {
       value.message = makeMuitlLineMessage(value.message, 'プレイヤーの負け!')

@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, SetupContext } from 'vue'
+import { defineComponent, /* computed,  */ SetupContext } from 'vue'
 
 export default defineComponent({
   name: 'AppActionButtons',
@@ -37,28 +37,28 @@ export default defineComponent({
 
     /**
      * attack event handling
+     * @param {Event} event
      * @return {void}
      */
     const clickAttackButtonHandler = (event: Event) => {
-      // console.log('clickAttackButtonHandler: ' + JSON.stringify(event, null, 2))
       ctx.emit('attack-event', event)
     }
 
     /**
      * heal event handling
+     * @param {Event} event
      * @return {void}
      */
     const clickHealButtonHandler = (event: Event) => {
-      // console.log('clickHealButtonHandler: ' + JSON.stringify(event, null, 2))
       ctx.emit('heal-event', event)
     }
 
     /**
      * escape event handling
+     * @param {Event} event
      * @return {void}
      */
     const clickEscapeButtonHandler = (event: Event) => {
-      // console.log('clickEscapeButtonHandler: ' + JSON.stringify(event, null, 2))
       ctx.emit('escape-event', event)
     }
     return {

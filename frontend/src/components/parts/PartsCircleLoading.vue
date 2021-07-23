@@ -9,6 +9,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 type Props = {
   open: boolean
 }

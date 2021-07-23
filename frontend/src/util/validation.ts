@@ -3,7 +3,7 @@
  * @param {string} value
  * @return {boolean}
  */
-export function checkTextLength(value: string): boolean {
+export const checkTextLength = (value: string): boolean => {
   // null or undefined
   if (!value) {
     return false
@@ -18,14 +18,14 @@ export function checkTextLength(value: string): boolean {
  * @param {null | number} maxlength
  * @return {boolean}
  */
-export function checkTextMaxLength(
+export const checkTextMaxLength = (
   value: string,
   maxlength: null | number = null
-): boolean {
+): boolean => {
   if (maxlength === null) {
     return true
   }
-  return value.length <= maxlength!
+  return value.length <= maxlength
 }
 
 /**
@@ -34,8 +34,8 @@ export function checkTextMaxLength(
  * @param {number} minlength
  * @return {boolean}
  */
-export function checkTextMinLength(value: string, minlength = 0): boolean {
-  return value.length >= minlength!
+export const checkTextMinLength = (value: string, minlength = 0): boolean => {
+  return value.length >= minlength
 }
 
 /**
@@ -44,7 +44,10 @@ export function checkTextMinLength(value: string, minlength = 0): boolean {
  * @param {string} comparedValue
  * @return {boolean}
  */
-export function checkTextEquals(value: string, comparedValue: string): boolean {
+export const checkTextEquals = (
+  value: string,
+  comparedValue: string
+): boolean => {
   return value === comparedValue
 }
 
@@ -53,7 +56,7 @@ export function checkTextEquals(value: string, comparedValue: string): boolean {
  * @param {string} value
  * @return {boolean}
  */
-export function checkKatakana(value: string): boolean {
+export const checkKatakana = (value: string): boolean => {
   // 文字の範囲で指定する場合は^[ァ-?]+$
   const regex = /^[\u30A0-\u30FF]+$/
   return regex.test(value)
@@ -65,7 +68,7 @@ export function checkKatakana(value: string): boolean {
  * @param {number} textSize
  * @return {string} message
  */
-export function validateName(value: string, textSize = 10): string {
+export const validateName = (value: string, textSize = 10): string => {
   let message = ''
   if (!checkTextLength(value)) {
     return (message = 'This is required')

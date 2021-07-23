@@ -2,6 +2,7 @@ import { reactive, InjectionKey } from 'vue'
 import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios'
 import { ServerRequestResponseType, ServerErrorResponseType } from '@/types'
 
+/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */
 export const useRequest = () => {
   const state = reactive<any>({})
 

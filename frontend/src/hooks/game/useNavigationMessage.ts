@@ -4,6 +4,7 @@ export type UseNavigationMessageStateType = {
   message: string
 }
 
+/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */
 export const useNavigationMessage = () => {
   const state = reactive<UseNavigationMessageStateType>({
     message: 'Game Start!',

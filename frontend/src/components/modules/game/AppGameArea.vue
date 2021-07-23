@@ -43,30 +43,12 @@ import AppResultContents from '@/components/modules/game/AppResultContents.vue'
 import PartsContentsBoard from '@/components/parts/PartsContentsBoard.vue'
 import PartsMessageArea from '@/components/parts/PartsMessageArea.vue'
 import PartsMessageBoard from '@/components/parts/PartsMessageBoard.vue'
-import {
-  PlayerType,
-  UsePlayerType,
-  GamePlayerStateKey,
-} from '@/hooks/game/usePlayer'
-import {
-  useEnemy,
-  UseEnemyType,
-  GameEnemyStateKey,
-} from '@/hooks/game/useEnemy'
-import {
-  useBattle,
-  UseBattleType,
-  GameBattleStateKey,
-} from '@/hooks/game/useBattle'
-import {
-  useNavigationMessage,
-  UseNavigationMessageType,
-  UseNavigationMessageStateType,
-  GameNavigationMessageStateKey,
-} from '@/hooks/game/useNavigationMessage'
-import { IAppConfig } from '@/types'
+import { PlayerType } from '@/hooks/game/usePlayer'
+import { UseBattleType, GameBattleStateKey } from '@/hooks/game/useBattle'
+import { useNavigationMessage } from '@/hooks/game/useNavigationMessage'
+// import { IAppConfig } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
-const config: IAppConfig = require('@/config/data')
+// const config: IAppConfig = require('@/config/data')
 
 export default defineComponent({
   name: 'AppGameArea',
@@ -81,12 +63,9 @@ export default defineComponent({
     // data
     const isFinishedFlag = ref<boolean>(false)
     const navigationService = useNavigationMessage()
-    // const battleService = useBattle()
 
     // inject
     const battleService = inject(GameBattleStateKey) as UseBattleType
-    const playerService = inject(GamePlayerStateKey) as UsePlayerType
-    const enemyService = inject(GameEnemyStateKey) as UseEnemyType
 
     // computed
     const isFinished = computed((): boolean => isFinishedFlag.value)

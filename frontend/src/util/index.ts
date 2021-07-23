@@ -5,7 +5,7 @@ import { Ref } from 'vue'
  * @param {Ref<boolean>} value
  * @return {void}
  */
-export const inversionFlag = (flag: Ref) => {
+export const inversionFlag = (flag: Ref): void => {
   flag.value = !flag.value
 }
 
@@ -14,7 +14,7 @@ export const inversionFlag = (flag: Ref) => {
  * @param {number} maxNumber
  * @return {number}
  */
-export const getRoundingRandomInt = (maxNumber: number) => {
+export const getRoundingRandomInt = (maxNumber: number): number => {
   return Math.round(Math.random() * maxNumber)
 }
 
@@ -23,7 +23,7 @@ export const getRoundingRandomInt = (maxNumber: number) => {
  * @param {number} maxNumber
  * @return {number}
  */
-export const getFloorRandomInt = (maxNumber: number) => {
+export const getFloorRandomInt = (maxNumber: number): number => {
   return Math.floor(Math.random() * maxNumber)
 }
 
@@ -38,7 +38,8 @@ export const readFileDataAsText = async (
   return new Promise(
     (resolve: (param: string | ArrayBuffer | null) => void) => {
       const reader = new FileReader()
-      reader.onload = (e: ProgressEvent) => {
+      // reader.onload = (e: ProgressEvent) => {
+      reader.onload = () => {
         // 読み込んだ結果をresolve(解決)する
         resolve(reader.result)
       }

@@ -30,11 +30,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent /* , computed */ } from 'vue'
 // import PartsContentsBoard from '@/components/parts/PartsContentsBoard.vue'
 import PartsLabelHeader from '@/components/parts/PartsLabelHeader.vue'
 
-import { IAppConfig, AboutMessageType } from '@/types'
+// import { IAppConfig, AboutMessageType } from '@/types'
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 // const config: IAppConfig = require('@/config/data')
 
@@ -52,7 +52,7 @@ export default defineComponent({
      * catch app-input event
      * @return {void}
      */
-    const catchAppInputEvent = (event: any) => {
+    const catchAppInputEvent = (event: Event) => {
       console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
     }
     return {

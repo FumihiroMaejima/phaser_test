@@ -1,13 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Ref, reactive, InjectionKey } from 'vue'
-import { useRequest, UseRequestType } from '@/hooks/useRequest'
-import {
-  IAppConfig,
-  ServerRequestResponseType,
-  ServerErrorResponseType,
-} from '@/types'
-
-const config: IAppConfig = require('@/config/data')
+import { reactive, InjectionKey } from 'vue'
+import { useRequest } from '@/hooks/useRequest'
+import { ServerErrorResponseType } from '@/types'
 
 export const enemyData = {
   id: 0,
@@ -40,6 +34,7 @@ export type usePlayerStateType = {
   enemy: EnemyType
 }
 
+/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */
 export const useEnemy = () => {
   const state = reactive<usePlayerStateType>({
     enemy: { ...enemyData },

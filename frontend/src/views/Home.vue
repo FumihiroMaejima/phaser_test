@@ -25,12 +25,10 @@ export default defineComponent({
      * catch app-input event
      * @return {void}
      */
-    const catchAppInputEvent = (event: any) => {
+    /* const catchAppInputEvent = (event: any) => {
       console.log('catchAppInputEvent: ' + JSON.stringify(event, null, 2))
-    }
-    return {
-      catchAppInputEvent,
-    }
+    } */
+    return {}
   },
 })
 </script>

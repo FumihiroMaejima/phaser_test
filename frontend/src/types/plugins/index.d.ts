@@ -2,6 +2,7 @@
 export * from '@/types/plugins/game'
 
 // 1. 拡張した型を定義する前に必ず 'vue' をインポートする
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 import Vue from 'vue'
 import { IAppConfig } from '@/types/config'
 

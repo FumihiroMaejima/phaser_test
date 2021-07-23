@@ -20,28 +20,19 @@ import AppCreateUserForm from '@/components/modules/game/AppCreateUserForm.vue'
 import AppGameArea from '@/components/modules/game/AppGameArea.vue'
 import PartsCircleLoading from '@/components/parts/PartsCircleLoading.vue'
 import PartsMainHeader from '@/components/parts/PartsMainHeader.vue'
-import {
-  useBattle,
-  UseBattleType,
-  GameBattleStateKey,
-} from '@/hooks/game/useBattle'
+import { useBattle, GameBattleStateKey } from '@/hooks/game/useBattle'
 import {
   usePlayer,
-  UsePlayerType,
   PlayerFormType,
   GamePlayerStateKey,
 } from '@/hooks/game/usePlayer'
-import {
-  useEnemy,
-  UseEnemyType,
-  GameEnemyStateKey,
-} from '@/hooks/game/useEnemy'
+import { useEnemy, GameEnemyStateKey } from '@/hooks/game/useEnemy'
 import { CircleLoadingKey } from '@/keys'
-import { IAppConfig } from '@/types'
+// import { IAppConfig } from '@/types'
 import { inversionFlag } from '@/util'
 
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
-const config: IAppConfig = require('@/config/data')
+// const config: IAppConfig = require('@/config/data')
 
 export default defineComponent({
   name: 'Game',
@@ -82,10 +73,9 @@ export default defineComponent({
     // methods
     /**
      * catch form button event handling
-     * @param {Event} _
      * @return {void}
      */
-    const clickFormButtonEventHandler = async (_: Event) => {
+    const clickFormButtonEventHandler = async () => {
       inversionFlag(loadingFlag)
       await enemyService.getEnemyDataRequest()
       playerService.startGame()

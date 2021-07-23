@@ -43,9 +43,7 @@
 import { defineComponent } from 'vue'
 import AppButton from '@/components/parts/AppButton.vue'
 import AppInput from '@/components/parts/AppInput.vue'
-import Card from '@/components/parts/Card.vue'
 import GridCols from '@/components/parts/GridCols.vue'
-import GridRows from '@/components/parts/GridRows.vue'
 
 export default defineComponent({
   name: 'Login',

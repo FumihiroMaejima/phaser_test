@@ -31,7 +31,45 @@ class GameEnemiesRepository implements GameEnemiesRepositoryInterface
     }
 
     /**
-     * Get All Role Data.
+     * Get One Enemy by id.
+     * @param int $id
+     * @return Collection
+     */
+    public function getGameEnemy(int $id): Collection
+    {
+        // game_enemies
+        $enemies = $this->model->getTable();
+        // game_offence_equipment
+        $offenceEquipment = $this->offenceEquipmentModel->getTable();
+        // game_defense_equipment
+        $defenseEquipment = $this->defenseEquipmentModel->getTable();
+
+        $row = [
+            $enemies . '.id',
+            $enemies . '.name',
+            $enemies . '.level',
+            $enemies . '.hp',
+            $enemies . '.mp',
+            $enemies . '.offence',
+            $enemies . '.defense',
+            $enemies . '.speed',
+            $enemies . '.magic'
+        ];
+
+        // collection
+        return DB::table($enemies)
+            ->select($row)
+            ->leftJoin($offenceEquipment, $enemies . '.offence_equipment_id', '=', $offenceEquipment . '.id')
+            ->leftJoin($defenseEquipment, $enemies . '.defense_equipment_id', '=', $defenseEquipment . '.id')
+            ->where($enemies . '.id', '=', $id)
+            ->where($enemies . '.deleted_at', '=', null)
+            ->where($offenceEquipment . '.deleted_at', '=', null)
+            ->where($defenseEquipment . '.deleted_at', '=', null)
+            ->get();
+    }
+
+    /**
+     * Get All Enemies Data.
      *
      * @return Collection
      */
@@ -96,7 +134,7 @@ class GameEnemiesRepository implements GameEnemiesRepositoryInterface
     }
 
     /**
-     * create Admin data.
+     * create Enemies data.
      *
      * @return int
      */
@@ -106,7 +144,7 @@ class GameEnemiesRepository implements GameEnemiesRepositoryInterface
     }
 
     /**
-     * update Role data.
+     * update Enemies data.
      *
      * @return int
      */

@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, SetupContext, PropType } from 'vue'
+import { defineComponent, computed, SetupContext } from 'vue'
 
 type Props = {
   modelValue: string | number | boolean | any

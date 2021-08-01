@@ -78,7 +78,8 @@ export default defineComponent({
       default: '',
     },
   },
-  setup() {
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+  setup(props: Props) {
     return {}
   },
 })

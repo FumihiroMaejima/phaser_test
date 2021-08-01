@@ -60,7 +60,8 @@ export default defineComponent({
       default: '',
     },
   },
-  setup(_, ctx: SetupContext) {
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+  setup(props: Props, ctx: SetupContext) {
     // methods
     /**
      * catch click event

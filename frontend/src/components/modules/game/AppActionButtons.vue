@@ -1,5 +1,5 @@
 <template>
-  <div class="grid rounded md:grid-cols-12 sm:grid-cols-1 gap-1">
+  <div class="grid rounded grid-flow-col md:grid-cols-12 sm:grid-rows-1 gap-1">
     <button
       class="app-action-buttons__button app-action-buttons__attack"
       @click="clickAttackButtonHandler"
@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, SetupContext } from 'vue'
+import { defineComponent, /* computed,  */ SetupContext } from 'vue'
 
 export default defineComponent({
   name: 'AppActionButtons',
@@ -37,28 +37,28 @@ export default defineComponent({
 
     /**
      * attack event handling
+     * @param {Event} event
      * @return {void}
      */
     const clickAttackButtonHandler = (event: Event) => {
-      console.log('clickAttackButtonHandler: ' + JSON.stringify(event, null, 2))
       ctx.emit('attack-event', event)
     }
 
     /**
      * heal event handling
+     * @param {Event} event
      * @return {void}
      */
     const clickHealButtonHandler = (event: Event) => {
-      console.log('clickHealButtonHandler: ' + JSON.stringify(event, null, 2))
       ctx.emit('heal-event', event)
     }
 
     /**
      * escape event handling
+     * @param {Event} event
      * @return {void}
      */
     const clickEscapeButtonHandler = (event: Event) => {
-      console.log('clickEscapeButtonHandler: ' + JSON.stringify(event, null, 2))
       ctx.emit('escape-event', event)
     }
     return {
@@ -96,12 +96,12 @@ export default defineComponent({
       }
     }
 
-    @include max-screen(var($tailwind-breakpoint-tablet - 1)) {
-      padding: 5% 0 5% 0;
+    @include max-screen($tailwind-breakpoint-tablet - 1) {
+      padding: 10% 0 10% 0;
 
       &:active {
         // background-color: rgba(107, 114, 128, 0.2);
-        border-bottom: initial;
+        border-bottom: solid 3px #f4f2db;
         box-shadow: initial;
       }
     }

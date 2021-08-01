@@ -6,6 +6,8 @@ use Illuminate\Support\Collection;
 
 interface GameEnemiesRepositoryInterface
 {
+    public function getGameEnemy(int $id): Collection;
+
     public function getGameEnemies(): Collection;
 
     public function getGameEnemiesList(): Collection;

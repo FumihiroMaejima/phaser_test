@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent /* , computed */ } from 'vue'
+import { defineComponent } from 'vue'
 
 type Props = {
   mdCols: number
@@ -37,14 +37,9 @@ export default defineComponent({
       default: '',
     },
   },
-  setup(/* props: Props */) {
-    // computed
-    // const mdColsClass = computed(() => `md:grid-cols-${props.mdCols}`)
-    // const smColsClass = computed(() => `sm:grid-cols-${props.smCols}`)
-    return {
-      // mdColsClass,
-      // smColsClass
-    }
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+  setup(props: Props) {
+    return {}
   },
 })
 </script>

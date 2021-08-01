@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Ref, reactive, InjectionKey } from 'vue'
-import { IAppConfig } from '@/types'
+import { reactive, InjectionKey } from 'vue'
 import { validateName } from '@/util/validation'
 
 export const valideteNameSceme = (value: string): boolean => {
@@ -8,18 +7,16 @@ export const valideteNameSceme = (value: string): boolean => {
   return message === ''
 }
 
-const config: IAppConfig = require('@/config/data')
-
-const playerData = {
+export const playerData = {
   id: 0,
   name: '',
   level: 1,
   hp: 100,
   mp: 0,
-  offence: 0,
+  offence: 30,
   defense: 0,
-  speed: 0,
-  magic: 0,
+  speed: 10,
+  magic: 30,
 }
 
 export type PlayerType = typeof playerData
@@ -41,6 +38,7 @@ export type usePlayerStateType = {
   isStart: boolean
 }
 
+/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */
 export const usePlayer = () => {
   const state = reactive<usePlayerStateType>({
     player: { ...playerData },

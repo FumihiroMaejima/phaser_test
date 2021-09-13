@@ -1,6 +1,7 @@
 // tsだとproxyが効かない為、jsにする
 module.exports = {
-  publicPath: '/',
+  publicPath: '/game/',
+  outputDir: 'dist',
   // ポートなどの設定
   devServer: {
     port: 8080,
